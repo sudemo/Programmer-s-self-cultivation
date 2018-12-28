@@ -20,3 +20,11 @@ print(a[::2,::2]) # >>>[[11 13 15]
                   #     [31 33 35]]
 print(a[:, 1]) # >>>[12 17 22 27 32]
 print(a)
+
+print('type a:',type(a)) # >>><class 'numpy.ndarray'>
+print(a.dtype) # >>>int64
+print('size:',a.size) # >>>25
+print(a.shape) # >>>(5, 5)
+print(a.itemsize) # >>>8
+print(a.ndim) # >>>2
+print(a.nbytes) # >>>200
