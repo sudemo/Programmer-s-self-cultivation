@@ -55,7 +55,7 @@ def split1(f=None):
 def foo(s):
     n = int(s)
     assert n != 0, 'n is zero!'
-    print n
+    print (n)
 #
 # def main():
 #     foo('0')

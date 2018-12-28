@@ -70,11 +70,27 @@ b = np.array([10, 62, 1, 14, 2, 56, 79, 2, 1, 45,
 ##############where###########
 # where() 函数是另外一个可以根据条件返回数组的索引的函数方法。
 # 只需要把条件传递给它，它就会返回一个使得条件为真的元素的列表
-a3 = np.arange(1,100,10)
-b3 = np.where(a3 < 50)
-c3 = np.where(a3>60)[0]
-print('a3:',a3)
-print('b3:',b3)
-print('c3:',c3)
+# a3 = np.arange(1,100,10)
+# b3 = np.where(a3 < 50)
+# c3 = np.where(a3>60)[0]
+# print('a3:',a3)
+# print('b3:',b3)
+# print('c3:',c3)
+# ########bool masking##############
+import matplotlib.pyplot as plt
+a4 = np.linspace(0,2*np.pi) # a4取值范围是0-2Π，选取样本点数默认为50个，
+# Number of samples to generate. Default is 50.
+# Must be non-negative.
+# 默认50，生成start和stop之间50个等差间隔的元素
+# a4 = 1
+b4 = np.cos(a4)
+c4 = np.cos(a4,b4)
+# plt.plot(a4,b4)
+plt.plot(b4)
+# plt.plot(c4)
+# mask = b >=                                                                                           0
+# plt.plot(a4[mask],b4[mask],'bool'
+# plt.plot
+plt.show()
 
 
