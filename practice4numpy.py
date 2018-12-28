@@ -35,20 +35,26 @@ n dim 属性是数组的维数。这个有2个。例如，向量只有1。
 n bytes 属性是数组中的所有数据消耗掉的字节数。你应该注意到，这并不计算数组的开销，因此数组占用的实际空间将稍微大一点。
 """
 
-a1 = np.arange(25)
-a1 = a.reshape((5, 5))
+a1 = np.arange(25) # 从0 到25 5*5
+a1 = a1.reshape((5, 5))
 
 b = np.array([10, 62, 1, 14, 2, 56, 79, 2, 1, 45,
               4, 92, 5, 55, 63, 43, 35, 6, 53, 24,
               56, 3, 56, 44, 78])
+print (b)
 b = b.reshape((5,5))
-
-print(a1 + b)
-print(a1 - b)
-print(a1 * b)
-print(a1 / b)
-print(a1 ** 2)
-print(a1 < b)
-print(a1 > b)
-
-print(a1.dot(b))
+print (a1)
+print (b)
+# print(a1 + b)
+# print(a1 - b)
+# print(a1 * b)
+# print(a1 / b)
+# print(a1 ** 2)
+# print(a1 < b)
+# print(a1 > b)
+print (a1.dot(b))
+print(type(a1.dot(b))) # numpy.ndarray
+# 它将像sum()这样的每个元素相加，但是它首先将第一个元素和第二个元素相加，
+# 并将计算结果存储在一个列表中，然后将该结果添加到第三个元素中，然后再将该结果存储在一个列表中。
+# 这将对数组中的所有元素执行此操作，并返回作为列表的数组之和的运行总数。
+print(a1.cumsum()) # >>>[ 0  1  3  6 10 15 21 28 36 45]
