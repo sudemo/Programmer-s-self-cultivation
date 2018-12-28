@@ -42,7 +42,7 @@ def analysisResultDI( result, index):
         else:
             num = (int(result, 16) >> index - 1) & 1
         return num
-    except Exception, e:
+    except Exception as e:
         return str(e)
 
 
