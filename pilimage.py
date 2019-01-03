@@ -6,7 +6,7 @@ Software: PyCharm Community Edition
 '''
 import random
 
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+from PIL import Image, ImageDraw, ImageFont, ImageEnhance
 
 
 # 随机字母:
@@ -37,5 +37,10 @@ for x in range(width):
 for t in range(4):
     draw.text((60 * t + 10, 10), rndChar(), font=font, fill=rndColor2())
 # 模糊:
-image = image.filter(ImageFilter.BLUR)
-image.save('code.jpg', 'jpeg')
+# image = image.filter(ImageFilter.BLUR)
+# image.save('code.jpg', 'jpeg')
+aa = Image.open('d:/2.jpg')
+# a = ImageChops.invert(aa)
+a = ImageEnhance.Brightness(aa)
+a1 = a.enhance(0.1)
+a1.show()
