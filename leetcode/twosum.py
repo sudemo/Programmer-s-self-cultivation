@@ -15,6 +15,8 @@ class Solution:
             for j in range (i+1,len(nums)):
                 if nums[i] + nums[j] == target:
                     return [i,j]
+                else:
+                    return False
 if __name__ =="__main__":
     s = Solution()
-    print (s.twoSum([2,71,1,15],9))
+    print (s.twoSum([2,7,1,15],9))
