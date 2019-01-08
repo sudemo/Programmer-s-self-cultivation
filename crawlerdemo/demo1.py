@@ -6,16 +6,24 @@ Software: PyCharm Community Edition
 '''
 import requests
 from bs4 import BeautifulSoup
-url = 'https://neo3301.wordpress.com/2018/12/29/%E8%B1%86%E6%A3%9A%E7%93%9C%E6%9E%B6%E9%9B%A8%E5%A6%82%E4%B8%9D%EF%BC%8C%E6%96%99%E5%BA%94%E5%8E%8C%E4%BD%9C%E4%BA%BA%E9%97%B4%E8%AF%AD%EF%BC%8C%E7%88%B1%E5%90%AC%E7%A7%8B%E5%9D%9F%E9%AC%BC%E5%94%B1/'
+import time
+import lxml
+# url = 'https://neo3301.wordpress.com/2018/12/29/%E8%B1%86%E6%A3%9A%E7%93%9C%E6%9E%B6%E9%9B%A8%E5%A6%82%E4%B8%9D%EF%BC%8C%E6%96%99%E5%BA%94%E5%8E%8C%E4%BD%9C%E4%BA%BA%E9%97%B4%E8%AF%AD%EF%BC%8C%E7%88%B1%E5%90%AC%E7%A7%8B%E5%9D%9F%E9%AC%BC%E5%94%B1/'
 # url = 'http://baidu.com'
 # url = 'https://www.biqukan.com/1_1094/5403177.html'
+# while 1:
+#     time.sleep(0.1)
+
+url = 'https://blog.csdn.net/u012422524/article/details/86065085'
 data = requests.get(url)
 # data.status_code
 # print(data.text)
+
+
 html1 = data.text
-bf = BeautifulSoup(html1)
-texts = bf.find_all('div',class_ ='entry-content')
-print(texts)
+bf = BeautifulSoup(html1,"lxml")
+texts = bf.find_all('main',class_ ='read-count')
+# print(texts)
 
 # # -*- coding: utf-8 -*-
 # import os
