@@ -4,7 +4,8 @@ author:neo
 Created on: 2019/1/3 15:05
 Software: PyCharm Community Edition
 '''
-import Image
+import PIL
+from PIL import Image
 
 
 def sigma(im,i,debug = False):
@@ -64,10 +65,11 @@ if __name__ == "__main__":
     #     sys.exit(1)
     # des_file = sys.argv[2]
     src_file = 'd:/lena.jpg'
+    # src_file = 'C:/Users/zwzhang/Pictures/新建文件夹/2.bmp'
     im = Image.open(src_file).convert('L')
-    debug = True
+    debug = False
     threadhold,max = Ost(im,debug)
-    print(threadhold,max)
+    # print(threadhold,max)
 
     im = im.point(lambda p: p > threadhold and 1)
     # im.save(des_file)
