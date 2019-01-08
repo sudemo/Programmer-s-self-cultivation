@@ -8,7 +8,7 @@ from matplotlib import pyplot as plt
 import numpy as np
 
 # fig1 = plt.figure('绘图')#每个figure是不同的窗口 图片
-fig1 = plt.figure(num='plt画图实列', figsize=(12, 8), dpi=75, facecolor='#FFFccc', edgecolor='#0000FF')
+fig1 = plt.figure(num='plt画图实列', figsize=(12, 8), dpi=75, facecolor='#f53333', edgecolor='#0000FF')
 plt.subplot(231)
 plt.plot([0,1],[1,0]) #连接（0，1），（1，0）
 plt.title('line')
