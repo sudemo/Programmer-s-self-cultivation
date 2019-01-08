@@ -4,6 +4,8 @@ author: neo
 Created on: 2019/1/8 10:50
 Software: PyCharm Community Edition
 '''
+'''使用 matplotlib库集成好的函数去直接加载和显示图像
+（来自matplotlib的image.imread 或 PIL的Image.open）效果更好'''
 import cv2
 from matplotlib import pyplot as plt
 import numpy as np
