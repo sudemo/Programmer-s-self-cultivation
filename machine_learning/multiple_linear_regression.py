@@ -22,7 +22,7 @@ X = onehotencoder.fit_transform(X).toarray()
 
 # Avoiding Dummy Variable Trap
 X = X[: , 1:]
-
+print('x:',X ,'\n','y:',Y)
 # Splitting the dataset into the Training set and Test set
 from sklearn.model_selection import train_test_split
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.2, random_state = 0)
@@ -34,7 +34,13 @@ regressor.fit(X_train, Y_train)
 
 # Predicting the Test set results
 y_pred = regressor.predict(X_test)
-
+print(y_pred)
 # regression evaluation
 from sklearn.metrics import r2_score
 print('socre: ',r2_score(Y_test,y_pred))
+
+#结果可视化
+
+import matplotlib.pyplot as plt
+
+# plt.scatter(X,Y,c = y_pred,marker = 'o')
