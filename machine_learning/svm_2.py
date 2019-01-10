@@ -11,7 +11,8 @@ import pandas as pd
 
 #Importing the dataset
 dataset = pd.read_csv('Social_Network_Ads.csv')
-X = dataset.iloc[:, [2, 3]].values
+X = dataset.iloc[:, [2, 3]].values #取第三四列的所有数据
+print(X)
 y = dataset.iloc[:, 4].values
 
 #Splitting the dataset into the Training set and Test set
