@@ -47,11 +47,11 @@ rdf = x.corr()
 examDf = x
 # print(rdf) #0.3-0.6 中等相关
 # 拆分训练集和测试集（train_test_split是存在与sklearn中的函数）
-X_train, X_test, Y_train, Y_test = train_test_split(examDf.Connect, examDf.Return, train_size=0.8)
+X_train, X_test, Y_train, Y_test = train_test_split(examDf.iloc[:,0], examDf.iloc[:,1], train_size=0.5)
 # train为训练数据,test为测试数据,examDf为源数据,train_size 规定了训练数据的占比
 
-print("自变量---源数据:", examDf.Connect.shape, "；  训练集:", X_train.shape, "；  测试集:", X_test.shape)
-print("因变量---源数据:", examDf.Return.shape, "；  训练集:", Y_train.shape, "；  测试集:", Y_test.shape)
+print("自变量---源数据:", examDf.iloc[:,0].shape, "；  训练集:", X_train.shape, "；  测试集:", X_test.shape)
+print("因变量---源数据:", examDf.iloc[:,1].shape, "；  训练集:", Y_train.shape, "；  测试集:", Y_test.shape)
 
 # 散点图
 plt.scatter(X_train, Y_train, color="darkgreen", label="train data")  # 训练集为深绿色点
