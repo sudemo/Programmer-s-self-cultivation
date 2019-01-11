@@ -6,6 +6,8 @@ Software: PyCharm Community Edition
 '''
 import pandas as pd
 from pandas import DataFrame
+from matplotlib import pyplot as plt
+from sklearn.model_selection import train_test_split
 import numpy
 
 X = [[0.0888, 0.5885],
@@ -34,5 +36,29 @@ x = DataFrame(X)
 # print(type(X),type(x))
 # print(x.iloc[0:2])
 # print(x.iloc[:2,[0,1]])
-print(x.iloc[:,:]) #取所有行和列
-print(x.iloc[:,[1]])# 取所有行，1列
+# print(x.iloc[:,:]) #取所有行和列
+# print(x.iloc[:,[1]])# 取所有行，1列
+# 绘制散点图
+plt.scatter(x.iloc[:,[0]],x.iloc[:,1])
+plt.xlabel("x account")#设置X轴标签
+plt.ylabel("y amount")#设置Y轴标签
+# plt.show()
+rdf = x.corr()
+examDf = x
+# print(rdf) #0.3-0.6 中等相关
+# 拆分训练集和测试集（train_test_split是存在与sklearn中的函数）
+X_train, X_test, Y_train, Y_test = train_test_split(examDf.Connect, examDf.Return, train_size=0.8)
+# train为训练数据,test为测试数据,examDf为源数据,train_size 规定了训练数据的占比
+
+print("自变量---源数据:", examDf.Connect.shape, "；  训练集:", X_train.shape, "；  测试集:", X_test.shape)
+print("因变量---源数据:", examDf.Return.shape, "；  训练集:", Y_train.shape, "；  测试集:", Y_test.shape)
+
+# 散点图
+plt.scatter(X_train, Y_train, color="darkgreen", label="train data")  # 训练集为深绿色点
+plt.scatter(X_test, Y_test, color="red", label="test data")  # 测试集为红色点
+
+# 添加标签
+plt.legend(loc=2)  # 图标位于左上角，即第2象限，类似的，1为右上角，3为左下角，4为右下角
+plt.xlabel("The Connection amount of the average account")  # 添加 X 轴名称
+plt.ylabel("The ratio of average return amount")  # 添加 Y 轴名称
+plt.show()  # 显示散点图
