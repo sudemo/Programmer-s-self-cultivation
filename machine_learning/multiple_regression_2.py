@@ -84,7 +84,7 @@ plt.scatter(X_test, Y_test, color='red', label="test data")
 plt.legend(loc=2)  # 图标位于左上角，即第2象限，类似的，1为右上角，3为左下角，4为右下角
 plt.xlabel("The Connection amount of the average account")  # 添加 X 轴名称
 plt.ylabel("The ratio of average return amount")  # 添加 Y 轴名称
-# plt.show()  # 显示图像
+plt.show()  # 显示图像
 
 print("拟合参数:截距", a, ",回归系数：", b)
 # print("最佳拟合线: Y = ", round(a, 2), "+", round(b[0], 2), "* X")  # 显示线性方程，并限制参数的小数位为两位
@@ -108,8 +108,3 @@ print(new_examDf[new_examDf.isnull() == True].count())  # 检验缺失值，若�
 
 # 输出相关系数，判断是否值得做线性回归模型
 print(new_examDf.corr())  # 0-0.3弱相关；0.3-0.6中相关；0.6-1强相关；
-
-# 通过seaborn添加一条最佳拟合直线和95%的置信带，直观判断相关关系
-sns.pairplot(x, examDf.iloc[:, :1], examDf.iloc[:, 1:2], size=7, aspect=0.8,kind='reg')
-plt.show()
-l
