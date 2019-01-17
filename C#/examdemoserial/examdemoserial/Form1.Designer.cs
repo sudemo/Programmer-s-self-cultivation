@@ -1,4 +1,4 @@
-﻿namespace serialform
+﻿namespace examdemoserial
 {
     partial class Form1
     {

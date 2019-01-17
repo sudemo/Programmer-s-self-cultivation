@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("serialdemo3")]
+[assembly: AssemblyTitle("examdemoserial")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("serialdemo3")]
+[assembly: AssemblyProduct("examdemoserial")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("de31e895-606e-4e9a-9038-585ca078b22e")]
+[assembly: Guid("63cc6aa4-8f9f-463a-823f-102c4079c4cb")]
 
 // 程序集的版本信息由下列四个值组成: 
 //

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "serialform", "serialform\serialform.csproj", "{A533D597-97EC-420C-9C5D-5F81E347E333}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "examdemo", "examdemo\examdemo.csproj", "{317C0B5C-4E25-40A0-98E6-E63713D16EE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A533D597-97EC-420C-9C5D-5F81E347E333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A533D597-97EC-420C-9C5D-5F81E347E333}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A533D597-97EC-420C-9C5D-5F81E347E333}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A533D597-97EC-420C-9C5D-5F81E347E333}.Release|Any CPU.Build.0 = Release|Any CPU
+		{317C0B5C-4E25-40A0-98E6-E63713D16EE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{317C0B5C-4E25-40A0-98E6-E63713D16EE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{317C0B5C-4E25-40A0-98E6-E63713D16EE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{317C0B5C-4E25-40A0-98E6-E63713D16EE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

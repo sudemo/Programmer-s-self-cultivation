@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace serialform.Properties
+namespace examdemoserial.Properties
 {
 
 
