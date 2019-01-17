@@ -43,7 +43,7 @@ namespace uidemo2
                 {
                     s.Open();
                     button1.Text = "closed serialport";
-                    s.DataReceived += S_DataReceived1;
+                    s.DataReceived += S_DataReceived;
                 }
                 else
                 {
@@ -58,13 +58,15 @@ namespace uidemo2
             }
         }
 
-        private void S_DataReceived1(object sender, SerialDataReceivedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         private void S_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
+
+            string str = s.ReadExisting();     //字符串方式读
+            richTextBox1.AppendText(str);//添加内容
+
+
             throw new NotImplementedException();
         }
 
