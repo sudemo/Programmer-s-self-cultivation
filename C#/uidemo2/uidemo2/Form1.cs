@@ -37,7 +37,7 @@ namespace uidemo2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
+            try   
             {
                 if (!s.IsOpen)
                 {
