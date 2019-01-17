@@ -43,7 +43,7 @@ class Excute
             
             a.Acceptdetails();
             a.Display();
-            Console.ReadLine();
+            Console.ReadLine(); //为了让最后一个显示窗口可以停留直至下一个键盘动作
         }
      }
  }       
