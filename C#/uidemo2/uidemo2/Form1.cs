@@ -18,6 +18,7 @@ namespace uidemo2
         public Form1()
         {
             InitializeComponent();
+            Control.CheckForIllegalCrossThreadCalls = false;
             button1.Text = "open";
             int[] item = { 9600, 115200 };
             foreach (int a in item)
@@ -32,7 +33,7 @@ namespace uidemo2
             string[] ports = SerialPort.GetPortNames();
             comboBox1.Items.AddRange(ports);
             //comboBox1.SelectedItem = comboBox1.Items[0];
-            //s.DataReceived += new SerialDataReceivedEventHandler(DataReceived);
+            s.DataReceived += new SerialDataReceivedEventHandler(S_DataReceived);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -62,12 +63,16 @@ namespace uidemo2
 
         private void S_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
+            // string str = s.ReadExisting();     //字符串方式读
+            // richTextBox1.AppendText(str);//添加内容
+            
+            string indata = s.ReadExisting();
+            Console.WriteLine("Data Received:{0}",indata);
+            richTextBox1.AppendText(indata);//添加内容
+            //richTextBox1.ResetText(indata);
+            //richTextBox1.ResetText()
+            //Console.Write(indata);
 
-            string str = s.ReadExisting();     //字符串方式读
-            richTextBox1.AppendText(str);//添加内容
-
-
-            throw new NotImplementedException();
         }
 
         private void button2_Click(object sender, EventArgs e)
