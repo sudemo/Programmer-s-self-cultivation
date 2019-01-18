@@ -63,15 +63,11 @@ namespace uidemo2
 
         private void S_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            // string str = s.ReadExisting();     //字符串方式读
-            // richTextBox1.AppendText(str);//添加内容
-            
-            string indata = s.ReadExisting();
+                            
+            string indata = s.ReadExisting();//字符串方式读
             Console.WriteLine("Data Received:{0}",indata);
             richTextBox1.AppendText(indata);//添加内容
-            //richTextBox1.ResetText(indata);
-            //richTextBox1.ResetText()
-            //Console.Write(indata);
+           
 
         }
 
