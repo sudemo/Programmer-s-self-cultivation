@@ -25,7 +25,9 @@ namespace uidemo2
             {
                 comboBox2.Items.Add(a.ToString());
             }
-            comboBox2.SelectedItem = comboBox2.Items[0];
+            //comboBox2.SelectedItem = comboBox2.Items[0];
+            //comboBox2.Text := Str;
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -36,6 +38,11 @@ namespace uidemo2
             s.DataReceived += new SerialDataReceivedEventHandler(S_DataReceived);
         }
 
+        private string GetItemText(int i)
+        {
+            // Return the text of the item using the index:  
+            return (comboBox1.Items[i].ToString());
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             try   
@@ -82,7 +89,7 @@ namespace uidemo2
             }
             else
             {
-                MessageBox.Show("no data in the box");
+                MessageBox.Show("serial port not open,plz open first");
             }
         }
 

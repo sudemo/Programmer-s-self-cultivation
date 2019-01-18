@@ -61,9 +61,10 @@ namespace SimpleEvent
         {
             EventTest e = new EventTest(); /* 实例化对象,第一次没有触发事件 */
             subscribEvent v = new subscribEvent(); /* 实例化对象 */
-            e.ChangeNum += new EventTest.NumManipulationHandler(v.printf); /* 注册 */
+            e.ChangeNum += new EventTest.NumManipulationHandler(v.printf); /* 注册 类似信号槽的连接*/
             e.SetValue(7);
             e.SetValue(11);
+            e.SetValue(12);
         }
     }
 }
