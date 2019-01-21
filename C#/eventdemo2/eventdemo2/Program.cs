@@ -4,7 +4,8 @@ using System.IO;
 namespace BoilerEventAppl
 {
 
-    // boiler 类
+    // boiler 锅炉类  本实例提供一个简单的用于热水锅炉系统故障排除的应用程序。
+    //当维修工程师检查锅炉时，锅炉的温度和压力会随着维修工程师的备注自动记录到日志文件中。
     class Boiler
     {
         private int temp;
@@ -28,7 +29,7 @@ namespace BoilerEventAppl
     class DelegateBoilerEvent
     {
         public delegate void BoilerLogHandler(string status);
-
+       
         // 基于上面的委托定义事件
         public event BoilerLogHandler BoilerEventLog;
 
