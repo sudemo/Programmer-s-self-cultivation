@@ -15,7 +15,7 @@ namespace fib
             
             //Console.WriteLine(previous2);
             //int now = 0;
-            while (fibonacciNumbers.Count < 2)
+            while (fibonacciNumbers.Count < 20)
             {
                 var previous = fibonacciNumbers[fibonacciNumbers.Count - 1];
                 //Console.WriteLine(previous);
@@ -25,9 +25,14 @@ namespace fib
                 
                 
             }
+            int a = 0;
             foreach (var item in fibonacciNumbers)
                 Console.WriteLine(item);
-                Console.ReadKey();
+                
+            //Console.WriteLine("1");
+            var sum = fibonacciNumbers.Sum();
+            Console.WriteLine("和为{0}",sum);
+            Console.ReadKey();
         }
     }
 }
