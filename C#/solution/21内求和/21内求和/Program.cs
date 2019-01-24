@@ -18,15 +18,10 @@ namespace _21内求和
                     sum = sum + num;
                 }
             }
-            Console.Write("ans={0}",sum);
+            //Console.Write("ans={0}",sum);
+            Console.WriteLine($"this number is {sum}");
             Console.ReadKey();
-        
-        
                 
-                
-                
-                
-                
-                }
+         }
     }
 }
