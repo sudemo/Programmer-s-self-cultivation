@@ -10,6 +10,23 @@ namespace _21内求和
     {
         static void Main(string[] args)
         {
-        }
+            int sum=0;
+            for (int num = 1;num <21;num++)
+            {
+                if (num % 3 == 0)
+                {
+                    sum = sum + num;
+                }
+            }
+            Console.Write("ans={0}",sum);
+            Console.ReadKey();
+        
+        
+                
+                
+                
+                
+                
+                }
     }
 }
