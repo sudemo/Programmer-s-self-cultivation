@@ -33,16 +33,39 @@ public class ads
     new Student {First="Eugene", Last="Zabokritski", ID=121, Scores= new List<int> {96, 85, 91, 60}},
     new Student {First="Michael", Last="Tucker", ID=122, Scores= new List<int> {94, 92, 91, 91}}
     };
-    IEnumerable<Student> studentQuery =
-    from student in students
-    where student.Scores[0] > 90
-    select student;
-    foreach (Student student in studentQuery)
-    {
-        Console.WriteLine("{0}, {1}", student.Last, student.First);
-                
-    }
+            /* IEnumerable<Student> studentQuery =
+             from student in students
+             where student.Scores[0] > 90&& student.Scores[3]>30
+             //orderby student.Last ascending //按首字母排序
+             orderby student.Scores[0] descending //按成绩降序
+             select student;
+             foreach (Student student in studentQuery)
+             {   
+                 Console.WriteLine("{0}, {1}", student.Last, student.Scores[0]);
+
+             }*/
+
+            // studentQuery2 is an IEnumerable<IGrouping<char, Student>>
+            var studentQuery2 =
+            from student in students
+                group student by student.Last[0];
+    //group student by student.Scores[1];
+    // studentGroup is a IGrouping<char, Student>
+    foreach (var studentGroup1 in studentQuery2)
+            {
+                Console.WriteLine(studentGroup1.Key);
+            foreach (Student student in studentGroup1)
+                {
+                    Console.WriteLine("   {0}, {1}",
+                              student.Last, student.First);
+                }
+             
+            }
             Console.ReadKey();
         }
+
+
+
+
     }
 }
