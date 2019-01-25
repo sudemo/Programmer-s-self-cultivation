@@ -5,20 +5,20 @@ using System.Linq;
 namespace Students
 {
 
-public class Student
-{
-    public string First { get; set; }
-    public string Last { get; set; }
-    public int ID { get; set; }
-    public List<int> Scores;
-}
-
-public class ads
-{
-    // Create a data source by using a collection initializer.
-    public static void Main()
+    public class Student
     {
-        List<Student> students = new List<Student>
+        public string First { get; set; }
+        public string Last { get; set; }
+        public int ID { get; set; }
+        public List<int> Scores;
+    }
+
+    public class ads
+    {
+        // Create a data source by using a collection initializer.
+        public static void Main()
+        {
+            List<Student> students = new List<Student>
     {
     new Student {First="Svetlana", Last="Omelchenko", ID=111, Scores= new List<int> {97, 92, 81, 60}},
     new Student {First="Claire", Last="O'Donnell", ID=112, Scores= new List<int> {75, 84, 91, 39}},
@@ -48,24 +48,20 @@ public class ads
             // studentQuery2 is an IEnumerable<IGrouping<char, Student>>
             var studentQuery2 =
             from student in students
-                group student by student.Last[0];
-    //group student by student.Scores[1];
-    // studentGroup is a IGrouping<char, Student>
-    foreach (var studentGroup1 in studentQuery2)
+            group student by student.Last[0];
+            //group student by student.Scores[1];
+            // studentGroup is a IGrouping<char, Student>
+            foreach (var studentGroup1 in studentQuery2)
             {
                 Console.WriteLine(studentGroup1.Key);
-            foreach (Student student in studentGroup1)
+                foreach (Student student in studentGroup1)
                 {
                     Console.WriteLine("   {0}, {1}",
                               student.Last, student.First);
                 }
-             
+
             }
             Console.ReadKey();
         }
-
-
-
-
     }
 }
