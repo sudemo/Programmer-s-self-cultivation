@@ -36,7 +36,8 @@ namespace 内插demo2
             var date = DateTime.Now;
             var price = 1.99m;
             var unit = Unit.kilogram;
-            Console.WriteLine($"On {date}, the price of {ite} was {price} per {unit}.");
+            //表达式的不同格式 “yyyy”（显示四位数年份）。 将 {price:C2} 中的“C2”更改为“e”（用于指数计数法）和“F3”（使数值在小数点后保持三位数字）。
+            Console.WriteLine($"On {date:t}, the price of {ite} was {price:f3} per {unit}.");
             Console.ReadKey();
 
         }
