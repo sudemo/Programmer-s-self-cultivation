@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace linqdemo3
 {
-    class Program
+    class Program //根据单词的长度分组，并将大写
     {
         static void Main(string[] args)
         {
@@ -19,7 +19,7 @@ namespace linqdemo3
                         group word.ToUpper() by word.Length into gr
                         orderby gr.Key
                         select new { Length = gr.Key, Words = gr };
-
+            Console.WriteLine(query);
             // Using method-based query syntax.  
             var query2 = words.
                 GroupBy(w => w.Length, w => w.ToUpper()).
@@ -31,8 +31,9 @@ namespace linqdemo3
                 Console.WriteLine("Words of length {0}:", obj.Length);
                 foreach (string word in obj.Words)
                     Console.WriteLine(word);
-                Console.ReadKey();
+                
             }
+            Console.ReadKey();
         }
     }
 }
