@@ -34,7 +34,7 @@ namespace SimpleEvent
 
         public void SetValue(int n)
         {
-            if (value != n)
+            if (value != n) //value 的初始值为0 
             {
                 value = n;
                 OnNumChanged();
