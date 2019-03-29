@@ -32,12 +32,18 @@ patches: 返回每个bin里面包含的数据，是一个list
 # from skimage import data
 import cv2
 import matplotlib.pyplot as plt
+import numpy as np
+
+
+
 img= plt.imread('d:/lena.jpg')
-plt.figure("hist")
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+# img = plt.imread("D:/debug/python/pytorchdemo/pic/val/j2/17-45-02.bmp")
+# plt.figure("hist")
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) #灰度变换
 # arr=img.flatten()
 # n, bins, patches = plt.hist(arr, bins=156, normed=1,edgecolor='None',facecolor='red')
-# plt.subplot(),\
+# plt.subplot()
 plt.hist(img.ravel(), 256)
 plt.show()
+
 
