@@ -4,7 +4,7 @@
 @file: edgedetect.py
 @time: 2019/3/29 16:33
 '''
-import  cv2
+import cv2
 from matplotlib import pyplot as plt
 import numpy as np
 
@@ -34,7 +34,7 @@ def Sobel_gradient(blurred):
 
 def Thresh_and_blur(gradient):
     blurred = cv2.GaussianBlur(gradient, (3, 3), 0)
-    (_, thresh) = cv2.threshold(blurred, 50, 255, cv2.THRESH_BINARY)
+    (_, thresh) = cv2.threshold(blurred, 50, 155, cv2.THRESH_BINARY)
 
     return thresh
 
@@ -52,7 +52,7 @@ def image_morphology(thresh):
 
 def findcnts_and_box_point(closed):
     # 这里opencv3返回的是三个参数
-    (_, cnts, _) = cv2.findContours(closed.copy(),
+    ( cnts, _) = cv2.findContours(closed.copy(),
                                     cv2.RETR_LIST,
                                     cv2.CHAIN_APPROX_SIMPLE)
     c = sorted(cnts, key=cv2.contourArea, reverse=True)[0]
@@ -92,20 +92,6 @@ def walk():
     box = findcnts_and_box_point(closed)
     draw_img, crop_img = drawcnts_and_cut(original_img, box)
 
-    # 暴力一点，把它们都显示出来看看
-
-    cv2.imshow('original_img', original_img)
-    cv2.imshow('blurred', blurred)
-    cv2.imshow('gradX', gradX)
-    cv2.imshow('gradY', gradY)
-    cv2.imshow('sobelfinal', gradient)
-    cv2.imshow('thresh', thresh)
-    cv2.imshow('closed', closed)
-    cv2.imshow('draw_img', draw_img)
-    cv2.imshow('crop_img', crop_img)
-    cv2.waitKey(20171219)
-    cv2.imwrite(save_path, crop_img)
-
 
 if __name__ == '__main__':
     # gray = Gaussian_Blur(img)
@@ -115,6 +101,20 @@ if __name__ == '__main__':
     closed = image_morphology(thresh)
     box = findcnts_and_box_point(closed)
     draw_img, crop_img = drawcnts_and_cut(img, box)
+
+    featureSum =0
+    # detector = cv2.xfeatures2d.SIFT_create()
+    # detector = cv2.xfeatures2d.SURF_create()
+    # 找到关键点
+    # kps, des = detector.detectAndCompute(thresh, None)
+    # 绘制关键点
+    # imag = cv2.drawKeypoints(thresh, kps, img)
+
+    # 将特征点保存
+    # np.savetxt(outputImgPath, des, fmt='%.2f')
+    # featureSum += len(kps)
+    # cv2.imshow('result', imag)
+    # print('kps:' + str(featureSum))
 
     # 暴力一点，把它们都显示出来看看
 
@@ -129,4 +129,3 @@ if __name__ == '__main__':
     cv2.imshow('crop_img', crop_img)
     cv2.waitKey()
     # cv2.imwrite(save_path, crop_img)
-
