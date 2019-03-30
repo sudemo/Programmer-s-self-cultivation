@@ -27,6 +27,6 @@ if im is not None:
     cv2.imshow('keypoints',img)
     v=cv2.waitKey(1000)
     print(v)
-    # cv2.destroyAllWindows()
+
 else:
     print('no pic')
