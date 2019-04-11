@@ -25,7 +25,7 @@ namespace SimpleEvent
         }
 
 
-        public EventTest()
+        public EventTest() //构造函数
         {
             int n = 5;
             SetValue(n);
@@ -47,6 +47,12 @@ namespace SimpleEvent
 
     public class subscribEvent
     {
+        public subscribEvent()
+        //public subscribEvent()
+        {
+            Console.WriteLine("{0}对象已经创建",nameof(subscribEvent));
+        } 
+
         public void printf()
         {
             Console.WriteLine("event fire 事件触发");
@@ -58,8 +64,9 @@ namespace SimpleEvent
     public class MainClass
     {
         public static void Main()
-        {
+         {
             EventTest e = new EventTest(); /* 实例化对象,第一次没有触发事件 */
+            
             subscribEvent v = new subscribEvent(); /* 实例化对象 */
             e.ChangeNum += new EventTest.NumManipulationHandler(v.printf); /* 注册 类似信号槽的连接*/
             e.SetValue(7);
