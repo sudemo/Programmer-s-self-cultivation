@@ -10,6 +10,9 @@ namespace DelegateAppl
         // 委托声明
         public delegate void printString(string s);
 
+
+
+
         // 该方法打印到控制台
         public static void WriteToScreen(string str)
         {
@@ -26,10 +29,15 @@ namespace DelegateAppl
             sw.Close();
             fs.Close();
         }
+
+
+
+
+
         // 该方法把委托作为参数，并使用它调用方法
-        public static void sendString(printString ps)
+        /*public static void sendString(printString p)
         {
-            ps("Hello World");
+            p("Hello World");
         }
         static void Main(string[] args)
         {
@@ -38,6 +46,6 @@ namespace DelegateAppl
             sendString(ps1);
             sendString(ps2);
             Console.ReadKey();
-        }
+        }*/
     }
 }
