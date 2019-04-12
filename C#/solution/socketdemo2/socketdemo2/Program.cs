@@ -27,12 +27,13 @@ public class GetSocket
             }
             catch (Exception ex)
             {
-                Console.WriteLine("try next ip");
+                Console.WriteLine("connect server failed, ip is {0}",ipe);
             }
 
             if (tempSocket.Connected)
             {
                 s = tempSocket;
+                Console.WriteLine("connect server ok, ip is {0}", ipe);
                 break;
             }
             else
