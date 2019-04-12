@@ -12,18 +12,23 @@ public class GetSocket
         IPHostEntry hostEntry = null;
 
         // Get host related information.
-        hostEntry = Dns.GetHostEntry(server);
+        hostEntry = Dns.GetHostEntry(server); //获取本地主机名
 
         // Loop through the AddressList to obtain the supported AddressFamily. This is to avoid
         // an exception that occurs when the host IP Address is not compatible with the address family
         // (typical in the IPv6 case).
         foreach (IPAddress address in hostEntry.AddressList)
         {
-            IPEndPoint ipe = new IPEndPoint(address, port);
-            Socket tempSocket =
-                new Socket(ipe.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
-            tempSocket.Connect(ipe);
+            IPEndPoint ipe = new IPEndPoint(address, 9091);
+            Socket tempSocket = new Socket(ipe.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            try
+            {
+                tempSocket.Connect(ipe);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("try next ip");
+            }
 
             if (tempSocket.Connected)
             {
@@ -76,12 +81,12 @@ public class GetSocket
     public static void Main(string[] args)
     {
         string host;
-        int port = 80;
+        int port = 9091;
 
         if (args.Length == 0)
             // If no server name is passed as argument to this program, 
             // use the current host name as the default.
-            host = Dns.GetHostName();
+            host = Dns.GetHostName(); //获取本地主机名
         else
             host = args[0];
 
