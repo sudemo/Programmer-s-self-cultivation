@@ -12,7 +12,7 @@ public class GetSocket
         IPHostEntry hostEntry = null;
 
         // Get host related information.
-        hostEntry = Dns.GetHostEntry(server); //获取本地主机名
+        hostEntry = Dns.GetHostEntry(server); //获取本地主机ip
 
         // Loop through the AddressList to obtain the supported AddressFamily. This is to avoid
         // an exception that occurs when the host IP Address is not compatible with the address family
@@ -27,7 +27,9 @@ public class GetSocket
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 Console.WriteLine("connect server failed, ip is {0}",ipe);
+
             }
 
             if (tempSocket.Connected)
@@ -47,7 +49,7 @@ public class GetSocket
     // This method requests the home page content for the specified server.
     private static string SocketSendReceive(string server, int port)
     {
-        string request = "GET / HTTP/1.1\r\nHost: " + server +
+        string request = "GET / HTTP/1.1\r\nHost: " + server +  //"GET / HTTP/1.1\r\nHost: C-NS-BU5-USER07\r\nConnection: Close\r\n\r\n"
             "\r\nConnection: Close\r\n\r\n";
         Byte[] bytesSent = Encoding.ASCII.GetBytes(request);
         Byte[] bytesReceived = new Byte[256];
