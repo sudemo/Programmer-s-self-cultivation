@@ -31,11 +31,23 @@ namespace SocketClient
                 Console.WriteLine(ex);
                 Console.Read();
             }
+            var buffer = new byte[1024];//设置一个缓冲区，用来保存数据
+            //方法参考：http://msdn.microsoft.com/zh-cn/library/system.net.sockets.socket.beginreceive.aspx
+            socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback((ar) =>
+            {
+                //方法参考：http://msdn.microsoft.com/zh-cn/library/system.net.sockets.socket.endreceive.aspx
+                var length = socket.EndReceive(ar);
+                //读取出来消息内容
+                var message = Encoding.Unicode.GetString(buffer, 0, length);
+                //显示消息
+                Console.WriteLine(message);
+
+            }), null);
 
 
 
         }
-            
+
 
     }
 }
