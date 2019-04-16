@@ -31,6 +31,9 @@ namespace SocketClient
                 Console.WriteLine(ex);
                 Console.Read();
             }
+
+
+
         }
             
 
