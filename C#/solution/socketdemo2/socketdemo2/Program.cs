@@ -76,6 +76,7 @@ public class GetSocket
                 page = page + Encoding.ASCII.GetString(bytesReceived, 0, bytes);
             }
             while (bytes > 0);
+            
         }
 
         return page;
