@@ -46,34 +46,46 @@ namespace SocketServer
             //给客户端发送一个欢迎消息
             client.Send(Encoding.Unicode.GetBytes("Hi there, I accept you request at " + DateTime.Now.ToString()));
 
-
+            //client.Send();
             //实现每隔两秒钟给服务器发一个消息
             //这里我们使用了一个定时器
-            var timer = new System.Timers.Timer();
-            timer.Interval = 2000D; //间隔
-            timer.Enabled = true;  
-            timer.Elapsed += (o, a) => //绑定响应事件   （0，a）=>{} 匿名方法定义
+            /* var timer = new System.Timers.Timer();
+             timer.Interval = 2000D; //间隔
+             timer.Enabled = true;  
+             timer.Elapsed += (o, a) => //绑定响应事件   （0，a）=>{} 匿名方法定义
+             {
+                 //检测客户端Socket的状态
+                 if (client.Connected)
+                 {
+                     try
+                     {
+                         client.Send(Encoding.Unicode.GetBytes("Message at " + DateTime.Now.ToString()));
+                     }
+                     catch (SocketException ex)
+                     {
+                         Console.WriteLine(ex.Message);
+                     }
+                 }
+                 else
+                 {
+                     timer.Stop();
+                     timer.Enabled = false;
+                     Console.WriteLine("Client is disconnected, the timer is stop.");
+                 }
+             };
+             timer.Start();
+             */
+
+
+            while (true)
             {
-                //检测客户端Socket的状态
-                if (client.Connected)
-                {
-                    try
-                    {
-                        client.Send(Encoding.Unicode.GetBytes("Message at " + DateTime.Now.ToString()));
-                    }
-                    catch (SocketException ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
-                }
-                else
-                {
-                    timer.Stop();
-                    timer.Enabled = false;
-                    Console.WriteLine("Client is disconnected, the timer is stop.");
-                }
-            };
-            timer.Start();
+
+                var message = "Message from client : " + Console.ReadLine();
+                var outputBuffer = Encoding.Unicode.GetBytes(message);
+                client.Send(outputBuffer);
+                //client.Send(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
+            }
+
 
 
             //接收客户端的消息(这个和在客户端实现的方式是一样的）
