@@ -11,11 +11,7 @@ namespace SocketServer
 {
     class Program
     {
-        /// <summary>
-        /// Socket Server 演示
-        /// 作者：陈希章
-        /// </summary>
-        /// <param name="args"></param>
+        
         static void Main(string[] args)
         {
             //创建一个新的Socket,这里我们使用最常用的基于TCP的Stream Socket（流式套接字）

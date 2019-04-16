@@ -29,6 +29,7 @@ namespace SocketClient
             //接受用户输入，将消息发送给服务器端
             while (true)
             {
+                
                 var message = "Message from client : " + Console.ReadLine();
                 var outputBuffer = Encoding.Unicode.GetBytes(message);
                 socket.BeginSend(outputBuffer, 0, outputBuffer.Length, SocketFlags.None, null, null);
