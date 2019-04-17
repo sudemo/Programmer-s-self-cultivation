@@ -14,7 +14,7 @@ namespace scoketdemo4server
 
         public  static void listenclient(object i)
         {
-            var socketex = i as Socket; //?
+            var socketex = i as Socket; //? 检测类型是否正确
             while (true)
             {
                 var server = socketex.Accept();
@@ -33,20 +33,29 @@ namespace scoketdemo4server
             var server = i as Socket;
             while (true)
             {
-                //recv
-                byte[] buffer = new byte[1024*1024*2];
-                var str = server.Receive(buffer);
-                //var effective = server.Receive(buffer);
-                if (str == 0)
+                try
                 {
-                    break;
+                    //recv
+                    byte[] buffer = new byte[1024];
+                    var str = server.Receive(buffer);
+                    //var effective = server.Receive(buffer);
+                    if (str == 0)
+                    {
+                        break;
+                    }
+                    var str1 = Encoding.UTF8.GetString(buffer, 0, str);
+                    //var str = Encoding.UTF8.GetBytes("server return");
+
+                    Console.WriteLine(str1);
+                    //send.Send(buffer);
                 }
-                var str1 = Encoding.UTF8.GetString(buffer, 0, str);
-                //var str = Encoding.UTF8.GetBytes("server return");
-                
-                Console.WriteLine(str1);
-                //send.Send(buffer);
-                
+                catch (SocketException ex)
+                {
+                    Console.WriteLine(ex);
+                    Console.Read();
+                }
+
+
             }
         }
 
