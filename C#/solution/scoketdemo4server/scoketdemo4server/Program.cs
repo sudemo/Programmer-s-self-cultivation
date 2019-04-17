@@ -44,10 +44,10 @@ namespace scoketdemo4server
                         break;
                     }
                     var str1 = Encoding.UTF8.GetString(buffer, 0, str);
-                    //var str = Encoding.UTF8.GetBytes("server return");
+                    
 
                     Console.WriteLine(str1);
-                    //send.Send(buffer);
+                    
                 }
                 catch (SocketException ex)
                 {
