@@ -38,14 +38,7 @@ namespace socketdemo4client
                     var strinput = Console.ReadLine();
                     var str = Encoding.Unicode.GetBytes(strinput);
                     client.Send(str);
-                    //byte[] buffer1 = new byte[1024];
-
-                    //var msg = "recv:" + Console.ReadLine();
-                    //var encodemsg = Encoding.Unicode.GetBytes(msg);
-                    //var outputBuffer = Encoding.Unicode.GetBytes(message);
-                    //client.Receive(buffer1);
-                    //var str = Encoding.UTF8.GetString(buffer1, 0, 1);
-                    //Console.WriteLine(str);
+                   
                 }
                 catch (Exception ex)
                 {
