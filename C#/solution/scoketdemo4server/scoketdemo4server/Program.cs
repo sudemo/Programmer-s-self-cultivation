@@ -38,7 +38,7 @@ namespace scoketdemo4server
                     //recv
                     byte[] buffer = new byte[1024];
                     var str = server.Receive(buffer);
-                    //var effective = server.Receive(buffer);
+                    
                     if (str == 0)
                     {
                         break;
