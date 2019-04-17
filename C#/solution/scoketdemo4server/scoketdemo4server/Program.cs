@@ -20,7 +20,7 @@ namespace scoketdemo4server
                 var server = socketex.Accept();
                 var sendport = server.RemoteEndPoint.ToString();
                 Console.WriteLine($"{sendport} connected");
-                //new thread
+                //new thread for recving
                 Thread thread = new Thread(recvmsg);
                 thread.IsBackground = true;
                 thread.Start(server);
@@ -33,16 +33,25 @@ namespace scoketdemo4server
             var server = i as Socket;
             while (true)
             {
-                try
+                try    //为什么无法捕获错误
                 {
                     //recv
                     byte[] buffer = new byte[1024];
-                    var str = server.Receive(buffer);
-                    
+                    try
+                    {
+                        var str = server.Receive(buffer);
+                    }
+                    catch (SocketException ex)
+                    {
+                        Console.WriteLine(ex);
+                        Console.Read();
+                    }
+
+                    /*
                     if (str == 0)
                     {
                         break;
-                    }
+                    }*/
                     var str1 = Encoding.UTF8.GetString(buffer, 0, str);
                     
 
