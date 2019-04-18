@@ -37,30 +37,21 @@ namespace scoketdemo4server
                 {
                     //recv
                     byte[] buffer = new byte[1024];
-                    try
-                    {
-                        var str = server.Receive(buffer);
-                    }
-                    catch (SocketException ex)
-                    {
-                        Console.WriteLine(ex);
-                        Console.Read();
-                    }
 
-                    /*
+                    var str = server.Receive(buffer);                    
                     if (str == 0)
                     {
                         break;
-                    }*/
+                    }
                     var str1 = Encoding.UTF8.GetString(buffer, 0, str);
                     
 
                     Console.WriteLine(str1);
                     
                 }
-                catch (SocketException ex)
+                catch (System.Net.Sockets.SocketException ex)
                 {
-                    Console.WriteLine(ex);
+                    Console.WriteLine(ex.Message);
                     Console.Read();
                 }
 
