@@ -24,6 +24,10 @@ namespace scoketdemo4server
                 Thread thread = new Thread(recvmsg);
                 thread.IsBackground = true;
                 thread.Start(server);
+
+                Thread thread1 = new Thread(sendmsg);
+                thread1.IsBackground = true;
+                thread1.Start(server);
             }
         }
 
@@ -33,7 +37,7 @@ namespace scoketdemo4server
             var server = i as Socket;
             while (true)
             {
-                try    //为什么无法捕获错误
+                try    //为什么无法捕获错误,SocketException,System.Net.Sockets.SocketException不同
                 {
                     //recv
                     byte[] buffer = new byte[1024];
@@ -46,18 +50,41 @@ namespace scoketdemo4server
                     var str1 = Encoding.UTF8.GetString(buffer, 0, str);
                     
 
-                    Console.WriteLine(str1);
+                    Console.WriteLine("recv from client {0}",str1);
                     
                 }
                 catch (System.Net.Sockets.SocketException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    Console.Read();
+                    Console.ReadKey();
                 }
 
 
             }
         }
+
+
+
+        public static void sendmsg(object o)
+        {
+            var server = o as Socket;
+            while (true)
+            {
+                try
+                {
+                    Console.WriteLine("server plz input:");
+                    var strinput = Console.ReadLine();
+                    var str = Encoding.Unicode.GetBytes(strinput);
+                    server.Send(str);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.Read();
+                }
+            }
+        }
+
 
 
 
@@ -75,7 +102,7 @@ namespace scoketdemo4server
             Thread thread = new Thread(listenclient);
             thread.IsBackground = true;
             thread.Start(server);
-            Console.Read();
+            Console.ReadKey();
             
         }
 
