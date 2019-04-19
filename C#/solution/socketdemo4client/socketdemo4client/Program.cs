@@ -71,11 +71,11 @@ namespace socketdemo4client
                 
 
                 Thread thread = new Thread(recvmsg);
-                thread.IsBackground = true;
+                thread.IsBackground = false;
                 thread.Start(client);
 
                 Thread thread2 = new Thread(sendmsg);
-                thread.IsBackground = true;
+                thread2.IsBackground = false;
                 thread2.Start(client);
 
                /* while (true)

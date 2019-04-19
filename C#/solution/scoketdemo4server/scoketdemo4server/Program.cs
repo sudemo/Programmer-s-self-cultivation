@@ -22,15 +22,16 @@ namespace scoketdemo4server
                 var sendport = server.RemoteEndPoint.ToString();
                 Console.WriteLine($"{sendport} connected");
                 //new thread for recving
-                Thread thread = new Thread(recvmsg);
-                thread.IsBackground = true;
-                thread.Start(server);
-                Console.WriteLine("thread recv start");
+                //return 1
+                Thread thread0 = new Thread(recvmsg);
+                thread0.IsBackground = true;
+                thread0.Start(server);
+                Console.WriteLine("start thread0:{0}", thread0.Name);
 
                 Thread thread1 = new Thread(sendmsg);
                 thread1.IsBackground = true;
                 thread1.Start(server);
-                Console.WriteLine("thread send start");
+                Console.WriteLine("start thread1 {0}",thread1.Name);
             }
         }
 
@@ -40,7 +41,7 @@ namespace scoketdemo4server
             var server = i as Socket;
             while (true)
             {
-                try    //为什么无法捕获错误,SocketException,System.Net.Sockets.SocketException不同
+                try    //为什么无法捕获错误,SocketException,与System.Net.Sockets.SocketException不同
                 {
                     //recv
                     byte[] buffer = new byte[1024];
@@ -54,12 +55,14 @@ namespace scoketdemo4server
                     
 
                     Console.WriteLine("recv from client {0}",str1);
-                    
+                   
                 }
                 catch (System.Net.Sockets.SocketException ex)
                 {
                     Console.WriteLine(ex.Message);
+                    
                     Console.ReadKey();
+                    
                 }
 
 
@@ -106,7 +109,12 @@ namespace scoketdemo4server
             thread.IsBackground = false;
             thread.Start(server);
             //Console.Read();
+
+
+
             
+
+
         }
 
     }
