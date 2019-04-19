@@ -50,7 +50,7 @@ class Solution:
 
         def traversal(root):
             # print(root)
-            #
+            #多遍历的一次是在继续往下查找，直到root is none
             if (root is None):
                 return
             result.append(root.val)
