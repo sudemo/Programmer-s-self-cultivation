@@ -14,6 +14,7 @@ namespace scoketdemo4server
 
         public  static void listenclient(object i)
         {
+            Console.WriteLine("lis started");
             var socketex = i as Socket; //? 检测类型是否正确
             while (true)
             {
@@ -102,9 +103,9 @@ namespace scoketdemo4server
 
             //开启线程
             Thread thread = new Thread(listenclient);
-            thread.IsBackground = true;
+            thread.IsBackground = false;
             thread.Start(server);
-            Console.ReadKey();
+            //Console.Read();
             
         }
 
