@@ -36,10 +36,21 @@ class Solution:
         self.right(root.right)
         self.result.append(root.val)
 
+    def preoder_traversal(self,root):
+        res =[]
+        if root is None:
+            return root
+        res.append(root.val)
+        res.append(root.left)
+        res.append(root.right)
+        return res
+
+
 if __name__ == '__main__':
     Tree = TreeNode(1)
     Tree.left = TreeNode(2)
     Tree.right = TreeNode(3)
-
+    print("tree:",Tree.val)
     s = Solution()
     print(s.postorderTraversal(Tree))
+    print(s.preoder_traversal(Tree))
