@@ -84,7 +84,7 @@ namespace socketdemo4client
                     var buff = Encoding.UTF8.GetBytes(buffer);
                     var temp = client.Send(buff);
                     Thread.Sleep(10);
-                }*/
+                }*/ 
             }
             catch (Exception ex)
             {
