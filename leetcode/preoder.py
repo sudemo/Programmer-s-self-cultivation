@@ -49,7 +49,10 @@ class Solution:
         # write your code here
 
         def traversal(root):
-            if (root is None): return
+            # print(root)
+            #
+            if (root is None):
+                return
             result.append(root.val)
             traversal(root.left)
             traversal(root.right)
@@ -66,5 +69,5 @@ if __name__ == '__main__':
     Tree.right = TreeNode(3)
     print("tree:",Tree.val)
     s = Solution()
-    print(s.postorderTraversal(Tree))
+    # print(s.postorderTraversal(Tree))
     print(s.preorderTraversal(Tree))
