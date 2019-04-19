@@ -31,8 +31,9 @@ namespace scoketdemo4server
                 Thread thread1 = new Thread(sendmsg);
                 thread1.IsBackground = true;
                 thread1.Start(server);
-                Console.WriteLine("start thread1 {0}",thread1.Name);
+                Console.WriteLine("start thread1 {0}", thread1.Name);
             }
+            
         }
 
 
@@ -59,7 +60,7 @@ namespace scoketdemo4server
                 }
                 catch (System.Net.Sockets.SocketException ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    Console.WriteLine("rec error {0}",ex.Message);
                     
                     Console.ReadKey();
                     

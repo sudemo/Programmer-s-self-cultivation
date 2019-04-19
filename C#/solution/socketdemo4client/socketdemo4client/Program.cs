@@ -31,7 +31,7 @@ namespace socketdemo4client
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("rec thread {0}",ex.Message);
+                    Console.WriteLine("thread {0}",ex.Message);
                     Console.Read();
                 }
             }
@@ -74,10 +74,10 @@ namespace socketdemo4client
                 thread.IsBackground = false;
                 thread.Start(client);
 
-                Thread thread2 = new Thread(sendmsg);
-                thread2.IsBackground = false;
-                thread2.Start(client);
-
+                Thread thread3 = new Thread(sendmsg);
+                thread3.IsBackground = false;
+                thread3.Start(client);
+                Console.ReadKey();
                /* while (true)
                 {
                     var buffer = Console.ReadLine();
