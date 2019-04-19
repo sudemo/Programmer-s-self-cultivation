@@ -24,10 +24,12 @@ namespace scoketdemo4server
                 Thread thread = new Thread(recvmsg);
                 thread.IsBackground = true;
                 thread.Start(server);
+                Console.WriteLine("thread recv start");
 
                 Thread thread1 = new Thread(sendmsg);
                 thread1.IsBackground = true;
                 thread1.Start(server);
+                Console.WriteLine("thread send start");
             }
         }
 
