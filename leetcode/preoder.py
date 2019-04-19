@@ -45,6 +45,20 @@ class Solution:
         res.append(root.right)
         return res
 
+        def preorderTraversal(self, root):
+            # write your code here
+
+            def traversal(root):
+                if (root is None): return
+                result.append(root.val)
+                traversal(root.left)
+                traversal(root.right)
+
+            result = []
+            traversal(root)
+            return result
+
+
 
 if __name__ == '__main__':
     Tree = TreeNode(1)
