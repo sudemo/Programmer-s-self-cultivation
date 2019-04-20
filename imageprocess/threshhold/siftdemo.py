@@ -25,7 +25,7 @@ if im is not None:
     keypoints,descriptors = sift.detectAndCompute(gray,None)
     img = cv2.drawKeypoints(gray,keypoints,im)
     cv2.imshow('keypoints',img)
-    v=cv2.waitKey(1000)
+    v=cv2.waitKey(11000)
     print(v)
 
 else:
