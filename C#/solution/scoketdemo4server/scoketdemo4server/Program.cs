@@ -81,7 +81,8 @@ namespace scoketdemo4server
                 {
                     Console.WriteLine("server plz input:");
                     var strinput = Console.ReadLine();
-                    var str = Encoding.Unicode.GetBytes(strinput);
+                    //var str = Encoding.Unicode.GetBytes(strinput);
+                    var str = Encoding.UTF8.GetBytes(strinput);
                     server.Send(str);
                 }
                 catch (Exception ex)
