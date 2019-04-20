@@ -45,7 +45,7 @@ namespace socketdemo4client
                 {
                     Console.WriteLine("plz input:");
                     var strinput = Console.ReadLine();
-                    var str = Encoding.Unicode.GetBytes(strinput);
+                    var str = Encoding.UTF8.GetBytes(strinput);
                     client.Send(str);
                 }
                 catch (System.Net.Sockets.SocketException ex)
@@ -60,7 +60,7 @@ namespace socketdemo4client
 
 
         static void Main(string[] args)
-        {   try
+        {   try 
             {
                 Socket client = new Socket(SocketType.Stream, ProtocolType.Tcp); //实例化客户端的socket
                 //client.SendTimeout = 120;
