@@ -20,9 +20,8 @@ namespace scoketdemo4server
             {
                 var server = socketex.Accept();
                 var sendport = server.RemoteEndPoint.ToString();
-                Console.WriteLine($"{sendport} connected");
+                Console.WriteLine($"{sendport} connected");//为了改善string.Format使用的不方便才有了 $格式化
                 //new thread for recving
-                //return 1
                 Thread thread0 = new Thread(recvmsg);
                 thread0.IsBackground = true;
                 thread0.Start(server);
@@ -110,13 +109,8 @@ namespace scoketdemo4server
             Thread thread = new Thread(listenclient);
             thread.IsBackground = false;
             thread.Start(server);
-            //Console.Read();
-
-
-
-            
-
-
+            //var s = $"{12}+{23}={12 + 23}";//  结果：12+23=35
+            //Console.WriteLine(s);
         }
 
     }
