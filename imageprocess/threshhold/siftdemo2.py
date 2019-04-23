@@ -44,7 +44,7 @@ if img1 is not None:
     vis = np.zeros((max(height1, height2), width1 + width2, 3), np.uint8)
     vis[:height1, :width1] = img1
     vis[:height2, width1:width1 + width2] = img2
-
+    # 相似度
     # v=cv2.waitKey(11000)
     # print(v)
     cv2.namedWindow("match", cv2.WINDOW_NORMAL)
