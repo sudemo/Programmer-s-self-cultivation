@@ -24,7 +24,7 @@ namespace demo11
                 如果字符串内容所表示数字超出int类型可表示的范围，则抛出OverflowException异常；
 
                 int.TryParse 与 int.Parse 又较为类似，但它不会产生异常，转换成功返回 true，转换失败返回 false。
-                最后一个参数为输出值，如果转换失败，输出值为 0
+                最后一个参数为输出值，如果转换失败，输出值为 0,如果成功则返回正确的结果
                 */ 
                 if (Int32.TryParse(ssMouthPieceUpload, out nOut)) 
 

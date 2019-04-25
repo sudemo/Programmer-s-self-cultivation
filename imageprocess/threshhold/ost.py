@@ -6,7 +6,7 @@ Software: PyCharm Community Edition
 '''
 import PIL
 from PIL import Image
-
+import pysnooper
 
 def sigma(im,i,debug = False):
     """
@@ -41,7 +41,7 @@ def sigma(im,i,debug = False):
     if debug:
         print  ('')
     return new_sigma
-
+@pysnooper.snoop()
 def Ost(im, debug =False):
     """
     线性寻找最大方差

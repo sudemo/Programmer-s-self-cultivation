@@ -5,6 +5,7 @@
 '''
 import cv2
 import numpy as np
+import pysnooper
 
 path1 = "D:/debug/python/pytorchdemo/pic/train/j1/18-55-34.bmp"
 path2 = "D:/debug/python/pytorchdemo/pic/train/j2/17-45-02.bmp"
@@ -30,7 +31,11 @@ if img1 is not None:
     # cv2.imshow('keypoints2',img01)
 
     # BFMatcher
+
     bf = cv2.BFMatcher()
+
+
+
     matchers = bf.knnMatch(descriptors, descriptors2, k=2)
 
     # 相似列表
