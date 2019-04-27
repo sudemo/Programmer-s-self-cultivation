@@ -19,13 +19,25 @@ def fun1(arg):
         else:
             print("a")
     def fun3():
-        if arg is str:
-            ss =""
-            for i in arg:
-                ss += i
 
-            return ss
+        if arg:
+            break
+        else:
+            print(1)
+
+
+
+        # return 1
+
+
+        # if arg is str:
+        #     ss =""
+        #     # for i in arg:
+        #     #     ss += i
+        #     #
+        #     return ss
         # else:
+        #     break
             # print("error")
 
 
