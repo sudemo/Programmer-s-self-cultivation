@@ -41,7 +41,7 @@ def sigma(im,i,debug = False):
     if debug:
         print  ('')
     return new_sigma
-@pysnooper.snoop()
+# @pysnooper.snoop()
 def Ost(im, debug =False):
     """
     线性寻找最大方差
