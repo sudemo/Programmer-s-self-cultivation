@@ -21,7 +21,7 @@ def fun1(arg):
     def fun3():
 
         if arg:
-            break
+            print('2')
         else:
             print(1)
 
