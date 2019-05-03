@@ -129,5 +129,5 @@ def test_fun():
 # print(len(params))
 # print(params[0].size())  # conv1's .weight
 # train_fun()
-# torch.save(model,"mycnn")
-# test_fun()
+# torch.save(model,"mycnn1")
+test_fun()
