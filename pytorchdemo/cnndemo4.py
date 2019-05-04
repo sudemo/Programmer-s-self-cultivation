@@ -45,7 +45,7 @@ def test_fun():
         loss = loss_func(out_put, b_y)
         eval_loss += loss.data.item() * b_y.size(0)
         _, pred = torch.max(out_put, 1)
-        # print("pred",pred,b_y)
+        print("pred",pred,b_y)
         num_correct = (pred == b_y).sum()
         eval_acc += num_correct.item()
         # print(eval_acc)
