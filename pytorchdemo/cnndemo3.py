@@ -82,7 +82,7 @@ train_loader = torch.utils.data.DataLoader(train_data, batch_size=2,shuffle=True
 test_loader = torch.utils.data.DataLoader(test_data,batch_size=2, shuffle=True)
 # print(train_data.train_data.size())
 x1,x2 = train_data.samples[0]
-print(x1)
+# print(x1)
 
 
 model = CNNnet()
