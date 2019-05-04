@@ -1,7 +1,7 @@
 '''
 @author: neo
 @file: cnndemo2.py
-@time: 2019/3/25 15:35
+@time: 2019/5/4 10:42
 '''
 import argparse
 import torch
