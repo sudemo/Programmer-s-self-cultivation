@@ -1,9 +1,7 @@
-# -*- coding: UTF-8 -*-
-''''
-author: zwzhang
-email: zwzhang@colibri.com.cn
-Created on: 2019/3/15 14:01
-Software: PyCharm Community Edition
+'''
+@author: neo
+@file: cnndemo1.py
+@time: 2019/5/4 10:41
 '''
 import torch
 import torch.nn as nn
@@ -52,6 +50,8 @@ class CNNnet(torch.nn.Module):
         # print(x.shape)
         # t = x.size(0)
         x = self.mlp1(x.view(x.size(0), -1))
+        x = self.mlp2(x)
+        return x
         x = self.mlp2(x)
         return x
 
@@ -109,7 +109,7 @@ def test_fun():
     # for eopch in range(EPOCH):
     for data in (test_loader):
         b_x, b_y = data
-        b_x, b_y = Variable(b_x), Variable(b_y)  # b_x 是 img b_y是标签
+        b_x, b_y = Variable(b_x), Variable(b_y)  # b_x �img b_y是标�
         out_put = model(b_x)
         loss = loss_func(out_put, b_y)
         eval_loss += loss.data.item() * b_y.size(0)
