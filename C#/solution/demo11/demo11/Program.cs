@@ -30,6 +30,10 @@ namespace demo11
 
                     ma_MouthpieceUpload = nOut;
                 Console.WriteLine("{0}",ma_MouthpieceUpload);
+
+                double res = Math.Round((double) (20/3),2);
+                Console.WriteLine( Math.Round(2.41234,4));
+                Console.WriteLine("res: {0}",res);
                 Console.ReadKey();
             }
         }
