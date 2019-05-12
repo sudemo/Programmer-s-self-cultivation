@@ -151,7 +151,7 @@ if __name__ == '__main__':
     # print(len(params))
     # print(model)
     # print(params[0].size())  # conv1's .weight
-    train_fun()
-    torch.save(model,"mycnn2")
+    # train_fun()
+    # torch.save(model,"mycnn2")
     # test_fun()
     print("model ok")
