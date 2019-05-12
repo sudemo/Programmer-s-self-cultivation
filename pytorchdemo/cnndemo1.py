@@ -1,3 +1,4 @@
+#coding=utf-8
 '''
 @author: neo
 @file: cnndemo1.py
@@ -109,7 +110,7 @@ def test_fun():
     # for eopch in range(EPOCH):
     for data in (test_loader):
         b_x, b_y = data
-        b_x, b_y = Variable(b_x), Variable(b_y)  # b_x �img b_y是标�
+        b_x, b_y = Variable(b_x), Variable(b_y)  # b_x �img b_y是标�
         out_put = model(b_x)
         loss = loss_func(out_put, b_y)
         eval_loss += loss.data.item() * b_y.size(0)
