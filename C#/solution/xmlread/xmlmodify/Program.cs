@@ -9,15 +9,35 @@ namespace xmlmodify
 {
     class Program
     {
-        public void Create(string xmlPath)
+        // public void Create(string )
+        static string xmlPath = @"D:\pdt_config\taskSet0304.xml";
+        
+        static  void Main()
         {
             XDocument xDoc = XDocument.Load(xmlPath);
-            XElement xElement = xDoc.Element("BookStore");
-            xElement.Add(new XElement("Test", new XAttribute("Name", "Zery")));
+            XElement root = xDoc.Root;
+            XElement ele = root.Element("setting");
+            XElement book = new XElement("BOOK");
+            book.SetElementValue("name", "高等数学");
+            book.SetElementValue("name1", "大学英语");
+            root.Add(book);
+            //获取name标签的值
+            // XElement shuxing = ele.Element("name");
+            //Console.WriteLine(shuxing.Value);
+            //获取根元素下的所有子元素
+           /* IEnumerable<XElement> enumerable = root.Elements();
+            foreach (XElement item in enumerable)
+            {
+                foreach (XElement item1 in item.Elements())
+                {
+                    Console.WriteLine(item1.Name);   //输出 name  name1            
+                }
+                Console.WriteLine(item.Attribute("id").Value);  //输出
+                
+            }*/
+            //Console.ReadKey();
             xDoc.Save(xmlPath);
-        }
-        static void Main(string[] args)
-        {
+
         }
     }
 }
