@@ -16,11 +16,12 @@ namespace xmlmodify
         {
             XDocument xDoc = XDocument.Load(xmlPath);
             XElement root = xDoc.Root;
-            XElement ele = root.Element("setting");
+            //XElement ele = root.Element("setting");
+            XElement root1 = new XElement("school");
             XElement book = new XElement("BOOK");
             book.SetElementValue("name", "高等数学");
             book.SetElementValue("name1", "大学英语");
-            root.Add(book);
+            root.Add(root1);
             //获取name标签的值
             // XElement shuxing = ele.Element("name");
             //Console.WriteLine(shuxing.Value);
