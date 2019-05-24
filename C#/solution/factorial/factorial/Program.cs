@@ -24,6 +24,9 @@ namespace factorial
         static void Main(string[] args)
         {
             Console.WriteLine("请输入一个整数：");
+            string astr = "hello world";
+            string bstr = astr.ToUpperInvariant();
+            Console.WriteLine(astr.ToUpper());
             try
             {
                 var a = Console.ReadLine();
@@ -31,6 +34,8 @@ namespace factorial
                 int inta = Int32.Parse(a);                                
                 Console.WriteLine("not int");
                 Console.WriteLine("{0} 的阶乘is {1}", inta, Factorial(inta));
+                int ab = 32;
+                Console.WriteLine(typeof(int));
                 Console.Read();
             }
             catch
