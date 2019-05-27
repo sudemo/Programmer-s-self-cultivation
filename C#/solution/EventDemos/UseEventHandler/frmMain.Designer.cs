@@ -1,6 +1,6 @@
-﻿namespace attach
+﻿namespace UseEventHandler
 {
-    partial class Form1
+    partial class frmMain
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -23,7 +23,7 @@
         #region Windows 窗体设计器生成的代码
 
         /// <summary>
-        /// 设计器支持所需的方法 - 不要修改
+        /// 设计器支持所需的方法 - 不要
         /// 使用代码编辑器修改此方法的内容。
         /// </summary>
         private void InitializeComponent()
@@ -33,22 +33,22 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(57, 52);
+            this.button1.Location = new System.Drawing.Point(65, 26);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(147, 65);
+            this.button1.Size = new System.Drawing.Size(179, 55);
             this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
+            this.button1.Text = "使用EventHandler动态挂接事件响应代码";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+           
             // 
-            // Form1
+            // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(310, 121);
             this.Controls.Add(this.button1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "frmMain";
+            this.Text = ".NET系统预定义委托EventHandler";
             this.ResumeLayout(false);
 
         }

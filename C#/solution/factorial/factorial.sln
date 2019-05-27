@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "attach", "attach\attach.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "refrencearg", "refrencearg\refrencearg.csproj", "{972542D0-0FD8-4E1E-BEF7-637DE1D5851A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "quicksort", "quicksort\quicksort.csproj", "{D0351192-E4AE-4E1C-A3C3-4DBD8104B605}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{972542D0-0FD8-4E1E-BEF7-637DE1D5851A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{972542D0-0FD8-4E1E-BEF7-637DE1D5851A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{972542D0-0FD8-4E1E-BEF7-637DE1D5851A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0351192-E4AE-4E1C-A3C3-4DBD8104B605}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0351192-E4AE-4E1C-A3C3-4DBD8104B605}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0351192-E4AE-4E1C-A3C3-4DBD8104B605}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0351192-E4AE-4E1C-A3C3-4DBD8104B605}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

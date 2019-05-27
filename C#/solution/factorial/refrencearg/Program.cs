@@ -10,12 +10,14 @@ namespace refrencearg
     {
         public int value = 100;
         public int va = 12;
+        static int sva = 121;
         //参数类型：值类型
-        public static void ModifyValue(int arg) //静态方法必须将参数传入，才能使用。无法直接使用类内的字段
+        public static void ModifyValue(int arg) //静态方法必须将参数传入，才能使用。无法直接使用类内的实例字段
         {
             arg *= arg;
             Console.WriteLine("arg is {0}",arg);
            // value = 2*arg;
+           
         }
         //引用类型，重载函数，参数类型不一致
         static void ModifyValue(difclass obj)
@@ -24,7 +26,7 @@ namespace refrencearg
         }
 
         public void Addm() //可以直接使用类内的字段，因为他是非静态方法
-        {
+        {   
             
             va = va + 1;
         }
