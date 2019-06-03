@@ -54,7 +54,7 @@ namespace PortControlDemo
         public void OpenPort(string portName , int boudRate = 115200, int dataBit = 8, int stopBit = 1, int timeout = 5000)
         {
             try
-            {
+            {   
                 sp.PortName = portName;
                 sp.BaudRate = boudRate;
                 sp.DataBits = dataBit;
