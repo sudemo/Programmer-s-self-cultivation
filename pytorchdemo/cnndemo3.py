@@ -49,7 +49,7 @@ class CNNnet(torch.nn.Module):
         # )
         # self.mlp1 = torch.nn.Linear(2*2*2*16*24, 2000)
         self.mlp1 = torch.nn.Linear(32*64*64, 1000)
-        self.mlp2 = torch.nn.Linear(1000, 3)
+        self.mlp2 = torch.nn.Linear(1000, 2)
 
     def forward(self, x):
         x = self.conv1(x)
@@ -81,8 +81,8 @@ test_data = torchvision.datasets.ImageFolder('D:/debug/python/pytorchdemo/pic/va
 train_loader = torch.utils.data.DataLoader(train_data, batch_size=2,shuffle=True)
 test_loader = torch.utils.data.DataLoader(test_data,batch_size=2, shuffle=True)
 # print(train_data.train_data.size())
-x1,x2 = train_data.samples[0]
-# print(x1)
+# x1,x2 = train_data.samples[0]
+# # print(x1)
 
 
 model = CNNnet()

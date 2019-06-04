@@ -15,7 +15,7 @@ import cnndemo1
 # import visdom
 
 path = 'd:/debug/python/pytorchdemo/'
-mymodel = torch.load('mycnn1')
+mymodel = torch.load('mycnn2')
 mymodel.eval()
 test_data = torchvision.datasets.ImageFolder('D:/debug/python/pytorchdemo/pic/val',
                                             transform=transforms.Compose([
