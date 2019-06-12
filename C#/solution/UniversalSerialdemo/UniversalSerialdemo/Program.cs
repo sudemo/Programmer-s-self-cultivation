@@ -5,20 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO.Ports;
 using System.IO.Pipes;
-
+using static System.Console;
 namespace UniversalSerialdemo
 {
-    class Program
+    class serialdemo
     {
-        private SerialPort sp;
+       // private SerialPort sp;
 
-        sp = new SerialPort();
-        public void PortControlHelper()
-        {
-          
-            sp.DataReceived += new SerialDataReceivedEventHandler(DataReceived);
-        }
-        public void OpenPort(string portName, int boudRate = 115200, int dataBit = 8, int stopBit = 1, int timeout = 5000)
+       SerialPort sp = new SerialPort();
+        private bool PortState;
+
+        //public void PortControlConfig()
+        //{
+
+        //    sp.DataReceived += new SerialDataReceivedEventHandler(DataReceived);
+        //}
+        public void OpenPort(string portName="com1", int boudRate = 115200, int dataBit = 8, int stopBit = 1, int timeout = 5000)
         {
             try
             {
@@ -60,7 +62,7 @@ namespace UniversalSerialdemo
         {
             try
             {
-                sp.Encoding = EncodingType;
+                //sp.Encoding = EncodingType;
                 sp.Write(sendData);
             }
             catch (Exception e)
@@ -74,21 +76,25 @@ namespace UniversalSerialdemo
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DataReceived(object sender, SerialDataReceivedEventArgs e)
+        private void DataReceived()
         {
-            byte[] buffer = new byte[sp.BytesToRead];
-            sp.Read(buffer, 0, buffer.Length);
-            string str = EncodingType.GetString(buffer);
-            if (OnComReceiveDataHandler != null)
+            while (true)
             {
-                OnComReceiveDataHandler(str);
+                byte[] buffer = new byte[sp.BytesToRead];
+                sp.Read(buffer, 0, buffer.Length);
+                //string str = UTF8Encoding.GetEncoding(buffer);
+                string str = System.Text.Encoding.UTF8.GetString(buffer);
+                WriteLine("rec {0}", str);
+                //ReadKey();
             }
         }
-#endregion
-    }
-}
+
+ 
 static void Main(string[] args)
         {
+            serialdemo serial = new serialdemo();
+            serial.OpenPort();
+            serial.DataReceived();
         }
     }
 }
