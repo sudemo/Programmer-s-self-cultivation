@@ -16,13 +16,16 @@ namespace serialdemo2   //demo2
         public static void ReceiveDataThread()
         {
             while (true)
-            {    
-                    byte[] rec = new byte[100];
-                    myserial.Read(rec, 0, 100);
+            {
+                    int n = myserial.BytesToRead;
+                if (n > 0)
+                {
+                    byte[] rec = new byte[n];
+                    myserial.Read(rec, 0, n);
                     string str = Encoding.Default.GetString(rec);
                     Console.WriteLine("接收到信息: {0}", str);
                     Thread.Sleep(50);
-
+                }
                 //return rec;
             }
 
@@ -35,6 +38,7 @@ namespace serialdemo2   //demo2
                 string inputstr = Console.ReadLine();
                 myserial.Write(inputstr);
                 Console.WriteLine("send: {0}", inputstr);
+                Thread.Sleep(50);
             }
         }
 
@@ -74,7 +78,7 @@ namespace serialdemo2   //demo2
             myserial.BaudRate = 9600;
             myserial.DataBits = 8;
             myserial.StopBits = StopBits.One;
-            myserial.Parity = Parity.Odd;
+            myserial.Parity = Parity.Even;
             //myserial.ReadTimeout = 5000;
             myserial.Encoding = Encoding.GetEncoding("utf-8");
             myserial.Open();
