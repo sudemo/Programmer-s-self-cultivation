@@ -26,8 +26,8 @@ namespace 串口通信发送和接收端 //利用事件
 
     public class SerialPortTest
     {
-        SerialPort port;
-        public SerialPortTest()
+        private SerialPort port;//默认是私有
+        public SerialPortTest() //构造方法内初始化
         {
             //指定COM1口,根据情况也可以指定COM2口
             port = new SerialPort("COM1");

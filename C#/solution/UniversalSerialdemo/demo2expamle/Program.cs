@@ -13,9 +13,19 @@ namespace HelloWorld //demo2example
     class program
     {
         // 声明串口类实例
-        static SerialPort port = new SerialPort();
-        //private static SerialPort port = null;
+        SerialPort port;
 
+        public program()
+        {
+            // 配置串口
+            port = new SerialPort("COM1");
+            port.BaudRate = 9600;
+            port.DataBits = 8;
+            port.StopBits = StopBits.One;
+            port.Parity = Parity.Even;
+            port.Open();
+        }
+        //private static SerialPort port = null;
         // 将char[]数组转换为string类型并返回
         private static string CharArrayTosting(char[] cha, int len)
         {
@@ -29,68 +39,45 @@ namespace HelloWorld //demo2example
             return str;
         }
         // 接收线程
-        private static void receivedata()
+        public void receivedata()
         {
-            byte[] rec = new byte[100];
             while (true)
             {
-                port.Read(rec, 0, 100);
-                //if (rec.Length >1)                
-                //string str = CharArrayTosting(rec, 100);
-                string str = Encoding.Default.GetString(rec);
-                Console.WriteLine("接收线程:{0}", str);
-                
-                //Thread.Sleep(50);
+                int n = port.BytesToRead;
+                if (n > 0)
+                {
+                    byte[] rec = new byte[n];
+                    port.Read(rec, 0, n);
+                    //if (rec.Length >1)                
+                    //string str = CharArrayTosting(rec, 100);
+                    string str = Encoding.Default.GetString(rec);
+                    Console.WriteLine("接收线程:{0}", str);
+                    Thread.Sleep(50);
+                }
             }
         }
         // 发送线程
-        private static void senddata()
+        public void senddata()
         {
             while (true)
             {
-                string str = Console.ReadLine();
                 Console.Write("plz input: ");
+                string str = Console.ReadLine();
+               
                 port.Write(str);
                 //Console.WriteLine("发送线程:" + str);
                 Thread.Sleep(50);
             }
         }
-        static void Main(string[] args)
+    }
+    public class mainclass
         {
-            // 配置串口
-            port = new SerialPort("COM1");
-            port.BaudRate = 9600;
-            port.DataBits = 8;
-            port.StopBits = StopBits.One;
-            port.Parity = Parity.Odd;
-            port.Open();
-
-            // 打开
-           // labelcheck:
-            if (port.IsOpen)
+            static void Main(string[] args)
             {
-                Console.WriteLine("串口打开成功1");
-            }
-            else
-            {
-                Console.WriteLine("串口打开失败1");
-             
-               // goto labelcheck;
-            }
-            // 启动接收线程
-            Thread th1 = new Thread(receivedata);
-            if (th1 != null)
-                th1.Start();
+                program myport = new program();
 
-            // 启动发送线程
-            Thread th2 = new Thread(senddata);
-            if (th2 != null)
-                th2.Start();
-
-            //while (true)
-            //{
-            //    Thread.Sleep(100);
-            //}
-        }
+            myport.receivedata();
+            myport.senddata();
+            }
     }
 }

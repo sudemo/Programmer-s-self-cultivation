@@ -30,13 +30,14 @@ namespace serialdemo2   //demo2
             }
 
         }
-        public static void SendDataTH()
+        public static void SendDataTH() //接收发送 均以字节形式
         {
             while (true)
             {
                 Console.Write("plz inout: ");
                 string inputstr = Console.ReadLine();
-                myserial.Write(inputstr);
+                byte[] inputstr1 = Encoding.Default.GetBytes(inputstr);
+                myserial.Write(inputstr1, 0, inputstr1.Length);
                 Console.WriteLine("send: {0}", inputstr);
                 Thread.Sleep(50);
             }
