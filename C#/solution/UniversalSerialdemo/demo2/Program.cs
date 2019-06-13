@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.IO.Ports;
 
-/*namespace serialdemo2
+namespace serialdemo2
 {
     public class Serialdemo
     {
@@ -88,6 +88,6 @@ using System.IO.Ports;
         }
     }
 }
-*/
+
 
 
