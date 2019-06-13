@@ -13,8 +13,12 @@ namespace 串口通信发送和接收端
         static void Main(string[] args)
         {
             SerialPortTest port = new SerialPortTest();
-            port.Send();    //发送数据
-            port.Close();   //关闭COM口
+            //port.Send();    //发送数据
+            //port.Close();   //关闭COM口
+            while (true)
+            {
+                
+            }
         }
 
     }
@@ -26,9 +30,10 @@ namespace 串口通信发送和接收端
         public SerialPortTest()
         {
             //指定COM1口,根据情况也可以指定COM2口
-            port = new SerialPort("COM3");
+            port = new SerialPort("COM1");
             //指定波特率
             port.BaudRate = 9600;
+            port.Encoding = System.Text.Encoding.GetEncoding("gb2312");
             try
             {
                 //打开COM口
@@ -59,11 +64,11 @@ namespace 串口通信发送和接收端
                 //读取接收到的字节长度
                 int n = port.BytesToRead;
                 //定义字节存储器数组
-                byte[] byteReceive = new byte[n];
+                byte[] byteReceive = new byte[100];
                 //接收的字节存入字节存储器数组
-                port.Read(byteReceive, 0, n);
+                port.Read(byteReceive, 0, 100);
                 //把接收的的字节数组转成字符串
-                strReceive = Encoding.UTF8.GetString(byteReceive);
+                strReceive = Encoding.Default.GetString(byteReceive);
                 Console.WriteLine("接收到的数据是: " + strReceive);
             }
         }
@@ -78,7 +83,7 @@ namespace 串口通信发送和接收端
             while (strRead != "q")
             {
                 //去掉输入字符串的前后空格
-                strRead = strRead.Trim();
+                //strRead = strRead.Trim();
                 if (!strRead.Equals(""))
                 {
                     //串口发送数据
@@ -87,8 +92,18 @@ namespace 串口通信发送和接收端
                 Console.WriteLine("请输入字符串:");
                 strRead = Console.ReadLine();
             }
-
         }
+        public void Send(string str) //重载发送函数
+        {
+            if (!str.Equals(""))
+            {
+                //串口发送数据
+                port.WriteLine(str);
+            }
+            //Console.WriteLine("请输入字符串:");
+           // strRead = Console.ReadLine();
+        }
+        
         //关闭COM口
         public void Close()
         {

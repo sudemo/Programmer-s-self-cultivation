@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.IO.Ports;
 
-namespace serialdemo2
+namespace serialdemo2   //demo2
 {
     public class Serialdemo
     {
         //实例
-        private SerialPort myserial = new SerialPort();
+        private static SerialPort myserial = new SerialPort();
         //接收
         public static void ReceiveDataThread()
         {
@@ -20,6 +20,7 @@ namespace serialdemo2
                 char[] rec = new char[100];
                 myserial.Read(rec, 0, 100);
                 Console.WriteLine("接收到信息: {0}", rec);
+                Thread.Sleep(500);
                 //return rec;
             }
 
@@ -41,7 +42,7 @@ namespace serialdemo2
         public static void threadstart()
         {
             Thread recthread = new Thread(ReceiveDataThread);
-            Thread sendthread = new Thread(SendDataTH());
+            Thread sendthread = new Thread(SendDataTH);
             if (recthread != null)
             {
                 recthread.Start();
@@ -63,28 +64,35 @@ namespace serialdemo2
             //Serialdemo myserialinstance = new Serialdemo();
             SerialPort myserial = new SerialPort();
 
-            myserial.PortName = "com3";
+            myserial.PortName = "com1";
             myserial.BaudRate = 115200;
             myserial.DataBits = 8;
-            myserial.StopBits = StopBits.One;
+            //myserial.StopBits = StopBits.One;
             myserial.Open();
-            
-            if (recthread != null)
+            if (myserial.IsOpen)
             {
-                recthread.Start();
+                Console.WriteLine("串口打开成功..");
             }
-            if (sendthread != null)
+            else
             {
-                sendthread.Start();
+                Console.WriteLine("串口打开失败..");
             }
+
+
+            //threadstart();
+            // 启动接收线程
+            Thread th1 = new Thread(ReceiveDataThread);
+            if (th1 != null)
+                th1.Start();
+
+            // 启动发送线程
+            Thread th2 = new Thread(SendDataTH);
+            if (th2 != null)
+                th2.Start();
             while (true)
             {
                 Thread.Sleep(100);
             }
-            //myserialinstance.
-            //Serialdemo se = new Serialdemo();
-            // //se.configsetting();
-            // se.threadstart();
         }
     }
 }

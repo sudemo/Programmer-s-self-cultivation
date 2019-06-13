@@ -8,7 +8,7 @@ using System.IO.Ports;
 ///这里添加线程管理类
 using System.Threading;
 
-namespace HelloWorld
+namespace HelloWorld //demo2example
 {
     class program
     {
@@ -49,7 +49,6 @@ namespace HelloWorld
         {
             while (true)
             {
-                //string str = "hello world!";
                 string str = Console.ReadLine();
                 Console.Write("plz input: ");
                 port.Write(str);
@@ -69,11 +68,11 @@ namespace HelloWorld
            // labelcheck:
             if (port.IsOpen)
             {
-                Console.WriteLine("串口打开成功");
+                Console.WriteLine("串口打开成功1");
             }
             else
             {
-                Console.WriteLine("串口打开失败");
+                Console.WriteLine("串口打开失败1");
              
                // goto labelcheck;
             }
