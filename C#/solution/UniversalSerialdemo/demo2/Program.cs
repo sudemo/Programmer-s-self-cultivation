@@ -11,25 +11,31 @@ namespace serialdemo2   //demo2
     public class Serialdemo
     {
         //实例
-        private static SerialPort myserial = new SerialPort();
+        private static SerialPort myserial=null; 
         //接收
         public static void ReceiveDataThread()
         {
             while (true)
-            {
-                char[] rec = new char[100];
-                myserial.Read(rec, 0, 100);
-                Console.WriteLine("接收到信息: {0}", rec);
-                Thread.Sleep(500);
+            {    
+                    byte[] rec = new byte[100];
+                    myserial.Read(rec, 0, 100);
+                    string str = Encoding.Default.GetString(rec);
+                    Console.WriteLine("接收到信息: {0}", str);
+                    Thread.Sleep(50);
+
                 //return rec;
             }
 
         }
         public static void SendDataTH()
         {
-            string inputstr = Console.ReadLine();
-            myserial.Write(inputstr);
-            Console.WriteLine("send: {0}", inputstr);
+            while (true)
+            {
+                Console.Write("plz inout: ");
+                string inputstr = Console.ReadLine();
+                myserial.Write(inputstr);
+                Console.WriteLine("send: {0}", inputstr);
+            }
         }
 
         //public void configsetting()
@@ -39,35 +45,38 @@ namespace serialdemo2   //demo2
         //    myserial.DataBits = 8;
         //    myserial.StopBits = StopBits.One;
         //}
-        public static void threadstart()
-        {
-            Thread recthread = new Thread(ReceiveDataThread);
-            Thread sendthread = new Thread(SendDataTH);
-            if (recthread != null)
-            {
-                recthread.Start();
-            }
-            if (sendthread != null)
-            {
-                sendthread.Start();
-            }
-            while (true)
-            {
-                Thread.Sleep(100);
-            }
-        }
+        //public static void threadstart()
+        //{
+        //    Thread recthread = new Thread(ReceiveDataThread);
+        //    Thread sendthread = new Thread(SendDataTH);
+        //    if (recthread != null)
+        //    {
+        //        recthread.Start();
+        //    }
+        //    if (sendthread != null)
+        //    {
+        //        sendthread.Start();
+        //    }
+            //while (true)
+            //{
+            //    Thread.Sleep(100);
+            //}
+        //}
 
 
 
         static void Main(string[] args)
         {
             //Serialdemo myserialinstance = new Serialdemo();
-            SerialPort myserial = new SerialPort();
+            myserial = new SerialPort();
 
             myserial.PortName = "com1";
-            myserial.BaudRate = 115200;
+            myserial.BaudRate = 9600;
             myserial.DataBits = 8;
-            //myserial.StopBits = StopBits.One;
+            myserial.StopBits = StopBits.One;
+            myserial.Parity = Parity.Odd;
+            //myserial.ReadTimeout = 5000;
+            myserial.Encoding = Encoding.GetEncoding("utf-8");
             myserial.Open();
             if (myserial.IsOpen)
             {
@@ -81,14 +90,14 @@ namespace serialdemo2   //demo2
 
             //threadstart();
             // 启动接收线程
-            Thread th1 = new Thread(ReceiveDataThread);
-            if (th1 != null)
-                th1.Start();
+            Thread th11 = new Thread(ReceiveDataThread);
+            if (th11 != null)
+                th11.Start();
 
             // 启动发送线程
-            Thread th2 = new Thread(SendDataTH);
-            if (th2 != null)
-                th2.Start();
+            Thread th22 = new Thread(SendDataTH);
+            if (th22 != null)
+                th22.Start();
             while (true)
             {
                 Thread.Sleep(100);

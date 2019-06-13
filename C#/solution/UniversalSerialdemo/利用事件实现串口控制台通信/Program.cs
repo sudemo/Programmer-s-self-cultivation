@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO.Ports;              //需要引入的命名空间
+using System.IO.Ports;              
 using System.Text;
 using System.Data;
 using System.Xml;
 
 
-namespace 串口通信发送和接收端
+namespace 串口通信发送和接收端 //利用事件
 {
     class Program
     {
@@ -64,9 +64,9 @@ namespace 串口通信发送和接收端
                 //读取接收到的字节长度
                 int n = port.BytesToRead;
                 //定义字节存储器数组
-                byte[] byteReceive = new byte[100];
+                byte[] byteReceive = new byte[n];
                 //接收的字节存入字节存储器数组
-                port.Read(byteReceive, 0, 100);
+                port.Read(byteReceive, 0, n);
                 //把接收的的字节数组转成字符串
                 strReceive = Encoding.Default.GetString(byteReceive);
                 Console.WriteLine("接收到的数据是: " + strReceive);

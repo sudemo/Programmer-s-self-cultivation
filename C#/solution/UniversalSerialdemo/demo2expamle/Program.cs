@@ -14,7 +14,7 @@ namespace HelloWorld //demo2example
     {
         // 声明串口类实例
         static SerialPort port = new SerialPort();
-        //private static SerialPort port = 
+        //private static SerialPort port = null;
 
         // 将char[]数组转换为string类型并返回
         private static string CharArrayTosting(char[] cha, int len)
@@ -31,17 +31,16 @@ namespace HelloWorld //demo2example
         // 接收线程
         private static void receivedata()
         {
+            byte[] rec = new byte[100];
             while (true)
             {
-                char[] rec = new char[100];
-
                 port.Read(rec, 0, 100);
-
-                string str = CharArrayTosting(rec, 100);
-
+                //if (rec.Length >1)                
+                //string str = CharArrayTosting(rec, 100);
+                string str = Encoding.Default.GetString(rec);
                 Console.WriteLine("接收线程:{0}", str);
-
-                Thread.Sleep(500);
+                
+                //Thread.Sleep(50);
             }
         }
         // 发送线程
@@ -53,15 +52,17 @@ namespace HelloWorld //demo2example
                 Console.Write("plz input: ");
                 port.Write(str);
                 //Console.WriteLine("发送线程:" + str);
-                Thread.Sleep(500);
+                Thread.Sleep(50);
             }
         }
         static void Main(string[] args)
         {
             // 配置串口
             port = new SerialPort("COM1");
-            port.BaudRate = 115200;
+            port.BaudRate = 9600;
             port.DataBits = 8;
+            port.StopBits = StopBits.One;
+            port.Parity = Parity.Odd;
             port.Open();
 
             // 打开
@@ -86,10 +87,10 @@ namespace HelloWorld //demo2example
             if (th2 != null)
                 th2.Start();
 
-            while (true)
-            {
-                Thread.Sleep(1000);
-            }
+            //while (true)
+            //{
+            //    Thread.Sleep(100);
+            //}
         }
     }
 }
