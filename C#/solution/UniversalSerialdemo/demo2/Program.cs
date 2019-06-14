@@ -38,7 +38,7 @@ namespace serialdemo2   //demo2
                 string inputstr = Console.ReadLine();
                 byte[] inputstr1 = Encoding.Default.GetBytes(inputstr);
                 myserial.Write(inputstr1, 0, inputstr1.Length);
-                Console.WriteLine("send: {0}", inputstr);
+                //Console.WriteLine("send: {0}", inputstr);
                 Thread.Sleep(50);
             }
         }

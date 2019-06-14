@@ -61,11 +61,13 @@ namespace HelloWorld //demo2example
         {
             while (true)
             {
-                Console.Write("plz input: ");
                 string str = Console.ReadLine();
-               
-                port.Write(str);
-                //Console.WriteLine("发送线程:" + str);
+                Console.Write("plz input: ");
+                byte[] inputstr1 = Encoding.Default.GetBytes(str);
+                port.Write(inputstr1, 0, inputstr1.Length);
+                //port.Write(str);
+
+                Console.WriteLine("发送线程:" + str);
                 Thread.Sleep(50);
             }
         }
@@ -76,7 +78,7 @@ namespace HelloWorld //demo2example
             {
                 program myport = new program();
 
-            myport.receivedata();
+            //myport.receivedata();
             myport.senddata();
             }
     }
