@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using System.Web;
 
-namespace demo2019
+namespace logbaseQuene
 {
     /// <summary>  
     /// 日志类  
@@ -16,7 +16,7 @@ namespace demo2019
     {
         public static void Write(string msgText)
         {
-            Write(DateTime.Now, MsgType.Information, "", msgText);
+            Write(DateTime.Now, MsgType.Infor, "", msgText);
         }
 
         /// <summary>  
@@ -34,7 +34,7 @@ namespace demo2019
 
         #region QueueManager
         /// <summary>  
-        /// 企业应用框架的日志类  
+        /// 企业应用框架的日志类，基于队列  
         /// </summary>  
         private class QueueManager : IDisposable
         {
@@ -47,6 +47,7 @@ namespace demo2019
             /// 日志文件保存的路径  
             /// </summary>  
             private static readonly string Path = BasePath + "\\AppLogs\\";
+            //private static readonly string Path = BasePath + "\\AppLogs\\";
 
             /// <summary>
             /// Web和WinForm通用的取当前根目录的方法 
@@ -59,7 +60,7 @@ namespace demo2019
                     //    return System.Web.HttpContext.Current.Server.MapPath("~/").TrimEnd(new char[] { '\\' });
                     //else //当控件在定时器的触发程序中使用时就为空
                     //{
-                        return AppDomain.CurrentDomain.BaseDirectory.TrimEnd(new char[] { '\\' });
+                    return AppDomain.CurrentDomain.BaseDirectory.TrimEnd(new char[] { '\\' });
                     //}
                 }
             }
@@ -97,7 +98,7 @@ namespace demo2019
             /// 写入新日志，根据指定的日志对象Msg  
             /// </summary>  
             /// <param name="msg">日志内容对象</param>  
-            private void WriteToQueue(Msg msg)
+            private void WriteToQueueMethod(Msg msg)
             {
                 if (msg != null)
                 {
@@ -110,6 +111,8 @@ namespace demo2019
                 {
                     _state = true;
                     _workDg.BeginInvoke(null, null);
+                    //以异步进行调用，也就是该方法封送完毕后马上返回，
+                    //不会等待委托方法的执行结束，调用者线程将不会被阻塞
                 }
             }
             /// <summary>  
@@ -123,7 +126,7 @@ namespace demo2019
                     Msg msg = null;
                     lock (_msgsQueue)
                     {
-                        msg = _msgsQueue.Dequeue();
+                        msg = _msgsQueue.Dequeue(); //char ch = (char)q.Dequeue();将队列中的日志移除，并将其赋值给msg
                     }
                     if (msg != null)
                     {
@@ -197,7 +200,7 @@ namespace demo2019
 
 
             /// <summary>  
-            /// 写入新日志，根据指定的日志时间、日志内容和信息类型写入新日志  
+            /// 将日志写入队列 写入新日志，根据指定的日志时间、日志内容和信息类型写入新日志  
             /// </summary>  
             /// <param name="msgDataTime"></param>
             /// <param name="msgType"></param>
@@ -205,7 +208,7 @@ namespace demo2019
             /// <param name="msgText"></param>  
             public void WriteToQueue(DateTime msgDataTime, MsgType msgType, string msgLocation, string msgText)
             {
-                WriteToQueue(new Msg(msgDataTime, msgType, msgLocation, msgText));
+                WriteToQueueMethod(new Msg(msgDataTime, msgType, msgLocation, msgText));
             }
 
             #region IDisposable 成员
@@ -278,7 +281,7 @@ namespace demo2019
             /// <summary>  
             /// 普通信息类型的日志记录  
             /// </summary>  
-            Information,
+            Infor,
             /// <summary>  
             /// 警告信息类型的日志记录  
             /// </summary>  
