@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using log4net;
 using System.Threading;
+
 namespace writelogdemo
 {
     class Program
@@ -13,10 +14,10 @@ namespace writelogdemo
         {
         try
             {
-            string a = "12";
+            string a = "ff";
             int b = Convert.ToInt32(a);
-                LogHelper.WriteLog("this is a ");
-                Console.WriteLine("ok");
+                LogHelper.WriteLog("this is a error log ");
+                //Console.WriteLine("ok");
                 Console.ReadKey();
             }
         catch (Exception ex)
@@ -28,9 +29,10 @@ namespace writelogdemo
         public static void Main(string[] args)
 
         {
-            //Page_Load();
+            Page_Load();
+            Console.WriteLine(string.Format("当前时间为{0}.", DateTime.Now.ToString()));
             LogHelper.WriteLog(string.Format("当前时间为{0}.", DateTime.Now.ToString()));
-           // Console.ReadKey();
+            Console.ReadKey();
         }
     }
 }

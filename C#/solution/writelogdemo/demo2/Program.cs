@@ -12,7 +12,7 @@ namespace demo1 //另写一个日志程序，线程安全，利用队列
     {
         public static void Main()
         {
-            Logger.Write("hello");
+            Logger2.Write("hello");
             //System.Threading.Tasks.Parallel.For(0, 100, x =>
             //    {
             //        Logger.Write(x.ToString());

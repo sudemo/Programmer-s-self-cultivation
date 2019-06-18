@@ -12,7 +12,7 @@ namespace logbaseQuene
     /// <remarks>  
     /// 当调用Write方法时不会造成线程阻塞,而是立即完成方法调用,因此调用线程不用等待日志写入文件之后才返回。  
     /// </remarks>  
-    public class Logger
+    public class Logger2
     {
         public static void Write(string msgText)
         {
