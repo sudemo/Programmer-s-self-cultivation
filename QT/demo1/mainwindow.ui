@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>false</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -15,16 +18,19 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QPushButton" name="pushButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>100</y>
+      <x>160</x>
+      <y>90</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>close</string>
+     <string>cc</string>
     </property>
    </widget>
   </widget>
@@ -53,13 +59,13 @@
  <connections>
   <connection>
    <sender>pushButton</sender>
-   <signal>pressed()</signal>
+   <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>showFullScreen()</slot>
+   <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>157</x>
-     <y>146</y>
+     <x>197</x>
+     <y>136</y>
     </hint>
     <hint type="destinationlabel">
      <x>199</x>
