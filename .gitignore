@@ -460,3 +460,5 @@ compile_commands.json
 
 # QtCreator local machine specific files for imported projects
 *creator.user*
+/C#/solution/sqltool/sqltool/CSqliteWrapper.cs
+/C#/solution/sqltool/sqltool/ATSLog.cs
