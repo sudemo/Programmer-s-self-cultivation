@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="ATSLog.cs" />
     <Compile Include="CSqliteWrapper.cs" />
+    <Compile Include="sqlmethod.cs" />
     <Compile Include="sqltool.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
