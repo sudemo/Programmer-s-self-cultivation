@@ -32,3 +32,12 @@ HEADERS += \
 
 FORMS += \
         mainwindow.ui
+
+INCLUDEPATH += D:\program\opencv\opencv4\opencv\build\include
+
+LIBS += D:\program\opencv\opencv4\cv4build\bin\libopencv_core410.dll
+LIBS += D:\program\opencv\opencv4\cv4build\bin\libopencv_highgui410.dll
+LIBS += D:\program\opencv\opencv4\cv4build\bin\libopencv_imgcodecs410.dll
+LIBS += D:\program\opencv\opencv4\cv4build\bin\libopencv_imgproc410.dll
+LIBS += D:\program\opencv\opencv4\cv4build\bin\libopencv_features2d410.dll
+LIBS += D:\program\opencv\opencv4\cv4build\bin\libopencv_calib3d410.dll
