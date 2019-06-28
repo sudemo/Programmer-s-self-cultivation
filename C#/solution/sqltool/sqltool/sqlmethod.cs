@@ -90,7 +90,7 @@ namespace sqltoolkit
             con.Close();
         }
 
-        public int querysql()
+        public void querysql()
         {
             string sql = "select * from student";
             con = new SQLiteConnection(dbPath);
@@ -101,7 +101,7 @@ namespace sqltoolkit
             string Text = "";
             while (reader.Read())
             {
-                //读取并赋值给控件
+                //读取并赋值
                 
                 Text = reader.GetInt32(0) + " " + reader.GetString(1) + " " + reader.GetString(2) + "\n";
                 Console.WriteLine(Text);
@@ -110,7 +110,7 @@ namespace sqltoolkit
             
             Console.ReadKey();
             con.Close();
-            return 0;
+            
         }
     }
 }

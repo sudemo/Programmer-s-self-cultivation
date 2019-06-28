@@ -18,8 +18,22 @@ namespace sqltoolkit
 
             sqlmethod a = new sqlmethod();
             //a.writesql();
-            a.writesqlbytran();
-            a.querysql();
+            //a.writesqlbytran();
+            //a.querysql();
+            SQLiteConnection conn = new SQLiteConnection("data source=C:\\data");
+
+            SQLiteCommand cmd = new SQLiteCommand();
+
+            cmd.Connection = conn;
+            conn.Open();
+
+            SQLiteHelper sh = new SQLiteHelper(cmd);
+
+            // do something...
+
+            conn.Close();
+
+
         }
     }
 }
