@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using 
+using OpenCvSharp;
+//using
+using opencvsamples.SamplesCS;
 
 namespace opencvsamples
 {
@@ -24,9 +26,9 @@ namespace opencvsamples
                 //new FASTSample();
                 //new FlannSample(); 
                 //new FREAKSample();
-                new HistSample();
+                //new HistSample();
             //new HOGSample();
-            //new HoughLinesSample();
+            new HoughLinesSample();
             //new KAZESample2();
             //new KAZESample();
             //new MatOperations();

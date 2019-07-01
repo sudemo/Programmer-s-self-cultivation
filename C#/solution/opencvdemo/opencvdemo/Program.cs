@@ -18,9 +18,6 @@ namespace opencvdemo
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form1());
-
-
-
             //Mat src = new Mat("d:/2.jpg", ImreadModes.Grayscale);
              Mat src = Cv2.ImRead("d:/2.jpg", ImreadModes.Grayscale);
             Mat src1 = Cv2.ImRead("d:/2.jpg", ImreadModes.Color);
