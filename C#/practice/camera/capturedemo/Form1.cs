@@ -64,7 +64,7 @@ namespace capturedemo
         static bool isopen = false;
        
         private void button1_Click(object sender, EventArgs e)
-        {   if (isopen = false)
+        {   if (isopen == false)
             {
                 isopen = !isopen;
                 Run();
