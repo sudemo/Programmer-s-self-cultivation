@@ -7,17 +7,19 @@ using OpenCvSharp.UserInterface;
 
 namespace winfopencv
 
-{
+{   
     public partial class FormMain : Form
     {
+        
         private PictureBoxIpl _pictureBoxIpl1;
         private BackgroundWorker _worker;
-
+        
         public FormMain()
         {
             InitializeComponent();
         }
 
+        static opencvmethod obj_opencv_method = null;
         private static double getFps(VideoCapture capture)
         {
             using (var image = new Mat())
@@ -59,6 +61,8 @@ namespace winfopencv
             }
         }
 
+        
+       
         private void BtnStart_Click(object sender, System.EventArgs e)
         {
             if (_worker != null && _worker.IsBusy)
@@ -89,14 +93,17 @@ namespace winfopencv
             BtnStart.Enabled = false;
         }
 
-        private void BtnStop_Click(object sender, System.EventArgs e)
+        private void BtnRun_Click(object sender, System.EventArgs e)
         {
-            if (_worker != null)
-            {
-                _worker.CancelAsync();
-                _worker.Dispose();
-            }
-            BtnStart.Enabled = true;
+            obj_opencv_method.opencv_method_run(input_img: a, output_img: b);
+
+            //if (_worker != null)
+            //{
+            //    _worker.CancelAsync();
+            //    _worker.Dispose();
+            //}
+            //BtnStart.Enabled = true;
+
         }
 
         private void FrmMain_Load(object sender, System.EventArgs e)
@@ -105,9 +112,9 @@ namespace winfopencv
             {
                 AutoSize = true
             };
-            flowLayoutPanel1.Controls.Add(_pictureBoxIpl1);
+            //flowLayoutPanel1.Controls.Add(_pictureBoxIpl1);
         }
-
+        #region 其他程序
         private void workerDoReadCamera(object sender, DoWorkEventArgs e)
         {
             using (var capture = new VideoCapture(CaptureDevice.Any, index: 0))
@@ -130,7 +137,6 @@ namespace winfopencv
                 }
             }
         }
-
         private void workerDoReadVideo(object sender, DoWorkEventArgs e)
         {
             using (var capture = new VideoCapture(@"C:/Users/zwzhang/Pictures/Movie/bach.mp4"))
@@ -156,7 +162,7 @@ namespace winfopencv
 
         private void workerProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            
+
             var image = e.UserState as Mat;
             if (image == null) return;
 
@@ -169,6 +175,19 @@ namespace winfopencv
             _worker.Dispose();
             _worker = null;
             BtnStart.Enabled = true;
+        } 
+        #endregion
+
+        private void listBox1_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            int methodnum; 
+            methodnum = listBox1.SelectedIndex;           
+            
+        }
+
+        private void listBox2_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            MessageBox.Show("how r u");
         }
 
        

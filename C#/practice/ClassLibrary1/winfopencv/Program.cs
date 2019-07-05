@@ -19,4 +19,6 @@ namespace winfopencv
             Application.Run(new FormMain());
         }
     }
+ 
+
 }

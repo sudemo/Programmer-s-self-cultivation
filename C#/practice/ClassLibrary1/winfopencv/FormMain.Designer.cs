@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.BtnStart = new System.Windows.Forms.Button();
-            this.BtnStop = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.RadioAvi = new System.Windows.Forms.RadioButton();
-            this.RadioWebCam = new System.Windows.Forms.RadioButton();
-            this.pictureBoxIpl1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIpl1)).BeginInit();
+            this.BtnRun = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnStart
@@ -47,67 +47,109 @@
             this.BtnStart.UseVisualStyleBackColor = true;
             this.BtnStart.Click += new System.EventHandler(this.BtnStart_Click);
             // 
-            // BtnStop
+            // BtnRun
             // 
-            this.BtnStop.Location = new System.Drawing.Point(184, 226);
-            this.BtnStop.Name = "BtnStop";
-            this.BtnStop.Size = new System.Drawing.Size(75, 23);
-            this.BtnStop.TabIndex = 1;
-            this.BtnStop.Text = "BtnStop";
-            this.BtnStop.UseVisualStyleBackColor = true;
-            this.BtnStop.Click += new System.EventHandler(this.BtnStop_Click);
+            this.BtnRun.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnRun.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.BtnRun.Location = new System.Drawing.Point(345, 309);
+            this.BtnRun.Name = "BtnRun";
+            this.BtnRun.Size = new System.Drawing.Size(75, 23);
+            this.BtnRun.TabIndex = 1;
+            this.BtnRun.Text = "BtnRun";
+            this.BtnRun.UseVisualStyleBackColor = true;
+            this.BtnRun.Click += new System.EventHandler(this.BtnRun_Click);
             // 
-            // flowLayoutPanel1
+            // listBox1
             // 
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(32, 12);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 49);
-            this.flowLayoutPanel1.TabIndex = 2;
+            this.listBox1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 12;
+            this.listBox1.Items.AddRange(new object[] {
+            "颜色空间转换",
+            "方框滤波",
+            "均值滤波",
+            "高斯滤波",
+            "中值滤波",
+            "双边滤波",
+            "膨胀",
+            "腐蚀",
+            "高级形态学变换",
+            "漫水填充",
+            "尺寸放大",
+            "尺寸缩小",
+            "尺寸调整",
+            "固定阈值化",
+            "边缘检测CANNY",
+            "边缘检测SOBEL",
+            "边缘检测LAPLACIAN",
+            "边缘检测SCHARR",
+            "图像快速增强",
+            "图像融合",
+            "霍夫标准变换",
+            "霍夫累计概率变换",
+            "霍夫圆变换",
+            "重映射",
+            "仿射变换",
+            "直方图均衡化",
+            "人脸识别"});
+            this.listBox1.Location = new System.Drawing.Point(0, 0);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(120, 338);
+            this.listBox1.TabIndex = 6;
+            this.listBox1.TabStop = false;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
-            // RadioAvi
+            // listBox2
             // 
-            this.RadioAvi.AutoSize = true;
-            this.RadioAvi.Location = new System.Drawing.Point(201, 170);
-            this.RadioAvi.Name = "RadioAvi";
-            this.RadioAvi.Size = new System.Drawing.Size(71, 16);
-            this.RadioAvi.TabIndex = 3;
-            this.RadioAvi.TabStop = true;
-            this.RadioAvi.Text = "radioavi";
-            this.RadioAvi.UseVisualStyleBackColor = true;
+            this.listBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.ItemHeight = 12;
+            this.listBox2.Items.AddRange(new object[] {
+            "1",
+            "12",
+            "2",
+            "3"});
+            this.listBox2.Location = new System.Drawing.Point(325, 0);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(107, 268);
+            this.listBox2.TabIndex = 7;
+            this.listBox2.TabStop = false;
+            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
             // 
-            // RadioWebCam
+            // textBox1
             // 
-            this.RadioWebCam.AutoSize = true;
-            this.RadioWebCam.Location = new System.Drawing.Point(201, 204);
-            this.RadioWebCam.Name = "RadioWebCam";
-            this.RadioWebCam.Size = new System.Drawing.Size(71, 16);
-            this.RadioWebCam.TabIndex = 4;
-            this.RadioWebCam.TabStop = true;
-            this.RadioWebCam.Text = "radioCam";
-            this.RadioWebCam.UseVisualStyleBackColor = true;
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.textBox1.Location = new System.Drawing.Point(0, 338);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(432, 21);
+            this.textBox1.TabIndex = 8;
             // 
-            // pictureBoxIpl1
+            // pictureBox1
             // 
-            this.pictureBoxIpl1.Location = new System.Drawing.Point(32, 87);
-            this.pictureBoxIpl1.Name = "pictureBoxIpl1";
-            this.pictureBoxIpl1.Size = new System.Drawing.Size(200, 50);
-            this.pictureBoxIpl1.TabIndex = 5;
-            this.pictureBoxIpl1.TabStop = false;
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Location = new System.Drawing.Point(113, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(211, 338);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.pictureBoxIpl1);
-            this.Controls.Add(this.RadioWebCam);
-            this.Controls.Add(this.RadioAvi);
-            this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.BtnStop);
+            this.ClientSize = new System.Drawing.Size(432, 359);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.listBox2);
+            this.Controls.Add(this.BtnRun);
             this.Controls.Add(this.BtnStart);
             this.Name = "FormMain";
             this.Text = "FormMain";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIpl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -116,11 +158,11 @@
         #endregion
 
         private System.Windows.Forms.Button BtnStart;
-        private System.Windows.Forms.Button BtnStop;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.RadioButton RadioAvi;
-        private System.Windows.Forms.RadioButton RadioWebCam;
-        private System.Windows.Forms.PictureBox pictureBoxIpl1;
+        private System.Windows.Forms.Button BtnRun;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
