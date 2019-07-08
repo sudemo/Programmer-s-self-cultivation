@@ -148,7 +148,7 @@ namespace winfopencv
             {
                 case "颜色空间转换":
                     {
-                        Cv2.CvtColor(input, output, ColorConversionCodes.RGB2BGR);
+                        Cv2.CvtColor(input, output, ColorConversionCodes.RGB2GRAY);
                         break;
                     }
                 case "OSTU":
@@ -169,7 +169,7 @@ namespace winfopencv
                 default:
                     //Console.WriteLine("default");
                     //FormMain form = new FormMain();
-                    MessageBox.Show("default");
+                    MessageBox.Show("请选择处理功能");
                     break;
             }
             return output;
