@@ -36,6 +36,10 @@
     <Reference Include="OpenCvSharp">
       <HintPath>..\..\..\..\..\..\..\program files\OpenCvSharp-4.1.0-x86-20190417\net40\OpenCvSharp.dll</HintPath>
     </Reference>
+    <Reference Include="OpenCvSharp.Extensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\program files\OpenCvSharp-4.1.0-x86-20190417\net40\OpenCvSharp.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="OpenCvSharp.UserInterface">
       <HintPath>..\..\..\..\..\..\..\program files\OpenCvSharp-4.1.0-x86-20190417\net40\OpenCvSharp.UserInterface.dll</HintPath>
     </Reference>

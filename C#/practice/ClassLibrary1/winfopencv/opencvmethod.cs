@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using System.Threading.Tasks;
 using OpenCvSharp;
 namespace winfopencv
@@ -65,22 +66,60 @@ namespace winfopencv
 
 
             number  //用于统计总数
-        };
+        }
         #endregion
-        public static opencvmethod obj_opencv_method = null;
+        //public static opencvmethod obj_opencv_method = null;
 
-        public Mat opencv_method_run(Mat input_img,Mat output_img)
+        public Mat anopencv_method_run(Mat input_img, Mat output_img)
         {
-            var index =new opencv_method_index();
-            switch ( index)
+            opencv_method_index index =new opencv_method_index();
+            switch (index)
             {
                 case opencv_method_index.cvt_color:
                     {
-                        Cv2.CvtColor(input_img, output_img,ColorConversionCodes.BayerRG2GRAY);
+                        Cv2.CvtColor(input_img, output_img, ColorConversionCodes.RGB2BGR);
                         break;
                     }
+                case opencv_method_index.threshold:
+                    {
+                        Cv2.Threshold(input_img, output_img, 50, 200, ThresholdTypes.Otsu);
+                        break;
+                    }
+                case opencv_method_index.canny:
+                    {
+                        Cv2.Canny(input_img,output_img,45,200);
+                        break;
+                    }
+                default:
+                    //Console.WriteLine("default");
+                    //FormMain form = new FormMain();
+                    MessageBox.Show("default");
+                    break;
             }
+
+
+            //FormMain form = new FormMain();
+
+
             return output_img;
         }
+
+        //测试
+        //opencv_method_index op;
+        public void testswitch()
+        {
+            opencv_method_index op = new opencv_method_index();
+            switch (op)
+            {
+                case opencv_method_index.cvt_color:
+                    MessageBox.Show("1");
+                    break;
+
+            }
+        }
+       
+           
     }
 }
+
+
