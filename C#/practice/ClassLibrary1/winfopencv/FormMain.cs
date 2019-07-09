@@ -147,6 +147,9 @@ namespace winfopencv
             {
                 //opencv_method_index index = new opencv_method_index();
                 #region switch
+                Scalar scalargreen = new Scalar(0x00, 0xFF, 0x00);//绿色 same as 255
+                Scalar scalarred = new Scalar(0x00, 0x00, 0xff);//red
+                Scalar scalar = new Scalar(0, 255, 255);
                 switch (listBox1.SelectedItem.ToString())
                 {
                     case "颜色空间转换":
@@ -170,8 +173,9 @@ namespace winfopencv
                             break;
                         }
                     case "霍夫圆变换":
+                        #region hough circle
                         {
-                            Scalar scalar = new Scalar(0x00, 0xFF, 0x00);//绿色
+                           
                                                                          //LineSegmentPoint[] lines;
                             CircleSegment[] circles;
                             OpenCvSharp.Size size = new OpenCvSharp.Size(output.Width, output.Height);
@@ -183,27 +187,45 @@ namespace winfopencv
                             *6:param2:  第二个方法特定于参数。[默认值是100] 中心点累加器阈值 – 候选圆心                         
                             *7:minRadius: 最小半径
                             *8:maxRadius: 最大半径*/
-                            circles = Cv2.HoughCircles(output, HoughMethods.Gradient, 1,20,100,30, 1, 5000);
+                            circles = Cv2.HoughCircles(output, HoughMethods.Gradient, 1, 20, 100, 30, 1, 5000);
                             Mat dst = new Mat();
                             input.CopyTo(dst);
                             for (int i = 0; i < circles.Length; i++)
-                            { //1
-                                //OpenCvSharp.Point center;
-                                //center.X = (int)Math.Round(circles[ii].Center.X);
-                                //center.Y = (int)Math.Round(circles[ii].Center.Y);
-                                //int radius = (int)Math.Round(circles[ii].Radius);
-                                //Cv2.Circle(image_out3, center.X, center.Y, radius, scalar);
-                                //Cv2.Circle(image_out3, center, radius, scalar);
-                                //return image_out3;
+                            { 
                                 //圆
-                                Cv2.Circle(dst, (int)circles[i].Center.X, (int)circles[i].Center.Y, (int)circles[i].Radius, new Scalar(0, 255, 0), 2, LineTypes.AntiAlias);
+                                Cv2.Circle(dst, (int)circles[i].Center.X, (int)circles[i].Center.Y, (int)circles[i].Radius, scalargreen, 2, LineTypes.AntiAlias);
                                 //加强圆心显示
-                                Cv2.Circle(dst, (int)circles[i].Center.X, (int)circles[i].Center.Y, 3, new Scalar(0, 255, 0), 2, LineTypes.Link8);
+                                Cv2.Circle(dst, (int)circles[i].Center.X, (int)circles[i].Center.Y, 3,scalarred, 2, LineTypes.Link8);
                             }
-                            using (new Window("OutputImage", WindowMode.AutoSize, dst)) ;
-                            Cv2.WaitKey();
-                            //Cv2.AddWeighted(image_out3, 1, input, 0.6, 0, output);
-                            break;
+                            //using (new Window("OutputImage", WindowMode.AutoSize, dst)) ;
+                            //Cv2.WaitKey();                     
+                            //break;
+                            return dst;
+                        }
+                    #endregion
+                    case "霍夫累计概率变换":
+                        {
+                            // Cv2.CvtColor(input, output, ColorConversionCodes.RGB2GRAY);
+                            /*
+                              1； image: 输入图像 （只能输入单通道图像）
+                  *      2； rho:   累加器的距离分辨率(以像素为单位) 生成极坐标时候的像素扫描步长
+                  *      3； theta: 累加器的角度分辨率(以弧度为单位)生成极坐标时候的角度步长，一般取值CV_PI/180 ==1度
+                  *      4； threshold: 累加器阈值参数。只有那些足够的行才会返回 投票(>阈值)；设置认为几个像素连载一起才能被看做是直线。
+                  *      5； minLineLength: 最小线长度，设置最小线段是有几个像素组成。
+                  *      6；maxLineGap: 同一条线上的点之间连接它们的最大允许间隙。(默认情况下是0）：设置你认为像素之间隔多少个间隙也能认为是直线
+                              */
+                            Cv2.Canny(input, output, 45, 200);
+                            LineSegmentPoint[] linePoint;
+                            linePoint  = Cv2.HoughLinesP(output, 1, 2, 10, 1);
+                            for (int i = 0; i < linePoint.Length; i++)
+                            { 
+                                Point p1 = linePoint[i].P1;
+                                Point p2 = linePoint[i].P2;
+                                Cv2.Line(output, p1, p2, scalar, 4, LineTypes.AntiAlias);
+                            }
+
+                            using (new Window("DST", WindowMode.AutoSize, output))
+                                return output;
                         }
                     default:
                         //Console.WriteLine("default");
@@ -218,7 +240,7 @@ namespace winfopencv
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message+"请先选择处理方法");
                 return input;
             }                    
             
