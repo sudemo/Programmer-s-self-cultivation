@@ -171,10 +171,30 @@ namespace winfopencv
                                      {
                                         new Rangef(0, 256),
                                      };
-                            int[] hsize = {255};
-                            Cv2.CvtColor(input, output, ColorConversionCodes.RGB2GRAY);
-                            Cv2.CalcHist(output,1,new Mat(),binImage,1,hsize,rangefs,true,false);
-                            break;
+                            int[] hsize = {250};
+                            Mat mask =new Mat();
+                            Mat[] mats = new Mat[] { output };
+                            int[] channels = new int[] { 0 };
+                           Cv2.CvtColor(input, output, ColorConversionCodes.RGB2GRAY);
+                            Cv2.CalcHist(mats,channels,mask,binImage,1,hsize,rangefs,true,false);
+
+                            //Console.WritleLine的后面加上
+                            //Mat HistImage = new Mat(MatType.CV_8UC3, new Scalar(0, 0, 0));
+                            Mat HistImage = new Mat(binImage.Width, binImage.Height, MatType.CV_8UC3, new Scalar(0, 0, 0));
+                            for (int i = 0; i < 256; i++)//画直方图
+                            {
+
+                                Cv2.Line(HistImage, new Point(binImage.Width/256 * (i - 1), binImage.Height - Math.Round(binImage.At<float>(i - 1))), new Point(binImage.Width/256 * (i - 1), binImage.Height - Math.Round(binImage.At<float>(i))), new Scalar(255, 0, 0), 1, LineTypes.AntiAlias);
+                               
+                                //int len = (int)((binImage.Get<float>(i)) * output.Rows);//单个箱子的长度，
+                                //                                                           // 10000) * panda.Rows)的作用只是让他变短，别超出了
+                                //Cv2.Line(output, i, 0, i, len, Scalar.Black, 2);//把线画出来
+
+                            }
+                            //Cv2.ImShow("s",HistImage);
+                            using (new Window("histImage", WindowMode.Normal, HistImage))
+                                return HistImage;
+                            //break;
                         }
                     case "固定阈值化":
                         {
