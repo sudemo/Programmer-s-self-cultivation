@@ -150,6 +150,7 @@ namespace winfopencv
                 Scalar scalargreen = new Scalar(0x00, 0xFF, 0x00);//绿色 same as 255
                 Scalar scalarred = new Scalar(0x00, 0x00, 0xff);//red
                 Scalar scalar = new Scalar(0, 255, 255);
+                Mat binImage = new Mat();
                 switch (listBox1.SelectedItem.ToString())
                 {
                     case "颜色空间转换":
@@ -159,7 +160,20 @@ namespace winfopencv
                         }
                     case "OSTU":
                         {
-                            Cv2.Threshold(input, output, 50, 200, ThresholdTypes.Otsu);
+                            Cv2.CvtColor(input, output, ColorConversionCodes.RGB2GRAY);
+                            Cv2.Threshold(output, binImage, 10, 250, ThresholdTypes.Otsu);
+                            return binImage;
+                            //break;
+                        }
+                    case "Hist":
+                        {
+                            Rangef[] rangefs = new Rangef[]
+                                     {
+                                        new Rangef(0, 256),
+                                     };
+                            int[] hsize = {255};
+                            Cv2.CvtColor(input, output, ColorConversionCodes.RGB2GRAY);
+                            Cv2.CalcHist(output,1,new Mat(),binImage,1,hsize,rangefs,true,false);
                             break;
                         }
                     case "固定阈值化":
@@ -203,6 +217,7 @@ namespace winfopencv
                             return dst;
                         }
                     #endregion
+                    #region hough linesp
                     case "霍夫累计概率变换":
                         {
                             // Cv2.CvtColor(input, output, ColorConversionCodes.RGB2GRAY);
@@ -216,9 +231,9 @@ namespace winfopencv
                               */
                             Cv2.Canny(input, output, 45, 200);
                             LineSegmentPoint[] linePoint;
-                            linePoint  = Cv2.HoughLinesP(output, 1, 2, 10, 1);
+                            linePoint = Cv2.HoughLinesP(output, 1, 2, 10, 1);
                             for (int i = 0; i < linePoint.Length; i++)
-                            { 
+                            {
                                 Point p1 = linePoint[i].P1;
                                 Point p2 = linePoint[i].P2;
                                 Cv2.Line(output, p1, p2, scalar, 4, LineTypes.AntiAlias);
@@ -227,6 +242,22 @@ namespace winfopencv
                             using (new Window("DST", WindowMode.AutoSize, output))
                                 return output;
                         }
+                    #endregion
+                    case "自适应阈值":
+                        {
+                            
+                            Cv2.CvtColor(input, output, ColorConversionCodes.RGB2GRAY);
+                            Cv2.AdaptiveThreshold(~output,binImage, 255, AdaptiveThresholdTypes.GaussianC, ThresholdTypes.Binary, 15, -2);
+                            return binImage;
+                        }
+                    case "漫水填充":
+                        {
+                           // Mat binImage = new Mat();
+                            Cv2.CvtColor(input, output, ColorConversionCodes.RGB2GRAY);
+                            Cv2.AdaptiveThreshold(~output, binImage, 255, AdaptiveThresholdTypes.GaussianC, ThresholdTypes.Binary, 15, -2);
+                            return binImage;
+                        }
+
                     default:
                         //Console.WriteLine("default");
                         //FormMain form = new FormMain();
@@ -240,7 +271,7 @@ namespace winfopencv
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message+"请先选择处理方法");
+                MessageBox.Show(e.Message+"未先选择处理方法或者处理异常");
                 return input;
             }                    
             
