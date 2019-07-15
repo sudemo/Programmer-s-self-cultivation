@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ZXing;
 using OpenCvSharp;
 
-namespace _2ddemo
+namespace barcodedemo
 {
     /// <summary>
     /// interface for a barcode reader class which can be used with the Mat type from OpenCVSharp

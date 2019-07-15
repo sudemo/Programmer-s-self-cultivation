@@ -7,7 +7,7 @@ using OpenCvSharp;
 
 using ZXing;
 
-namespace _2ddemo
+namespace barcodedemo
 {
 
     /// <summary>

@@ -1,4 +1,4 @@
-﻿namespace _2ddemo
+﻿namespace barcodedemo
 {
     partial class Form1
     {

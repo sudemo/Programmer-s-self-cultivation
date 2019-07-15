@@ -4,7 +4,7 @@ using OpenCvSharp;
 
 using ZXing;
 
-namespace _2dbarcode
+namespace barcodedemo
 {
     /// <summary>
     /// a barcode reader class which can be used with the Mat type from OpenCVSharp
