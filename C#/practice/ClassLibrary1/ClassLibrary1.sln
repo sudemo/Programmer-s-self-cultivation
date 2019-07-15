@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kmeansdemo", "kmeansdemo\km
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "winfopencv", "winfopencv\winfopencv.csproj", "{DCB08437-3136-445D-84E8-94072FD94DE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testmethod", "testmethod\testmethod.csproj", "{34CCE12A-0F7B-4F02-BDA8-CD1C3940B88E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{DCB08437-3136-445D-84E8-94072FD94DE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCB08437-3136-445D-84E8-94072FD94DE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCB08437-3136-445D-84E8-94072FD94DE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34CCE12A-0F7B-4F02-BDA8-CD1C3940B88E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34CCE12A-0F7B-4F02-BDA8-CD1C3940B88E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34CCE12A-0F7B-4F02-BDA8-CD1C3940B88E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34CCE12A-0F7B-4F02-BDA8-CD1C3940B88E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

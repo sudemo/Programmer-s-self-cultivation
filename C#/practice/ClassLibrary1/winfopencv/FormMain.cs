@@ -150,7 +150,7 @@ namespace winfopencv
                 Scalar scalargreen = new Scalar(0x00, 0xFF, 0x00);//绿色 same as 255
                 Scalar scalarred = new Scalar(0x00, 0x00, 0xff);//red
                 Scalar scalar = new Scalar(0, 255, 255);
-                Mat binImage = new Mat();
+                Mat binImage = new Mat(output.Width,output.Height,MatType.CV_8UC1);
                 switch (listBox1.SelectedItem.ToString())
                 {
                     case "颜色空间转换":
@@ -171,29 +171,27 @@ namespace winfopencv
                                      {
                                         new Rangef(0, 256),
                                      };
-                            int[] hsize = {250};
-                            Mat mask =new Mat();
+                            int[] hsize = {255};
+                            Mat histimg =new Mat();
                             Mat[] mats = new Mat[] { output };
-                            int[] channels = new int[] { 0 };
-                           Cv2.CvtColor(input, output, ColorConversionCodes.RGB2GRAY);
-                            Cv2.CalcHist(mats,channels,mask,binImage,1,hsize,rangefs,true,false);
-
-                            //Console.WritleLine的后面加上
-                            //Mat HistImage = new Mat(MatType.CV_8UC3, new Scalar(0, 0, 0));
-                            Mat HistImage = new Mat(binImage.Width, binImage.Height, MatType.CV_8UC3, new Scalar(0, 0, 0));
+                            int[] channels = new int[] { 1 };
+                            Cv2.CvtColor(input, output, ColorConversionCodes.RGB2GRAY);
+                            Cv2.CalcHist(mats,channels,output,histimg,1,hsize,rangefs,true,false);
+                            using (new Window("histImage", WindowMode.Normal, histimg)) ;
+                                //Console.WritleLine的后面加上
+                                //Mat HistImage = new Mat(MatType.CV_8UC3, new Scalar(0, 0, 0));
+                            Mat HistImage = new Mat(binImage.Width, binImage.Height, MatType.CV_8UC1, new Scalar(0, 0, 0));
                             for (int i = 0; i < 256; i++)//画直方图
                             {
-
-                                Cv2.Line(HistImage, new Point(binImage.Width/256 * (i - 1), binImage.Height - Math.Round(binImage.At<float>(i - 1))), new Point(binImage.Width/256 * (i - 1), binImage.Height - Math.Round(binImage.At<float>(i))), new Scalar(255, 0, 0), 1, LineTypes.AntiAlias);
+                               // Cv2.Line(HistImage, new Point(binImage.Width/256 * (i - 1), binImage.Height - Math.Round(binImage.At<float>(i - 1))), new Point(binImage.Width/256 * (i - 1), binImage.Height - Math.Round(binImage.At<float>(i))), new Scalar(255, 0, 0), 1, LineTypes.AntiAlias);
                                
-                                //int len = (int)((binImage.Get<float>(i)) * output.Rows);//单个箱子的长度，
-                                //                                                           // 10000) * panda.Rows)的作用只是让他变短，别超出了
-                                //Cv2.Line(output, i, 0, i, len, Scalar.Black, 2);//把线画出来
-
+                               // int len = (int)((binImage.Get<float>(i)) * output.Rows);//单个箱子的长度，
+                                //                                                           
+                                Cv2.Line(histimg,new Point(i,0), new Point(0, i),Scalar.Black, 2);//把线画出来
                             }
                             //Cv2.ImShow("s",HistImage);
-                            using (new Window("histImage", WindowMode.Normal, HistImage))
-                                return HistImage;
+                            //using (new Window("histImage", WindowMode.Normal, HistImage))
+                            return histimg;
                             //break;
                         }
                     case "固定阈值化":
