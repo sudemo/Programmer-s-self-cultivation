@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Drawing;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
@@ -14,27 +15,46 @@ namespace testmethod
 {
     class Program
     {
+        string filepath = "C:/Users/zwzhang/Pictures/barcode/1563173493.png";
+        string filepath1 = "C:/Users/zwzhang/Pictures/barcode/cli-DATAMATRIX (1).png";
+        public void qrcode()
+        {
+            IBarcodeReader reader = new BarcodeReader();
+            // load a bitmap            
+            try
+            {
+                var barcodeBitmap = (Bitmap)Image.FromFile(filepath1);
+                //var barcodeBitmap =(Bitmap)Image.LoadFrom("d:\\2.jpg");
+                // detect and decode the barcode inside the bitmap
+                var result = reader.Decode(barcodeBitmap);
+                // do something with the result
+                if (result != null)
+                {                
+                    MessageBox.Show(result.Text);
+                }
+                else               
+                    MessageBox.Show("没有解析到内容");                
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);                
+            }           
+        }
 
         public void datamatrix()
         {
-            IBarcodeReader reader = new BarcodeReader();
-            // load a bitmap
+            Bitmap bMap = Cv2.ImRead(filepath).ToBitmap();
+            DatamatrixEncodingOptions opt = new DatamatrixEncodingOptions();
+            DataMatrixReader dm = new DataMatrixReader();
             
-
-            var barcodeBitmap =(Bitmap)Image.LoadFrom("d:\\2.jpg");
-            // detect and decode the barcode inside the bitmap
-            var result = reader.Decode(barcodeBitmap);
-            // do something with the result
-            if (result != null)
-            {
-                Form1 fm = new Form1();
-                txtDecoderType.Text = result.BarcodeFormat.ToString();
-                txtDecoderContent.Text = result.Text;
-
-            }
-
+            BitmapLuminanceSource source = new BitmapLuminanceSource(bMap);
+            HybridBinarizer binarizer = new HybridBinarizer(source);
+            BinaryBitmap binaryBitmap = new BinaryBitmap(binarizer);
+            // Result[] results = genericReader.decodeMultiple(binaryBitmap, hints);         
+            
+            var result= dm.decode(binaryBitmap);
+            MessageBox.Show(result.Text);
         }
-
         public void testhist()
         {
             Mat img = new Mat();
@@ -60,7 +80,7 @@ namespace testmethod
 
                 // int len = (int)((binImage.Get<float>(i)) * output.Rows);//单个箱子的长度，
                 //                                                           
-                Cv2.Line(histimg, new Point(img.Width/256*(i-1), img.Height - Math.Round(img.At<float>(i - 1))), new Point(img.Width / 256 * (i - 1), img.Height - Math.Round(img.At<float>(i))), Scalar.Black, 2);//把线画出来
+                //Cv2.Line(histimg, new Point(img.Width/256*(i-1), img.Height - Math.Round(img.At<float>(i - 1))), new Point(img.Width / 256 * (i - 1), img.Height - Math.Round(img.At<float>(i))), Scalar.Black, 2);//把线画出来
             }
             Cv2.ImShow("hist", histimg);
             Cv2.WaitKey();
@@ -69,7 +89,9 @@ namespace testmethod
         static void Main(string[] args)
         {
             Program a = new Program();
-            a.testhist();
+            // a.testhist();
+            a.datamatrix();
+            //a.qrcode();
         }
     }
 }

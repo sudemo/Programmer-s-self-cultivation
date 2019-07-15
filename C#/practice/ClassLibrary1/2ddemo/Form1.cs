@@ -21,8 +21,9 @@ namespace barcodedemo
         {
             using (var openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.Multiselect = false;
-                openFileDialog.Filter = "TIFF (*.tif,*.tiff)|*.tif;*.tiff| JPG (*.jpg,*.jpeg)|*.jpg *.jpeg|*.*|*.*";
+                openFileDialog.Multiselect = false;//多选
+                // 筛选器+筛选模式
+                openFileDialog.Filter = "*.*|*.*|TIFF (*.tif,*.tiff)|*.tif;*.tiff| JPG (*.jpg,*.jpeg)|*.jpg *.jpeg";
                 try
                 {
                     if (openFileDialog.ShowDialog() == DialogResult.OK)
