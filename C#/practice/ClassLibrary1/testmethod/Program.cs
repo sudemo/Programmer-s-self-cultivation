@@ -10,20 +10,22 @@ using OpenCvSharp.Extensions;
 using ZXing;
 using ZXing.Datamatrix;
 using ZXing.Common;
+using System.IO;
+using System.Drawing.Imaging;
 
 namespace testmethod
 {
     class Program
     {
         string filepath = "C:/Users/zwzhang/Pictures/barcode/1563173493.png";
-        string filepath1 = "C:/Users/zwzhang/Pictures/barcode/cli-DATAMATRIX (1).png";
+        string filepath1 = "C:/Users/zwzhang/Pictures/barcode/cli-DATAMATRIX.png";
         public void qrcode()
         {
             IBarcodeReader reader = new BarcodeReader();
             // load a bitmap            
             try
             {
-                var barcodeBitmap = (Bitmap)Image.FromFile(filepath1);
+                var barcodeBitmap = (Bitmap)Image.FromFile(filepath);
                 //var barcodeBitmap =(Bitmap)Image.LoadFrom("d:\\2.jpg");
                 // detect and decode the barcode inside the bitmap
                 var result = reader.Decode(barcodeBitmap);
@@ -43,18 +45,71 @@ namespace testmethod
 
         public void datamatrix()
         {
-            Bitmap bMap = Cv2.ImRead(filepath).ToBitmap();
-            DatamatrixEncodingOptions opt = new DatamatrixEncodingOptions();
-            DataMatrixReader dm = new DataMatrixReader();
-            
-            BitmapLuminanceSource source = new BitmapLuminanceSource(bMap);
-            HybridBinarizer binarizer = new HybridBinarizer(source);
-            BinaryBitmap binaryBitmap = new BinaryBitmap(binarizer);
-            // Result[] results = genericReader.decodeMultiple(binaryBitmap, hints);         
-            
-            var result= dm.decode(binaryBitmap);
-            MessageBox.Show(result.Text);
+            Bitmap img = Cv2.ImRead(filepath).ToBitmap();
+            //DatamatrixEncodingOptions opt = new DatamatrixEncodingOptions();
+            DataMatrixReader dm = new DataMatrixReader();          
+            byte[] bmap = Bitmap2Byte(img);
+            LuminanceSource source = new RGBLuminanceSource(bitmap, bmap.Length, bmap.Length);
+            //LuminanceSource source = new RGBLuminanceSource(bmap, bmap.Length, bmap.Length);
+            BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+            //Result result;
+            var result= dm.decode(bitmap);
+            if (result != null)
+            { MessageBox.Show(result.Text); }
+            else
+            { MessageBox.Show("null"); }
         }
+
+
+        public static byte[] Bitmap2Byte(Bitmap bitmap)
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                bitmap.Save(stream, ImageFormat.Png);
+                byte[] data = new byte[stream.Length];
+                stream.Seek(0, SeekOrigin.Begin);
+                stream.Read(data, 0, Convert.ToInt32(stream.Length));
+                return data;
+            }
+        }
+
+        //private void decodematrix()
+        //{
+            
+        //    Image img = Image.FromFile(filepath1);
+        //    Bitmap bmap1;
+        //    try
+        //    {
+        //        bmap1 = new Bitmap(img);
+        //    }
+        //    catch (System.IO.IOException ioe)
+        //    {
+        //        MessageBox.Show(ioe.ToString());
+        //        return;
+        //    }
+        //    if (bmap1 == null)
+        //    {
+        //        MessageBox.Show("Could not decode image");
+        //        return;
+        //    }
+
+        
+        //    LuminanceSource source = new RGBLuminanceSource(bmap, bmap.Width, bmap.Height);
+        //    BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+        //    Result result;
+        //    try
+        //    {
+        //        result = new MultiFormatReader().decode(bitmap);
+        //    }
+        //    catch (ReaderException re)
+        //    {
+        //        MessageBox.Show(re.ToString());
+        //        return;
+        //    }
+
+        //    MessageBox.Show(result.Text);
+        //}
+
         public void testhist()
         {
             Mat img = new Mat();
@@ -90,7 +145,7 @@ namespace testmethod
         {
             Program a = new Program();
             // a.testhist();
-            a.datamatrix();
+            //a.datamatrix();
             //a.qrcode();
         }
     }
