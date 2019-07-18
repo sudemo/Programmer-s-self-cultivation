@@ -47,13 +47,8 @@
     <Compile Include="Language\English.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Siemens\SiemensFetchWriteNet.cs" />
-    <Compile Include="Siemens\SiemensPLCS.cs" />
-    <Compile Include="Siemens\SiemensPPI.cs" />
-    <Compile Include="Siemens\SiemensS7Net.cs" />
-    <Compile Include="Siemens\SiemensS7Server.cs" />
     <Compile Include="SocketBase\SocketBase.cs" />
-    <Compile Include="SocketBase\status.cs" />
+    <Compile Include="SocketBase\ReturnStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
