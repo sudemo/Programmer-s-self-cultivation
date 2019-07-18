@@ -51,7 +51,18 @@ namespace PLCCommunicationLibrary
         {
             this.IsSuccess = arg;
         }
-        
+
+
+
+        public static ReturnStatus<T> CreatSuccessStatus<T>()
+        {
+            return new ReturnStatus<T>
+            {
+                IsSuccess = true,
+                ErrorCode = 0,
+                returnMessage = StringResources.LanguageSet.SuccessText,
+            };
+        }
         /// <summary>
         /// 创建一个返回成功的结果，其返回的类型为泛型，包括了数字，字符串等
         /// </summary>
