@@ -64,8 +64,8 @@ namespace socketdemo4client
             {
                 Socket client = new Socket(SocketType.Stream, ProtocolType.Tcp); //实例化客户端的socket
                 //client.SendTimeout = 120;
-                IPAddress ip = IPAddress.Parse("127.0.0.1");
-                IPEndPoint port = new IPEndPoint(ip, 49091);
+                IPAddress ip = IPAddress.Parse("172.16.8.204");
+                IPEndPoint port = new IPEndPoint(ip, 8081);
                 //client.ReceiveTimeout = 100*2;
                 client.Connect(port);
                 

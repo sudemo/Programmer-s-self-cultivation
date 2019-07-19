@@ -68,6 +68,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Siemens\Siemens.cs" />
+    <Compile Include="Siemens\SiemensType.cs" />
     <Compile Include="SocketBase\SocketBaseKit.cs" />
     <Compile Include="SocketBase\ReturnStatus.cs" />
   </ItemGroup>

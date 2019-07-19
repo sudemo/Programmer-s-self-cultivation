@@ -15,7 +15,7 @@ namespace PLCCommunicationLibrary.SocketBase
         private bool ConnectionStatus;
 
         
-        public ReturnStatus<Socket> CreatandConnect(string ip, int port)//创建并连接socket
+        public ReturnStatus<Socket> CreatandConnect(string ip, int port)//创建并连接socket,此client
         {
             
             PLCClient = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
@@ -38,15 +38,20 @@ namespace PLCCommunicationLibrary.SocketBase
             }           
         }
 
-        public ReturnStatus socketsend(Socket PLCClient,byte[] arg)
+        public ReturnStatus SocketSend(byte[] arg)
         {
             PLCClient.Send(arg);
             return ReturnStatus.CreatSuccessStatus<bool>();
         }
-        //public ReturnStatus socketsend(Socket PLCClient, string arg)
-        //{
-        //    PLCClient.Send(arg);
-        //    return ReturnStatus.CreatSuccessStatus<bool>();
-        //}
+       
+        public ReturnStatus SocketRec()
+        {
+            byte[] receiveBuffer = new byte[1024];
+            PLCClient.Receive(receiveBuffer, receiveBuffer.Length, SocketFlags.None);
+            
+            //Console.Write(Encoding.UTF8.GetString(receiveBuffer));
+            return ReturnStatus.CreatSuccessStatus<bool>();
+        }
+
     }
 }
