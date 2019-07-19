@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A1216B44-9CFB-4F32-8FD1-45A0E8106B6C}</ProjectGuid>
+    <ProjectGuid>{5462C0B2-953D-4412-8426-DE055588F2DC}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PLCCommunicationKit</RootNamespace>
@@ -45,6 +45,12 @@
   <ItemGroup>
     <Compile Include="Language\DefaultLanguage.cs" />
     <Compile Include="Language\English.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="obj\x64\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\x64\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\x64\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Siemens\PLCDeviceBase.cs" />
@@ -55,6 +61,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="bin\Debug\PLCCommunication.exe.config" />
+    <None Include="bin\Debug\PLCCommunication.vshost.exe.config" />
+    <None Include="bin\Debug\PLCCommunicationKit.exe.config" />
+    <None Include="bin\Debug\PLCCommunicationKit.vshost.exe.config" />
+    <None Include="bin\Debug\PLCCommunicationKit.vshost.exe.manifest" />
+    <None Include="bin\x64\Debug\PLCCommunication.exe.config" />
+    <None Include="bin\x64\Debug\PLCCommunication.vshost.exe.config" />
+    <None Include="bin\x64\Debug\PLCCommunication.vshost.exe.manifest" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\x64\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\x64\Debug\PLCCommunicationLibrary.csprojResolveAssemblyReference.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\PLCCommunication.vshost.exe" />
+    <Content Include="bin\Debug\PLCCommunicationKit.vshost.exe" />
+    <Content Include="bin\x64\Debug\PLCCommunication.exe" />
+    <Content Include="bin\x64\Debug\PLCCommunication.pdb" />
+    <Content Include="bin\x64\Debug\PLCCommunication.vshost.exe" />
+    <Content Include="obj\Debug\PLCCommunication.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\PLCCommunicationKit.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\PLCCommunicationLibrary.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\x64\Debug\PLCCommunication.exe" />
+    <Content Include="obj\x64\Debug\PLCCommunication.pdb" />
+    <Content Include="obj\x64\Debug\PLCCommunicationLibrary.csproj.FileListAbsolute.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+    <Folder Include="bin\x64\Release\" />
+    <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="obj\x64\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

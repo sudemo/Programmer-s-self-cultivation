@@ -85,17 +85,12 @@ namespace PLCCommunicationKit.Siemens
             }
 
 
-        public bool initWrite()
+        public Int32 initWrite()
         {
-            bool status = false;
             SocketBase sk = new SocketBase();
             sk.SocketSend(plcHead1);
-            if (sk.SocketRec() == 22)
-            {
-                sk.SocketSend(plcHead2);
-                if (sk.SocketRec() == 27)
-              
-            return status;
+            sk.SocketRec();
+            return 1;
         }
 
 

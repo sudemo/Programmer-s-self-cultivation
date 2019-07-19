@@ -9,8 +9,6 @@ using System.Net.Sockets;
 
 namespace PLCCommunicationKit.SocketBaseKit
 {
-
-    //暂时，发送接收的返回值不做处理，用原始的数据
     class SocketBase
     {
         public  Socket PLCClient; //字段
@@ -43,28 +41,25 @@ namespace PLCCommunicationKit.SocketBaseKit
 
         #endregion
         #region read send
-        public int SocketSend(byte[] arg)
+        public ReturnStatus SocketSend(byte[] arg)
         {
-            //默认返回的是发送的字节数
-            return PLCClient.Send(arg);
-            
-            //return ReturnStatus.CreatSuccessStatus<int>();
+            PLCClient.Send(arg);
+            return ReturnStatus.CreatSuccessStatus<int>();
         }
 
-        public int SocketRec()
+        public ReturnStatus SocketRec()
         {
             byte[] receiveBuffer = new byte[1024];
-
             PLCClient.Receive(receiveBuffer, receiveBuffer.Length, SocketFlags.None);
+
             //Console.Write(Encoding.UTF8.GetString(receiveBuffer));
-            return 1;
-            //return ReturnStatus.CreatSuccessStatus<bool>();
+            return ReturnStatus.CreatSuccessStatus<bool>();
         }
         #endregion
 
 
 
-
+     
         /// <summary>
         /// 是否是长连接的状态
         /// </summary>

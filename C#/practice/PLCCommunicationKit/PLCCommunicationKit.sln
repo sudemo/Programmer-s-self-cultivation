@@ -3,18 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PLCCommunicationKit", "PLCCommunicationKit\PLCCommunicationKit.csproj", "{5462C0B2-953D-4412-8426-DE055588F2DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PLCCommunicationKit", "PLCCommunicationKit\PLCCommunicationKit.csproj", "{A1216B44-9CFB-4F32-8FD1-45A0E8106B6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5462C0B2-953D-4412-8426-DE055588F2DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5462C0B2-953D-4412-8426-DE055588F2DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5462C0B2-953D-4412-8426-DE055588F2DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5462C0B2-953D-4412-8426-DE055588F2DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1216B44-9CFB-4F32-8FD1-45A0E8106B6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1216B44-9CFB-4F32-8FD1-45A0E8106B6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1216B44-9CFB-4F32-8FD1-45A0E8106B6C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A1216B44-9CFB-4F32-8FD1-45A0E8106B6C}.Debug|x64.Build.0 = Debug|Any CPU
+		{A1216B44-9CFB-4F32-8FD1-45A0E8106B6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1216B44-9CFB-4F32-8FD1-45A0E8106B6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1216B44-9CFB-4F32-8FD1-45A0E8106B6C}.Release|x64.ActiveCfg = Release|Any CPU
+		{A1216B44-9CFB-4F32-8FD1-45A0E8106B6C}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,11 +11,11 @@ namespace socketdemo4client
 {
     class Program
     {
-        
+
         //public static void recvmsg(Socket client)
         public static void recvmsg(object o)
         {
-           var client = o as Socket;
+            var client = o as Socket;
             while (true)
             {
                 try
@@ -27,11 +27,11 @@ namespace socketdemo4client
                         break;
                     }
                     var str = Encoding.UTF8.GetString(buffer1, 0, recdata);
-                    Console.WriteLine("recv from serve:{0}",str);
+                    Console.WriteLine("recv from serve:{0}", str);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("thread {0}",ex.Message);
+                    Console.WriteLine("thread {0}", ex.Message);
                     Console.Read();
                 }
             }
@@ -57,27 +57,28 @@ namespace socketdemo4client
         }
 
 
-        class AAA
+        //class AAA
+        //{
+        //    public static void Main()
+        //    {
+        //        Thread t = new Thread(new ParameterizedThreadStart(B));
+        //        t.Start("B");
+
+        //        Console.Read();
+        //    }
+
+        //    private static void B(object obj)
+        //    {
+        //        Console.WriteLine("Method {0}!", obj.ToString());
+
+        //    }
+        //}
+
+
+
+        static void Main(string[] args)
         {
-            public static void Main()
-            {
-                Thread t = new Thread(new ParameterizedThreadStart(B));
-                t.Start("B");
-
-                Console.Read();
-            }
-
-            private static void B(object obj)
-            {
-                Console.WriteLine("Method {0}!", obj.ToString());
-
-            }
-        }
-
-
-        /*
-         static void Main(string[] args)
-        {   try 
+            try
             {
                 Socket client = new Socket(SocketType.Stream, ProtocolType.Tcp); //实例化客户端的socket
                 //client.SendTimeout = 120;
@@ -85,7 +86,7 @@ namespace socketdemo4client
                 IPEndPoint port = new IPEndPoint(ip, 8081);
                 //client.ReceiveTimeout = 100*2;
                 client.Connect(port);
-                
+
 
                 Thread thread = new Thread(recvmsg);
                 thread.IsBackground = false;
@@ -95,20 +96,20 @@ namespace socketdemo4client
                 thread3.IsBackground = false;
                 thread3.Start(client);
                 Console.ReadKey();
-               /* while (true)
-                {
-                    var buffer = Console.ReadLine();
-                    var buff = Encoding.UTF8.GetBytes(buffer);
-                    var temp = client.Send(buff);
-                    Thread.Sleep(10);
-                }*/
+                /* while (true)
+                 {
+                     var buffer = Console.ReadLine();
+                     var buff = Encoding.UTF8.GetBytes(buffer);
+                     var temp = client.Send(buff);
+                     Thread.Sleep(10);
+                 }*/
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.ReadKey();
+            }
+        }
     }
-    /* catch (Exception ex)
-     {
-         Console.WriteLine(ex.Message);
-         Console.ReadKey();
-     }
- }
-*/
 }
 

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PLCCommunicationKit.Siemens
 {
-    public class PLCDeviceBase
+   public class PLCDeviceBase
     {
         public virtual string IpAddress
         {
@@ -75,8 +75,7 @@ namespace PLCCommunicationKit.Siemens
         /// </summary>
         /// <remarks>对设备来说，一个地址的数据对应的字节数，或是1个字节或是2个字节</remarks>
         protected ushort WordLength { get; set; } = 1;
-    }
-}
+
         #endregion
 
         //#region Customer Support     
