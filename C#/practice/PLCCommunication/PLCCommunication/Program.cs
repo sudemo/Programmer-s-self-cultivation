@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Net.Sockets;
-using PLCCommunicationLibrary.SocketBase;
+using PLCCommunicationLibrary.SocketBaseKit;
 
 namespace PLCCommunicationLibrary
 {
@@ -13,7 +13,7 @@ namespace PLCCommunicationLibrary
         static void Main(string[] args)
         {
             // SocketBase.SocketBase sk = new SocketBase.SocketBase();
-            SocketBaseKit sk = new SocketBaseKit();
+            SocketBase sk = new SocketBase();
             // skd = new Socket();
             Console.Write("ok");
             sk.CreatandConnect("172.16.8.204",102);

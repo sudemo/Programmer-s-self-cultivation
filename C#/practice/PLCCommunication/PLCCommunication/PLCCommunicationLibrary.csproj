@@ -67,10 +67,11 @@
     <Compile Include="Language\English.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Siemens\PLCDeviceBase.cs" />
     <Compile Include="Siemens\Siemens.cs" />
     <Compile Include="Siemens\SiemensType.cs" />
-    <Compile Include="SocketBase\SocketBaseKit.cs" />
-    <Compile Include="SocketBase\ReturnStatus.cs" />
+    <Compile Include="SocketBaseKit\SocketBase.cs" />
+    <Compile Include="SocketBaseKit\ReturnStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

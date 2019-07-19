@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace PLCCommunication.Siemens
 {
     class Siemens
     {
-        public class SiemensS7Net
+        public class SiemensS7Net:PLCDeviceBase
         {
 
 
