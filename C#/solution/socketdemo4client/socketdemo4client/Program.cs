@@ -12,10 +12,10 @@ namespace socketdemo4client
     class Program
     {
         
-        
+        //public static void recvmsg(Socket client)
         public static void recvmsg(object o)
         {
-            var client = o as Socket;
+           var client = o as Socket;
             while (true)
             {
                 try
@@ -57,9 +57,26 @@ namespace socketdemo4client
         }
 
 
+        class AAA
+        {
+            public static void Main()
+            {
+                Thread t = new Thread(new ParameterizedThreadStart(B));
+                t.Start("B");
+
+                Console.Read();
+            }
+
+            private static void B(object obj)
+            {
+                Console.WriteLine("Method {0}!", obj.ToString());
+
+            }
+        }
 
 
-        static void Main(string[] args)
+        /*
+         static void Main(string[] args)
         {   try 
             {
                 Socket client = new Socket(SocketType.Stream, ProtocolType.Tcp); //实例化客户端的socket
@@ -84,13 +101,14 @@ namespace socketdemo4client
                     var buff = Encoding.UTF8.GetBytes(buffer);
                     var temp = client.Send(buff);
                     Thread.Sleep(10);
-                }*/ 
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.ReadKey();
-            }
-        }
+                }*/
     }
+    /* catch (Exception ex)
+     {
+         Console.WriteLine(ex.Message);
+         Console.ReadKey();
+     }
+ }
+*/
 }
+
