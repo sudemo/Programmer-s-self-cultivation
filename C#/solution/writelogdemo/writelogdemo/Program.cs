@@ -17,6 +17,7 @@ namespace writelogdemo
             string a = "ff";
             int b = Convert.ToInt32(a);
                 LogHelper.WriteLog("this is a error log ");
+                LogHelper.InfoFormatted("sss");
                 //Console.WriteLine("ok");
                 Console.ReadKey();
             }

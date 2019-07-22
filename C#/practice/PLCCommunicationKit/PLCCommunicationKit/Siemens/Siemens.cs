@@ -87,30 +87,42 @@ namespace PLCCommunicationKit.Siemens
         }
         #endregion
         public bool init_plc_Connect() //与plc连接的初始化
-          {
+        {
             bool status; //判断返回值是否对的标志
             //SocketBase sk = new SocketBase();
-            SocketBase.initSocketBase();
-            SocketBase.SocketSend(plcHead1);
-            //Console.ReadKey();
-            if (SocketBase.SocketRec() == 22)
+
+            if (SocketBase.initSocketBase())
             {
-                SocketBase.SocketSend(plcHead2);
-                int res = SocketBase.SocketRec();
-                if (res == 27)
+                SocketBase.SocketSend(plcHead1);
+
+                //Console.ReadKey();
+                if (SocketBase.SocketRec() == 22)
                 {
-                    status = true;
-                    return status;
+                    LogHelper.Infor("handshake first done");
+                    SocketBase.SocketSend(plcHead2);
+                    int res = SocketBase.SocketRec();
+                    if (res == 27)
+                    {
+                        status = true;
+                        LogHelper.Infor("handshake second done");
+                        return status;
+                    }
+                    else
+                    {
+                        status = false;
+                        return status;
+                    }
                 }
                 else
                 {
+                    //Console.WriteLine("rec {0}", SocketBase.SocketRec());
+                    LogHelper.Infor("handshake error");
                     status = false;
                     return status;
                 }
             }
             else
             {
-                Console.WriteLine("rec {0}", SocketBase.SocketRec());
                 status = false;
                 return status;
             }

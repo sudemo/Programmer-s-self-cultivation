@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net;
+
 using System.Net.Sockets;
 
 
@@ -19,20 +20,23 @@ namespace PLCCommunicationKit.SocketBaseKit
 
         #region creat socket client
         // ReturnStatus<Socket> CreatandConnect(string ip, int port)//创建并连接socket,此client
-        public static void  initSocketBase(string ip="172.16.8.204", int port=102) //这两个参数后续可以从配置文件读取
+        public static bool  initSocketBase(string ip="172.16.8.204", int port=102) //这两个参数后续可以从配置文件读取
         {
              PLCClient = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try
             {
                 //timeout = 100;这里无法设置连接的超时时间，可能会造成该线程卡住20s-40s(在地址错误的时候）
                 //PLCClient.ReceiveTimeout = 100;
-                PLCClient.Connect(ip, port);                
+                PLCClient.Connect(ip, port);
+                return true;            
             }
             catch (Exception e)
             {
                 PLCClient?.Close();
+                LogHelper.logerror.Error(e);
+                //throw;
                 //log
-                Console.Write(new ReturnStatus<Socket>(e.Message));
+                Console.Write(e.Message);
                 //Console.ReadKey();
                 //return new ReturnStatus<Socket>(e.Message);
             }
@@ -41,26 +45,40 @@ namespace PLCCommunicationKit.SocketBaseKit
         #region read send
         public static int SocketSend(byte[] arg)
         {
-            if (PLCClient != null)
-            //默认返回的是发送的字节数
+            try
             {
                 int ret = PLCClient.Send(arg);
                 return ret;
             }
-            else { return 0; }
+            catch (Exception ex)
+            {
+                LogHelper.logerror.Error(ex);               
+                return 0;              
+            }
+            //默认返回的是发送的字节数
+            
+                
+            
+            
             
             //return ReturnStatus.CreatSuccessStatus<int>();
         }
         public static int SocketRec()
         {
             byte[] receiveBuffer = new byte[1024];
-            if (PLCClient != null)
-                {
-                int RecCount = PLCClient.Receive(receiveBuffer, receiveBuffer.Length, SocketFlags.None);
-                Console.WriteLine("{0} is {1}", receiveBuffer,receiveBuffer.Length);
-                return RecCount;
-                }
-            else { return 0; }
+            try
+            {              
+                    int RecCount = PLCClient.Receive(receiveBuffer, receiveBuffer.Length, SocketFlags.None);
+                    //Console.WriteLine("{0} is {1}", receiveBuffer, receiveBuffer.Length);
+                    return RecCount;              
+            }
+            catch (Exception ex)
+            {
+
+                LogHelper.Infor("rec error",ex);
+                return 0;
+            }
+            
             //Console.Write(Encoding.UTF8.GetString(receiveBuffer));
            
             

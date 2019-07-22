@@ -31,7 +31,8 @@ namespace PLCCommunicationKit
             SiemensS7Net s7 = new SiemensS7Net();
             bool ret;
             ret = s7.init_plc_Connect();
-            Console.Write(ret);
+            LogHelper.Debug("init plc connect successful");
+            //Console.Write(ret);
             Console.ReadKey();
         }
 

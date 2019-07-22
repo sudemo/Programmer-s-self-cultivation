@@ -34,7 +34,10 @@ namespace writelogdemo
                 Console.WriteLine("log not ready {0}",loginfo.IsInfoEnabled);
             }
         }
-
+        public static void InfoFormatted(string format, params object[] args)
+        {
+            loginfo.InfoFormat(format, args);
+        }
 
         public static void WriteLog(string info, Exception ex)
         {
