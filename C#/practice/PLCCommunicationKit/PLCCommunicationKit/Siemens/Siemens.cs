@@ -70,7 +70,7 @@ namespace PLCCommunicationKit.Siemens
                 default: plcHead1[18] = 0; break;
             }
             SocketBase sk = new SocketBase();
-            sk.initSocketBase(ip, Port);
+            //sk.initSocketBase(ip, Port);
         }
 
         /// <summary>
@@ -85,34 +85,36 @@ namespace PLCCommunicationKit.Siemens
             // Write();
             return ReturnStatus.CreatSuccessStatus<bool>();
         }
-
         #endregion
-
         public bool init_plc_Connect() //与plc连接的初始化
-        {
-            bool status = false; //判断返回值是否对的标志
-            SocketBase sk = new SocketBase();
-            sk.SocketSend(plcHead1);
-            Console.ReadKey();
-            if (sk.SocketRec() == 22)
+          {
+            bool status; //判断返回值是否对的标志
+            //SocketBase sk = new SocketBase();
+            SocketBase.initSocketBase();
+            SocketBase.SocketSend(plcHead1);
+            //Console.ReadKey();
+            if (SocketBase.SocketRec() == 22)
             {
-                sk.SocketSend(plcHead2);
-                if (sk.SocketRec() == 27)
+                SocketBase.SocketSend(plcHead2);
+                int res = SocketBase.SocketRec();
+                if (res == 27)
                 {
-                   return status = true;
+                    status = true;
+                    return status;
                 }
                 else
                 {
-                    return status = false;
+                    status = false;
+                    return status;
                 }
             }
             else
             {
-                return status = false;
+                Console.WriteLine("rec {0}", SocketBase.SocketRec());
+                status = false;
+                return status;
             }
         }
-
-
         #region plc headercmd
         private byte[] plcHead1_1200 = new byte[22] //
                 {
