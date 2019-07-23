@@ -94,7 +94,6 @@ namespace PLCCommunicationKit.Siemens
             if (SocketBase.initSocketBase())
             {
                 SocketBase.SocketSend(plcHead1);
-
                 //Console.ReadKey();
                 if (SocketBase.SocketRec() == 22)
                 {
@@ -104,29 +103,32 @@ namespace PLCCommunicationKit.Siemens
                     if (res == 27)
                     {
                         status = true;
-                        LogHelper.Infor("handshake second done");
-                        return status;
+                        LogHelper.Infor("handshake second done");                      
                     }
                     else
                     {
                         status = false;
-                        return status;
+                        LogHelper.Infor("handshake second failed");                       
                     }
                 }
                 else
                 {
                     //Console.WriteLine("rec {0}", SocketBase.SocketRec());
-                    LogHelper.Infor("handshake error");
+                    LogHelper.Error("handshake error,plc init failed");
                     status = false;
-                    return status;
                 }
             }
             else
             {
                 status = false;
-                return status;
             }
+            return status;
         }
+
+        public void WriteBit()
+        {
+        }
+
         #region plc headercmd
         private byte[] plcHead1_1200 = new byte[22] //
                 {

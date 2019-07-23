@@ -47,39 +47,18 @@ namespace PLCCommunicationKit
         {
             loginfo.InfoFormat(format, args);
         }
-        public static void DebugFormatted(string format, params object[] args)
-        {
-            if (loginfo.IsDebugEnabled)
-            { loginfo.DebugFormat(format, args); }
-        }
         
-        public static void Debug(string message)
-        {
-            if (loginfo.IsDebugEnabled)
-            {   
-                loginfo.Debug(message);
-            }
-            else
-            {
-                logerror.Error("log not ready");
-                Console.WriteLine("log not ready {0}", loginfo.IsDebugEnabled);
-            }
-        }
-        public static void Debug(string message, Exception ex)
-        {
-            logerror.Debug(string.Format(message), ex);
-        }
         public static void Error(string message)
         {
-            if (loginfo.IsDebugEnabled)
+            if (loginfo.IsErrorEnabled)
             {
                 logerror.Error(message);
             }
             else
                
             {
-                logerror.Error("log not ready");
-                Console.WriteLine("log not ready {0}", loginfo.IsDebugEnabled);
+                logerror.Error("log not ready,loginfo.IsErrorEnabled is false");
+                Console.WriteLine("log not ready {0}", loginfo.IsErrorEnabled);
             }
         }
         public static void Error(string message, Exception ex)
