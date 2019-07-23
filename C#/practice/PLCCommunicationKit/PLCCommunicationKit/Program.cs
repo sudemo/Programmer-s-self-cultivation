@@ -11,6 +11,7 @@ namespace PLCCommunicationKit
 {
     class Program
     {
+        static byte[] aaa = new byte[] { 0 };
         static void Main(string[] args)
         {
            // SocketBase.SocketBase sk = new SocketBase.SocketBase();
@@ -36,7 +37,9 @@ namespace PLCCommunicationKit
             ret = s7.init_plc_Connect();
             //LogHelper.Infor("init plc connect successful");
             //Console.Write(ret);
-            Console.ReadKey();
+            
+            s7.writeByteData(aaa,2,7,8,4);
+            //Console.ReadKey();
         }
 
     }

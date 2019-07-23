@@ -64,20 +64,21 @@ namespace PLCCommunicationKit.SocketBaseKit
             
             //return ReturnStatus.CreatSuccessStatus<int>();
         }
-        public static int SocketRec()
+        public static byte[] SocketRec()
         {
             byte[] receiveBuffer = new byte[1024];
             try
             {              
                     int RecCount = PLCClient.Receive(receiveBuffer, receiveBuffer.Length, SocketFlags.None);
-                    //Console.WriteLine("{0} is {1}", receiveBuffer, receiveBuffer.Length);
-                    return RecCount;              
+                //Console.WriteLine("{0} is {1}", receiveBuffer, receiveBuffer.Length);
+                byte[] recMsg = receiveBuffer.Take(RecCount).ToArray();
+                    return recMsg;              
             }
             catch (Exception ex)
             {
 
                 LogHelper.Infor("rec error",ex);
-                return 0;
+                return receiveBuffer;
             }
             
             //Console.Write(Encoding.UTF8.GetString(receiveBuffer));
