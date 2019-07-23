@@ -17,7 +17,8 @@ namespace writelogdemo
                 LogHelper.WriteLog("this is a error log1 ");
                 string a = "13";
             int b = Convert.ToInt32(a);
-                LogHelper.WriteLog("this is a error log1 ");
+                LogHelper.WriteLog("this is a error log2 ");
+                LogHelper.Infor("log3");
                 LogHelper.InfoFormatted("sss");
                 //Console.WriteLine("ok");
                 Console.ReadKey();
@@ -33,7 +34,9 @@ namespace writelogdemo
 
         {
             Page_Load();
+            LogHelper.Infor("starting");
             Console.WriteLine(string.Format("当前时间为{0}.", DateTime.Now.ToString()));
+            Console.WriteLine("当前时间为{0}.", DateTime.Now.ToString());
             LogHelper.WriteLog(string.Format("当前时间为{0}.", DateTime.Now.ToString()));
             Console.ReadKey();
         }

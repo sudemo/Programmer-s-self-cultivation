@@ -34,9 +34,9 @@ namespace PLCCommunicationKit.SocketBaseKit
             {
                 PLCClient?.Close();
                 LogHelper.logerror.Error(e);
-                //throw;
+                throw;
                 //log
-                Console.Write(e.Message);
+                //Console.Write(e.Message);
                 //Console.ReadKey();
                 //return new ReturnStatus<Socket>(e.Message);
             }
