@@ -14,16 +14,18 @@ namespace writelogdemo
         {
         try
             {
-            string a = "ff";
+                LogHelper.WriteLog("this is a error log1 ");
+                string a = "13";
             int b = Convert.ToInt32(a);
-                LogHelper.WriteLog("this is a error log ");
+                LogHelper.WriteLog("this is a error log1 ");
                 LogHelper.InfoFormatted("sss");
                 //Console.WriteLine("ok");
                 Console.ReadKey();
             }
         catch (Exception ex)
             {
-            LogHelper.WriteLog(ex.Message.ToString(), ex);
+                LogHelper.WriteLog("this is a error log ");
+                LogHelper.WriteLog(ex.Message.ToString(), ex);
             }
         }
 
