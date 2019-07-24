@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PLCCommunicationKit.SocketBaseKit;
-
+using System.Threading;
 
 namespace PLCCommunicationKit.Siemens
 {
@@ -127,63 +127,6 @@ namespace PLCCommunicationKit.Siemens
         }
         public void writeCmdInit()
         {
-            //#region databyte
-            //byte[] _PLCCommand = new byte[35 + data.Length];
-            //_PLCCommand[0] = 0x03;
-            //_PLCCommand[1] = 0x00;
-            //// 长度 -> Length
-            //_PLCCommand[2] = (byte)((35 + data.Length) / 256);
-            //_PLCCommand[3] = (byte)((35 + data.Length) % 256);
-            //// 固定 -> Fixed
-            //_PLCCommand[4] = 0x02;
-            //_PLCCommand[5] = 0xF0;
-            //_PLCCommand[6] = 0x80;
-            //_PLCCommand[7] = 0x32;
-            //// 命令 发 -> command to send
-            //_PLCCommand[8] = 0x01;
-
-            //_PLCCommand[9] = 0x00;
-            //_PLCCommand[10] = 0x00;
-            //// 标识序列号 -> Identification serial Number
-            //_PLCCommand[11] = 0x00;
-            //_PLCCommand[12] = 0x01;
-            //// 固定 -> Fixed
-            //_PLCCommand[13] = 0x00;
-            //_PLCCommand[14] = 0x0E;
-            //// 写入长度+4 -> Write Length +4
-            //_PLCCommand[15] = (byte)((4 + data.Length) / 256);
-            //_PLCCommand[16] = (byte)((4 + data.Length) % 256);
-            //// 读写指令 -> Read and write instructions
-            //_PLCCommand[17] = 0x05;
-            //// 写入数据块个数 -> Number of data blocks written
-            //_PLCCommand[18] = 0x01;
-            //// 固定，返回数据长度 -> Fixed, return data length
-            //_PLCCommand[19] = 0x12;
-            //_PLCCommand[20] = 0x0A;
-            //_PLCCommand[21] = 0x10;
-            //// 写入方式，1是按位，2是按字 -> Write mode, 1 is bitwise, 2 is by word
-            //_PLCCommand[22] = 0x02;
-            //// 写入数据的个数 -> Number of Write Data
-            //_PLCCommand[23] = (byte)(data.Length / 256);
-            //_PLCCommand[24] = (byte)(data.Length % 256);
-            //// DB块编号，如果访问的是DB块的话 -> DB block number, if you are accessing a DB block
-            //_PLCCommand[25] = 0x00; //(byte)(analysis.Content.DbBlock / 256);
-            //_PLCCommand[26] = 0x00; //(byte)(analysis.Content.DbBlock % 256);
-            //// 写入数据的类型 -> Types of writing data
-            //_PLCCommand[27] = 0x00; //analysis.Content.DataCode;
-            //// 偏移位置 -> Offset position
-            //_PLCCommand[28] = 0x00; //(byte)(analysis.Content.AddressStart / 256 / 256 % 256); ;
-            //_PLCCommand[29] = 0x00; //(byte)(analysis.Content.AddressStart / 256 % 256);
-            //_PLCCommand[30] = 0x00; // (byte)(analysis.Content.AddressStart % 256);
-            //// 按字写入 -> Write by Word
-            //_PLCCommand[31] = 0x00;
-            //_PLCCommand[32] = 0x04;
-            //// 按位计算的长度 -> The length of the bitwise calculation
-            //_PLCCommand[33] = (byte)(data.Length * 8 / 256);
-            //_PLCCommand[34] = (byte)(data.Length * 8 % 256);
-
-            //data.CopyTo(_PLCCommand, 35); 
-            //#endregion
 
             headCmd = new byte[] { 0x03, 0x00 };
             msgLenth = new byte[] { 0x00, 0x00 };//报文长度（35+写入长度）
@@ -215,24 +158,24 @@ namespace PLCCommunicationKit.Siemens
                 //Console.ReadKey();
                 if (SocketBase.SocketRec().Length == 22)
                 {
-                    LogHelper.Infor("handshake first done");
-                    int res = SocketBase.SocketSend(plcHead2);
-                     
-                    if (res == 27)
+                    Logger.Infor("handshake first done");
+                    SocketBase.SocketSend(plcHead2);
+                    byte[] res = SocketBase.SocketRec();
+                    if (res.Length == 27)
                     {
                         status = true;
-                        LogHelper.Infor("handshake second done,init ok");                      
+                        Logger.Infor("handshake second done,init ok " + res);                      
                     }
                     else
                     {
                         status = false;
-                        LogHelper.Infor("handshake second failed");                       
+                        Logger.Error("handshake second failed");                       
                     }
                 }
                 else
                 {
                     //Console.WriteLine("rec {0}", SocketBase.SocketRec());
-                    LogHelper.Error("handshake error,plc init failed");
+                    Logger.Error("handshake first error,plc init failed");
                     status = false;
                 }
             }
@@ -336,13 +279,15 @@ namespace PLCCommunicationKit.Siemens
                 writeCmd.AddRange(wData);
                 //发送数据
                 SocketBase.SocketSend(writeCmd.ToArray());
+                Thread.Sleep(500);
                 byte[] recvData = SocketBase.SocketRec();
-                //if (recvData[0] == 0x03 && recvData[1] == 0x00 && recvData[recvData.Length - 1] == 0xFF)
-                if(true)
+                if (recvData[0] == 0x03 && recvData[1] == 0x00 && recvData[recvData.Length - 1] == 0xFF)
+                //if(true)
                 {
                     Console.WriteLine(recvData);
                     Console.ReadKey();
                     isSuccess = true;
+                    Logger.Infor("write ok");
                 }
                 else
                 {
@@ -352,9 +297,9 @@ namespace PLCCommunicationKit.Siemens
             catch (Exception ex)
             {
                 isSuccess = false;
-                LogHelper.Error("写入plc失败",ex);
+                Logger.Error("写入plc失败"+ex);
             }
-            LogHelper.Infor("写入plc成功");
+            //Logger.Infor("写入plc成功");
             return isSuccess;
         }
 

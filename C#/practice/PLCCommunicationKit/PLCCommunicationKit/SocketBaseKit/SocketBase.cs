@@ -20,7 +20,7 @@ namespace PLCCommunicationKit.SocketBaseKit
 
         #region creat socket client
         // ReturnStatus<Socket> CreatandConnect(string ip, int port)//创建并连接socket,此client
-        public static bool  initSocketBase(string ip="172.16.8.204", int port=102) //这两个参数后续可以从配置文件读取
+        public static bool  initSocketBase(string ip="192.168.0.1", int port=102) //这两个参数后续可以从配置文件读取
         {
              PLCClient = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try
@@ -33,9 +33,10 @@ namespace PLCCommunicationKit.SocketBaseKit
             catch (Exception e)
             {
                 PLCClient?.Close();
-                LogHelper.logerror.Error(e);
+                //LogHelper.logerror.Error(e);
+                Logger.Error("init socket failed " + e.ToString());
                 return false;
-                throw;
+                //throw;
                 //log
                 //Console.Write(e.Message);
                 //Console.ReadKey();
@@ -68,10 +69,14 @@ namespace PLCCommunicationKit.SocketBaseKit
         {
             byte[] receiveBuffer = new byte[1024];
             try
-            {              
+            {
+                PLCClient.ReceiveTimeout = 3000;
+                bool aa=PLCClient.Connected;
                     int RecCount = PLCClient.Receive(receiveBuffer, receiveBuffer.Length, SocketFlags.None);
                 //Console.WriteLine("{0} is {1}", receiveBuffer, receiveBuffer.Length);
+               
                 byte[] recMsg = receiveBuffer.Take(RecCount).ToArray();
+                //Console.WriteLine();
                     return recMsg;              
             }
             catch (Exception ex)
