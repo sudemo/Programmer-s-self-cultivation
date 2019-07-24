@@ -20,7 +20,7 @@ namespace PLCCommunicationKit.SocketBaseKit
 
         #region creat socket client
         // ReturnStatus<Socket> CreatandConnect(string ip, int port)//创建并连接socket,此client
-        public static bool  initSocketBase(string ip="192.168.0.1", int port=102) //这两个参数后续可以从配置文件读取
+        public static bool  initSocketBase(string ip="172.16.8.204", int port=102) //这两个参数后续可以从配置文件读取
         {
              PLCClient = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try
@@ -93,7 +93,18 @@ namespace PLCCommunicationKit.SocketBaseKit
         #endregion
 
 
-
+        private static string byteToHexStr(byte[] bytes, int length)
+        {
+            string returnStr = "";
+            if (bytes != null)
+            {
+                for (int i = 0; i < length; i++)
+                {
+                    returnStr += bytes[i].ToString("X2");
+                }
+            }
+            return returnStr;
+        }
 
         /// <summary>
         /// 是否是长连接的状态
