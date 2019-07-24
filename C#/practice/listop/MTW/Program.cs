@@ -10,6 +10,8 @@ namespace MTW
     {
         static void Main(string[] args)
         {
+            MTWFile al = new MTWFile("test");
+            al.Write("this is a test");
         }
     }
 }

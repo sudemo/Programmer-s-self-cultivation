@@ -100,6 +100,31 @@ namespace PLCCommunicationKit.Siemens
         public byte[] writeBitCnt;     //写入bit的个数
         public byte[] writeData;       //写入值
 
+        struct ReadStructCmd
+        {
+            public byte[] headCmd;         //固定的报文
+            public byte[] msgLenth;        //报文长度（0x1F = 31）
+            public byte[] fixedCmd1;       //固定的报文
+            public byte[] serialFlag;      //序列号标识（发送、接收的标识符一样）
+            public byte[] fixedCmd2;       //固定的报文
+            public byte[] accessCnt;       //访问数据个数，bit为单位
+            public byte[] DBNo;            //DB块编号
+            public byte dataType;            //input:0x81,output:0x82,flag:0x83,DB:0x84
+            public byte[] DBOffset;        //访问DB块的偏移量offset(地址+1，以byte为单位）
+
+            public void ReadCmdInit()
+            {
+                headCmd = new byte[] { 0x03, 0x00 };
+                msgLenth = new byte[] { 0x00, 0x1F };
+                fixedCmd1 = new byte[] { 0x02, 0xF0, 0x80, 0x32, 0x01, 0x00, 0x00 };
+                serialFlag = new byte[] { 0x00, 0x00 };
+                fixedCmd2 = new byte[] { 0x00, 0x0E, 0x00, 0x00, 0x04, 0x01, 0x12, 0x0A, 0x10, 0x02 };
+                accessCnt = new byte[] { 0x00, 0x00 };
+                DBNo = new byte[] { 0x00, 0x00 };
+                dataType = 0x00;
+                DBOffset = new byte[] { 0x00, 0x00, 0x00 };
+            }
+        }
         public void writeCmdInit()
         {
             //#region databyte
@@ -244,9 +269,7 @@ namespace PLCCommunicationKit.Siemens
 
                 writeCmdInit();
                 List<byte> writeCmd = new List<byte>();
-
-                writeCmd.AddRange(headCmd);
-
+  
                 byte[] msgLen = IntToByte(35 + wData.Length);
                 if (msgLen.Length < 2)
                     writeCmd.Add(0x00);
@@ -335,19 +358,112 @@ namespace PLCCommunicationKit.Siemens
             return isSuccess;
         }
 
-        public bool WriteByte()
+        public bool ReadByteData(int DBNode, int ioffset, byte datablockType, int byteCnt, out byte[] receiveData)
         {
+            bool isSuccess = false;
 
-            return false;
+            try
+            {
+                #region 填充读取指令
+                ReadStructCmd readStruct = new ReadStructCmd();
+                readStruct.ReadCmdInit();
+                List<byte> readCmd = new List<byte>();
+
+
+                readCmd.AddRange(readStruct.headCmd);
+                readCmd.AddRange(readStruct.msgLenth);
+                readCmd.AddRange(readStruct.fixedCmd1);
+
+                //标识序列号，自定义
+                readStruct.serialFlag = new byte[] { 0x00, 0x05 };
+                readCmd.AddRange(readStruct.serialFlag);
+                readCmd.AddRange(readStruct.fixedCmd2);
+                byte[] readCnt = IntToByte(byteCnt);
+                if (readCnt.Length < 2)
+                {
+                    readCmd.Add(0x00);
+                }
+                readCmd.AddRange(readCnt);
+                byte[] DBNo = IntToByte(DBNode);
+                if (DBNo.Length < 2)
+                {
+                    readCmd.Add(0x00);
+                }
+                readCmd.AddRange(DBNo);
+
+                readCmd.Add(datablockType);
+
+                byte[] offset = IntToByte(ioffset * 8);
+
+                if (offset.Length == 1)
+                {
+                    readCmd.Add(0x00);
+                    readCmd.Add(0x00);
+                }
+                else if (offset.Length == 2)
+                {
+                    readCmd.Add(0x00);
+                }
+                readCmd.AddRange(offset);
+
+                #endregion
+
+                SocketBase.SocketSend(readCmd.ToArray());
+                byte[] data = SocketBase.SocketRec();
+                int len = BitConverter.ToInt32(data.Skip(2).Take(2).ToArray(), 0);
+                if (len == 25 + byteCnt) //25+读取长度
+                {
+                    receiveData = data.Skip(24).Take(data.Length - 24).ToArray();
+                    //双字、单字处理？？？
+                    getLittleEndianBytes(receiveData);
+                    isSuccess = true;
+                }
+                else
+                {
+                    receiveData = new byte[] { };
+                    isSuccess = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error("read byte error",ex);
+                receiveData = new byte[] { };
+                isSuccess = false;
+            }
+            return isSuccess;
         }
 
-        public void WriteBit()
+
+        public bool ReadSignal(int DBNode, int ioffset, byte datablockType, int byteCnt)
         {
+            bool isResult = false;
+            byte[] receiveData;
+            if (ReadByteData(DBNode, ioffset, datablockType, byteCnt, out receiveData))
+            {
+                if (receiveData.Length > 0)
+                {
+                    byte b = 0x03;
+                    b = (byte)(b >> 1);
+                }
+            }
+
+
+            return isResult;
         }
 
-        public void Write2Bit()
-        {
-        }
+        //public bool WriteByte()
+        //{
+
+        //    return false;
+        //}
+
+        //public void WriteBit()
+        //{
+        //}
+
+        //public void Write2Bit()
+        //{
+        //}
 
         public byte[] getLittleEndianBytes(byte[] wData)
         {
