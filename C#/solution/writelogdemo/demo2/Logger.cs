@@ -14,11 +14,18 @@ namespace logbaseQuene
     /// </remarks>  
     public class Logger2
     {
-        public static void Write(string msgText)
+        public static void Infor(string msgText)
         {
             Write(DateTime.Now, MsgType.Infor, "", msgText);
         }
-
+        public static void Error(string msgText)
+        {
+            Write(DateTime.Now, MsgType.Error, "", msgText);
+        }
+        public static void Fatal(string msgText)
+        {
+            Write(DateTime.Now, MsgType.Fatal, "", msgText);
+        }
         /// <summary>  
         /// 写日志基础方法  
         /// </summary>  
@@ -47,8 +54,6 @@ namespace logbaseQuene
             /// 日志文件保存的路径  
             /// </summary>  
             private static readonly string Path = BasePath + "\\AppLogs\\";
-            //private static readonly string Path = BasePath + "\\AppLogs\\";
-
             /// <summary>
             /// Web和WinForm通用的取当前根目录的方法 
             /// </summary>
@@ -147,6 +152,7 @@ namespace logbaseQuene
                 string format = "yyyy-MM-dd'.log'";
                 _timeSign = new DateTime(now.Year, now.Month, now.Day);
                 _timeSign = _timeSign.AddDays(1);
+                format = "PLC1_" + format;   //修改日志名字
                 return now.ToString(format);
             }
 
@@ -170,7 +176,7 @@ namespace logbaseQuene
                     }
                     if (_writer != null)
                     {
-                        _writer.WriteLine(string.Format("{0}", msg.Datetime) + "\t" + msg.Type + "\t" + msg.Location + "\t" + msg.Text);
+                        _writer.WriteLine(string.Format("日志时间：{0}", msg.Datetime) + "\n日志级别：" + msg.Type + "\t" + msg.Location + "\n日志内容：" + msg.Text);
                         _writer.Flush();
                     }
                 }

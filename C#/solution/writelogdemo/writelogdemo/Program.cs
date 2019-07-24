@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using log4net;
 using System.Threading;
 
@@ -33,11 +33,22 @@ namespace writelogdemo
         public static void Main(string[] args)
 
         {
-            Page_Load();
-            LogHelper.Infor("starting");
-            Console.WriteLine(string.Format("当前时间为{0}.", DateTime.Now.ToString()));
-            Console.WriteLine("当前时间为{0}.", DateTime.Now.ToString());
-            LogHelper.WriteLog(string.Format("当前时间为{0}.", DateTime.Now.ToString()));
+            //Page_Load();
+            //LogHelper.Infor("starting");
+            //Console.WriteLine(string.Format("当前时间为{0}.", DateTime.Now.ToString()));
+            //Console.WriteLine("当前时间为{0}.", DateTime.Now.ToString());
+            //LogHelper.WriteLog(string.Format("当前时间为{0}.", DateTime.Now.ToString()));
+            Stopwatch st = new Stopwatch();
+            st.Start();
+            System.Threading.Tasks.Parallel.For(0, 100, x =>
+            {
+                LogHelper.Infor(x.ToString());
+                //Logger2.Write("test" + x.ToString());
+                //Console.WriteLine(x);
+
+            });
+            st.Stop();
+            Console.WriteLine(st.ElapsedMilliseconds);
             Console.ReadKey();
         }
     }
