@@ -12,9 +12,14 @@ namespace BytesLinkDemo
 
         static void Main(string[] args)
         {
-            ArrayCopyTest();
-            BlockCopyTest();
-            ListTest();
+            //ArrayCopyTest();
+            //BlockCopyTest();
+            //ListTest();
+             bool res =addm(4);
+            if (addm(5))
+            {
+                Console.Write(addm(9));
+            }
             Console.ReadKey();
         }
 
@@ -72,6 +77,24 @@ namespace BytesLinkDemo
             }
             sw.Stop();
             Console.WriteLine("BlockCopyTest " + sw.ElapsedMilliseconds + " 毫秒,数组长度：" + byteSource.Length);
+        }
+
+        static void writelogtest()
+        { }
+        static bool addm(int x)
+        {
+            if (x > 3)
+            { return true; }
+            else { return false; }
+            
+            //if (x > 3)
+            //{
+            //    return true;
+            //}
+            //else
+            //{
+            //    return false;
+            //}
         }
     }
 }
