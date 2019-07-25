@@ -16,21 +16,7 @@ namespace PLCCommunicationKit
         static void Main(string[] args)
         {
             byte[] readcmdexam = new byte[] { 0x03, 0x00, 0x00, 0x1f, 0x02, 0xf0, 0x80, 0x32, 0x10, 0x00, 0x00, 0x00, 0x1c, 0x00, 0x0e, 0x00 };
-            // SocketBase.SocketBase sk = new SocketBase.SocketBase();
-            //SocketBase sk = new SocketBase();
-            //sk.initSocketBase();
-            //skd = new Socket();
-            //Console.Write("ok");
-            //sk.CreatandConnect("172.16.8.204", 102);
-            //string ina = Console.ReadLine();
-            //Console.ReadKey();
-            //string ina = "sas";
-            //byte[] by = Encoding.UTF8.GetBytes(ina);
-            //Socket soc = null;
-            //sk.SocketSend(by);
-            //Thread.Sleep(100);
-            //Console.WriteLine(sk.SocketRec());
-            //Console.ReadKey();
+            
             SiemensS7Net s7 = new SiemensS7Net();
             bool ret;
             Logger.Infor("enter plc init");

@@ -16,7 +16,7 @@ namespace PLCCommunicationKit.SocketBaseKit
     {
         public static Socket PLCClient ; //字段
         //private bool ConnectionStatus;
-
+       
 
         #region creat socket client
         // ReturnStatus<Socket> CreatandConnect(string ip, int port)//创建并连接socket,此client
@@ -25,6 +25,7 @@ namespace PLCCommunicationKit.SocketBaseKit
              PLCClient = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try
             {
+                PLCClient.ReceiveTimeout = 2000;
                 //timeout = 100;这里无法设置连接的超时时间，可能会造成该线程卡住20s-40s(在地址错误的时候）
                 //PLCClient.ReceiveTimeout = 100;
                 PLCClient.Connect(ip, port);
@@ -36,11 +37,6 @@ namespace PLCCommunicationKit.SocketBaseKit
                 //LogHelper.logerror.Error(e);
                 Logger.Error("init socket failed " + e.ToString());
                 return false;
-                //throw;
-                //log
-                //Console.Write(e.Message);
-                //Console.ReadKey();
-                //return new ReturnStatus<Socket>(e.Message);
             }
         }
         #endregion
@@ -54,15 +50,11 @@ namespace PLCCommunicationKit.SocketBaseKit
             }
             catch (Exception ex)
             {
-                LogHelper.logerror.Error(ex);               
+                Logger.Error("send error"+ex.Message);               
                 return 0;              
             }
-            //默认返回的是发送的字节数
-            
-                
-            
-            
-            
+            //默认返回的是发送的字节数           
+
             //return ReturnStatus.CreatSuccessStatus<int>();
         }
         public static byte[] SocketRec()
@@ -70,28 +62,25 @@ namespace PLCCommunicationKit.SocketBaseKit
             byte[] receiveBuffer = new byte[1024];
             try
             {
-                PLCClient.ReceiveTimeout = 3000;
+                
                 bool aa=PLCClient.Connected;
-                    int RecCount = PLCClient.Receive(receiveBuffer, receiveBuffer.Length, SocketFlags.None);
+                int RecCount = PLCClient.Receive(receiveBuffer, receiveBuffer.Length, SocketFlags.None);
                 //Console.WriteLine("{0} is {1}", receiveBuffer, receiveBuffer.Length);
                
                 byte[] recMsg = receiveBuffer.Take(RecCount).ToArray();
+                string msg = byteToHexStr(recMsg,recMsg.Length);
+                Logger.Infor(msg);
                 //Console.WriteLine();
-                    return recMsg;              
+                return recMsg;              
             }
             catch (Exception ex)
             {
 
-                LogHelper.Infor("rec error",ex);
+                Logger.Error("rec error"+ex.Message);
                 return receiveBuffer;
-            }
-            
-            //Console.Write(Encoding.UTF8.GetString(receiveBuffer));
-           
-            
+            }                            
         }
         #endregion
-
 
         private static string byteToHexStr(byte[] bytes, int length)
         {
