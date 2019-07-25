@@ -31,26 +31,34 @@ namespace taskdemo
                 HttpClient client = new HttpClient();
 
                 //执行异步方法 GetStringAsync
-                Task<string> getStringTask = client.GetStringAsync("https://msdn.microsoft.com");
-
+                //Task<string> getStringTask = client.GetStringAsync("https://www.baidu.com");
+               
+                Task<bool> ok = taskas();
                 //由于下面的非异步方法不依赖上面异步方法结果，因此可以先执行，假设在这里执行一些非异步的操作
                 DoIndependentWork();
 
                 //等待操作挂起方法 OperateAsync，直到 getStringTask 完成，OperateAsync 方法才会继续执行
                 //同时，控制将返回到 OperateAsync 方法的调用方，直到 getStringTask 完成后，将在这里恢复控制。
                 //然后从 getStringTask 拿到字符串结果
-                string urlContents = await getStringTask;
-
-                Console.WriteLine("方法OperateAsync");
+                //string urlContents = await getStringTask;
+                bool urlContents = await ok;
+                Console.WriteLine("方法OperateAsynch的执行结果：{0}",urlContents);
                 //返回字符串的长度（int 类型）
-                return urlContents.Length;
+                //return urlContents.Length;
 
+            }
+
+            private static bool taskas()
+            {
+                Thread.Sleep(5000);
+                
+                return true;
             }
 
             private static void DoIndependentWork()
             {
                 int i = 0;
-                for (i = 0; i < 10; i++)
+                for (i = 0; i < 100; i++)
                 {
                     Console.WriteLine("主线程执行内容" + i);
                     Thread.Sleep(100);
