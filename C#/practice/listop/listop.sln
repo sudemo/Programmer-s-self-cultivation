@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "listop", "listop\listop.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTW", "MTW\MTW.csproj", "{0F28B5DC-9857-4889-A47C-BCF90BB3B27D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "invokedemo", "invokedemo\invokedemo.csproj", "{E0C976EC-CA1C-46B3-BBB9-FA64DCBE5483}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{0F28B5DC-9857-4889-A47C-BCF90BB3B27D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F28B5DC-9857-4889-A47C-BCF90BB3B27D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F28B5DC-9857-4889-A47C-BCF90BB3B27D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0C976EC-CA1C-46B3-BBB9-FA64DCBE5483}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0C976EC-CA1C-46B3-BBB9-FA64DCBE5483}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0C976EC-CA1C-46B3-BBB9-FA64DCBE5483}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0C976EC-CA1C-46B3-BBB9-FA64DCBE5483}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

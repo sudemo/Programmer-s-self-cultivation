@@ -40,7 +40,7 @@
             this.downloadButton.TabIndex = 0;
             this.downloadButton.Text = "button1";
             this.downloadButton.UseVisualStyleBackColor = true;
-            this.downloadButton.Click += new System.EventHandler(this.downloadButton_Click);
+            //this.downloadButton.Click += new System.EventHandler(this.downloadButton_Click);
             // 
             // Form1
             // 
