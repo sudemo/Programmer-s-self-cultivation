@@ -10,11 +10,11 @@ namespace BytesLinkDemo
     {
         static int RunCount = 10000;
 
-        static void Main(string[] args)
+        static void Main()
         {
             //ArrayCopyTest();
             //BlockCopyTest();
-            //ListTest();
+            ListTest();
              bool res =addm(4);
             if (addm(5))
             {
