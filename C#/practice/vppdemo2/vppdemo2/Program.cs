@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace vppdemo2
+
 {
+    
     static class Program
     {
         /// <summary>
@@ -14,9 +16,14 @@ namespace vppdemo2
         [STAThread]
         static void Main()
         {
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            MainForm mf = new MainForm();
+            mf.ShowDialog();
+            
+            if (mf. ==true)
+            {Application.Run(new MainForm());}
         }
     }
 }

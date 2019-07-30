@@ -12,6 +12,7 @@ namespace vppdemo2
 {
     public partial class MainForm : Form
     {
+        //public bool closeflag = true;
         public MainForm()
         {
             InitializeComponent();
@@ -25,28 +26,15 @@ namespace vppdemo2
 
         private void cogDisplay1_DoubleClick(object sender, EventArgs e)
         {
-            MainForm.
+            
             Form1 fm1 = new Form1();
             fm1.initForm1();
         }
 
         private void display_Click(object sender, EventArgs e)
         {
-            if (-1 != m_curDragCogDisplay && (CogRecordDisplay)sender == m_cogDisPlayList[m_curDragCogDisplay])
-            {
-                if (clickTime < FileDirOP.Instance.m_dragListBMPFile.Count)
-                {
-
-                    showHandinputImgToUI(FileDirOP.Instance.m_dragListBMPFile[clickTime]);
-                    clickTime++;
-                }
-                else if (FileDirOP.Instance.m_dragListBMPFile.Count != 0)
-                {
-                    MessageBox.Show("文件已全部遍历！！");
-                    FileDirOP.Instance.m_dragListBMPFile.Clear();
-                    clickTime = 0;
-                }
-            }
+           
+            
         }
     }
 }
