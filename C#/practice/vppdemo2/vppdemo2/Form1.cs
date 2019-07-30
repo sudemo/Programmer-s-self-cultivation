@@ -16,6 +16,10 @@ namespace vppdemo2
         {
             InitializeComponent();
         }
+        public void initForm1()
+        {
+            MessageBox.Show("fm1");
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {

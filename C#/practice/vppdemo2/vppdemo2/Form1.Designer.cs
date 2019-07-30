@@ -28,37 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cogBlobEditV21 = new Cognex.VisionPro.Blob.CogBlobEditV2();
-            ((System.ComponentModel.ISupportInitialize)(this.cogBlobEditV21)).BeginInit();
+            this.cogToolBlockEditV21 = new Cognex.VisionPro.ToolBlock.CogToolBlockEditV2();
+            ((System.ComponentModel.ISupportInitialize)(this.cogToolBlockEditV21)).BeginInit();
             this.SuspendLayout();
             // 
-            // cogBlobEditV21
+            // cogToolBlockEditV21
             // 
-            this.cogBlobEditV21.Location = new System.Drawing.Point(12, 12);
-            this.cogBlobEditV21.MinimumSize = new System.Drawing.Size(489, 0);
-            this.cogBlobEditV21.Name = "cogBlobEditV21";
-            this.cogBlobEditV21.Size = new System.Drawing.Size(748, 402);
-            this.cogBlobEditV21.SuspendElectricRuns = false;
-            this.cogBlobEditV21.TabIndex = 0;
-            this.cogBlobEditV21.Load += new System.EventHandler(this.cogBlobEditV21_Load);
+            this.cogToolBlockEditV21.AllowDrop = true;
+            this.cogToolBlockEditV21.ContextMenuCustomizer = null;
+            this.cogToolBlockEditV21.Location = new System.Drawing.Point(60, 33);
+            this.cogToolBlockEditV21.MinimumSize = new System.Drawing.Size(489, 0);
+            this.cogToolBlockEditV21.Name = "cogToolBlockEditV21";
+            this.cogToolBlockEditV21.ShowNodeToolTips = true;
+            this.cogToolBlockEditV21.Size = new System.Drawing.Size(808, 410);
+            this.cogToolBlockEditV21.SuspendElectricRuns = false;
+            this.cogToolBlockEditV21.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(955, 466);
-            this.Controls.Add(this.cogBlobEditV21);
+            this.Controls.Add(this.cogToolBlockEditV21);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.cogBlobEditV21)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cogToolBlockEditV21)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private Cognex.VisionPro.Blob.CogBlobEditV2 cogBlobEditV21;
+        private Cognex.VisionPro.ToolBlock.CogToolBlockEditV2 cogToolBlockEditV21;
+
     }
 }
 

@@ -38,7 +38,12 @@
     <Reference Include="Cognex.VisionPro.Blob.Controls, Version=59.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
     <Reference Include="Cognex.VisionPro.Controls, Version=59.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
     <Reference Include="Cognex.VisionPro.Core, Version=59.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
+    <Reference Include="Cognex.VisionPro.Database, Version=59.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
     <Reference Include="Cognex.VisionPro.Display.Controls, Version=59.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
+    <Reference Include="Cognex.VisionPro.Inspection, Version=59.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
+    <Reference Include="Cognex.VisionPro.Inspection.Controls, Version=59.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
+    <Reference Include="Cognex.VisionPro.ToolGroup, Version=59.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
+    <Reference Include="Cognex.VisionPro.ToolGroup.Controls, Version=59.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -58,10 +63,19 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
