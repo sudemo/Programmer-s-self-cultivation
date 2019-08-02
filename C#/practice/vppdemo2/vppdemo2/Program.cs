@@ -19,10 +19,10 @@ namespace vppdemo2
             
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            MainForm mf = new MainForm();
-            mf.ShowDialog();
-            
-            if (mf. ==true)
+            //MainForm mf = new MainForm();
+            //mf.ShowDialog();
+            //CommonProperty.closeFlag=true;
+            //if (mf.closeflag ==true)
             {Application.Run(new MainForm());}
         }
     }

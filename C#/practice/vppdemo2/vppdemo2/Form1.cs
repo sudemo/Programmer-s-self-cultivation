@@ -19,13 +19,14 @@ namespace vppdemo2
         }
         public void initForm1()
         {
-            MessageBox.Show("fm1");
+//MessageBox.Show("fm1");
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+           // MessageBox.Show("load");
         }
+
 
         private void cogBlobEditV21_Load(object sender, EventArgs e)
         {

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace vppdemo2
 {
-    public static class CommonProperty
+    public  class CommonProperty
     {
-        public bool closeFlag
+        public static bool closeFlag
         { get;
           set; 
         }
