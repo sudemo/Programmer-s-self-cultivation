@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace vppdemo2
 {
-    public  class CommonProperty
+    public class CommonProperty
     {
         public static bool closeFlag
         { get;
-          set; 
+            set;
         }
+        public static string testprop { get; set; }
     }
 }
