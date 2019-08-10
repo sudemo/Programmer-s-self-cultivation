@@ -41,8 +41,18 @@ namespace jsondemo
                     //Console.WriteLine(res);
                    
                     JObject m_readjson1 = (JObject)JToken.ReadFrom(jst1);
-                    string res = m_readjson1["employees"][0]["firstName"].ToString();
-                    Console.WriteLine(res);
+                    try
+                    {
+                        string res = m_readjson1["employeess"][0]["firstName"].ToString();
+                        Console.WriteLine(res);
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("error, plz check the json key value");
+                        //throw;
+                    }
+                   
+                   
                 }
                 Console.ReadKey();
             }
