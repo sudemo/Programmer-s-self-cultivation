@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    //w.show();
+    w.show();
 
     cv::Mat image = cv::imread("d://2.jpg",1);
     cv::namedWindow("show");

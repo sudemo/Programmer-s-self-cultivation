@@ -19,7 +19,7 @@ namespace SocketServer
 
             //将该socket绑定到主机上面的某个端口
             //方法参考：http://msdn.microsoft.com/zh-cn/library/system.net.sockets.socket.bind.aspx
-            socket.Bind(new IPEndPoint(IPAddress.Any, 4530));
+            socket.Bind(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 102));
 
             //启动监听，并且设置一个最大的队列长度
             //方法参考：http://msdn.microsoft.com/zh-cn/library/system.net.sockets.socket.listen(v=VS.100).aspx

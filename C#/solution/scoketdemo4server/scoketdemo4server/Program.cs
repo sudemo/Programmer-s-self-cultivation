@@ -98,17 +98,19 @@ namespace scoketdemo4server
         static void Main(string[] args)
         {
             Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPAddress ip = IPAddress.Any;
-            IPEndPoint port = new IPEndPoint(ip,49091);
+            //IPAddress ip = IPAddress.Any;
+            IPAddress ip = IPAddress.Parse("127.0.0.1");
+            IPEndPoint port = new IPEndPoint(ip,102);
             //bind
             server.Bind(port);
             Console.WriteLine("listen success");
             server.Listen(4);
-
+           
             //开启线程
             Thread thread = new Thread(listenclient);
             thread.IsBackground = false;
             thread.Start(server);
+            //recvmsg(server);
             //var s = $"{12}+{23}={12 + 23}";//  结果：12+23=35
             //Console.WriteLine(s);
         }
