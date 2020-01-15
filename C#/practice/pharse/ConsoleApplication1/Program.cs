@@ -4,14 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SetKanBan
+namespace ConsoleApplication1
 {
     class Program
     {
         static void Main(string[] args)
         {
-            RegHelper rh = new RegHelper();
-            rh.ModifyReg();
+            string ss = "0.1123134553456789345678906";
+            double sa ;
+            double.TryParse(ss, out sa);
+            //sa=double.Parse(ss);
+
         }
     }
 }

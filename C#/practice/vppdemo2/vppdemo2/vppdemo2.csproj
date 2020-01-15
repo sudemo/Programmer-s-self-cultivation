@@ -32,6 +32,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Cognex.VisionPro, Version=59.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
     <Reference Include="Cognex.VisionPro.Blob, Version=59.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
@@ -40,6 +48,7 @@
     <Reference Include="Cognex.VisionPro.Core, Version=59.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
     <Reference Include="Cognex.VisionPro.Database, Version=59.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
     <Reference Include="Cognex.VisionPro.Display.Controls, Version=59.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
+    <Reference Include="Cognex.VisionPro.ImageFile, Version=59.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64" />
     <Reference Include="Cognex.VisionPro.Inspection, Version=59.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
     <Reference Include="Cognex.VisionPro.Inspection.Controls, Version=59.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />
     <Reference Include="Cognex.VisionPro.ToolGroup, Version=59.2.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505" />

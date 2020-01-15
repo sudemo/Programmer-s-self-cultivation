@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 
-namespace regsetting
+namespace SetKanBan
 {
     class RegHelper
     {
@@ -22,19 +22,23 @@ namespace regsetting
                 //RegistryKey CCDserverkey1 = null;
                 KBserverkey = key.OpenSubKey("SYSTEM\\CurrentControlSet\\Services\\W32Time\\parameters",true);
                 //set KB client's server ip 
-                KBserverkey.SetValue("NtpServer", "172.22.149.250,0x1");
+                KBserverkey.SetValue("NtpServer", "172.22.149.250,0x1");//注意格式
                 ret = KBserverkey.GetValue("NtpServer").ToString();
 
                 KBserverkey = key.OpenSubKey(@"SYSTEM\CurrentControlSet\Services\W32Time\TimeProviders\NtpServer\",true);
-                KBserverkey.SetValue("Enabled", "1");
+                KBserverkey.SetValue("Enabled",0x00000001);
 
                 KBserverkey = key.OpenSubKey("SYSTEM\\CurrentControlSet\\Services\\W32Time\\TimeProviders\\Ntpclient",true);
                 //set KB enable client
-                KBserverkey.SetValue("Enabled", "1");
+                KBserverkey.SetValue("Enabled", 0x00000001);
                 KBserverkey.SetValue("SpecialPollInterval", "604800");
 
                 var strenable = KBserverkey.GetValue("Enabled").ToString();
                 var strserver = KBserverkey.GetValue("SpecialPollInterval").ToString();
+
+                key.Close();
+                KBserverkey.Close();
+                
                 Console.WriteLine(" client status: {0}", strenable);
                 Console.WriteLine("CCD server status {0},interval is {1}",ret, strserver);
                 Console.ReadKey();

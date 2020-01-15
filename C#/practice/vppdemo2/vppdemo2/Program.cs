@@ -24,6 +24,7 @@ namespace vppdemo2
             //CommonProperty.closeFlag=true;
             //if (mf.closeflag ==true)
             {Application.Run(new MainForm());}
+            //{ Application.Run(new Form2()); }
         }
     }
 }

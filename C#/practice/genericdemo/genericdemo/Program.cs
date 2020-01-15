@@ -8,6 +8,7 @@ namespace genericdemo
 {
     class Program
     {
+        //泛型方法
         public static void EnumerateAll<T>(IEnumerable<T> thecollection, Action<T> argmethod)
         {
             foreach (T thing in thecollection)

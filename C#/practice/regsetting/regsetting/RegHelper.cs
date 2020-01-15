@@ -19,21 +19,25 @@ namespace regsetting
                 RegistryKey key = Registry.LocalMachine;
                 string ret = "";
                 RegistryKey CCDserverkey = null;
-                //RegistryKey CCDserverkey1 = null;
+                RegistryKey CCDserverkey1 = null;
                 CCDserverkey = key.OpenSubKey("SYSTEM\\CurrentControlSet\\Services\\W32Time\\parameters",true);
                 //set client's server ip 
                 CCDserverkey.SetValue("NtpServer", "192.168.250.31,0x1");
                 ret = CCDserverkey.GetValue("NtpServer").ToString();
-                CCDserverkey = key.OpenSubKey("SYSTEM\\CurrentControlSet\\Services\\W32Time\\TimeProviders\\Ntpclient",true);
+                CCDserverkey1 = key.OpenSubKey("SYSTEM\\CurrentControlSet\\Services\\W32Time\\TimeProviders\\Ntpclient",true);
                 //set enable client
-                CCDserverkey.SetValue("Enabled", "1");
-                CCDserverkey.SetValue("SpecialPollInterval", "604800");
+                CCDserverkey1.SetValue("Enabled", 0x00000001);
+                CCDserverkey1.SetValue("SpecialPollInterval", "604800");
 
-                var strenable = CCDserverkey.GetValue("Enabled").ToString();
-                var strserver = CCDserverkey.GetValue("SpecialPollInterval").ToString();
+                var strenable = CCDserverkey1.GetValue("Enabled").ToString();
+                var strserver = CCDserverkey1.GetValue("SpecialPollInterval").ToString();
                 Console.WriteLine(" client status: {0}", strenable);
                 Console.WriteLine("CCD server status {0},interval is {1}",ret, strserver);
-                Console.ReadKey();
+                key.Close();
+                CCDserverkey.Close();
+                CCDserverkey1.Close();
+               
+                //Console.ReadKey();
 
 
                 #region 判断当前登录用户是否为管理员
