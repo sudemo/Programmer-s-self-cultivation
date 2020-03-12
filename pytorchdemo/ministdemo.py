@@ -17,7 +17,7 @@ class net(nn.Module):  # 括号表示继承自nnModule，我们只需要重写2�
         super(net, self).__init__()  # 在我们自己类的初始化函数中，先调用父类的初始化函数
         # 使用序列工具快速构建，意思为：这个层将会逐一执行下列动作
         # 这就是一个标准的卷积动作： 卷积conv2d->归一化batch->激活->最大池化
-        self.conv1 = nn.Sequential(  # output_size =1+ (input_size+2*padding-kernel_size)/stride
+        self.conv1 = nn.Sequential(  # output_size =1+ (input_size+2*padding-kernel_size)/stride 满足此条件 图 尺寸不变
             nn.Conv2d(1, 16, kernel_size=5, padding=1),
             nn.BatchNorm2d(16),
             nn.ReLU(),
