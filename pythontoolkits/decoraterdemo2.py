@@ -20,5 +20,15 @@ def log(func):
 def test(p):
     print(test.__name__ + " param: " + p)
 
+def mycalc(a1,b1):
 
-test("I'm a param")
+    def myadd():
+        # print("this is debug")
+        c= a1+b1
+        return c
+    return myadd()
+
+
+print(2+mycalc(12,1))
+print(type(mycalc(11,2)))
+print(mycalc(2, 3)) #mycalc()有返回值，但是不会直接显示
