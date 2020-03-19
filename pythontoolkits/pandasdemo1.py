@@ -23,7 +23,24 @@ area = pd.Series({'California': 423967, 'Texas': 695662, 'New York': 141297, 'Fl
 pop = pd.Series(
     {'California': 38332521, 'Texas': 26448193, 'New York': 19651127, 'Florida': 19552860, 'Illinois': 12882135})
 data2 = pd.DataFrame({'area': area, 'pop': pop})
-print(data2)
+# print(data2)
 # data2['density'] = pop/area
 data2['density']= data2['area']/data2['pop']
-print(data2)
+# print(data2)
+
+
+import matplotlib.pyplot as plt
+plt.switch_backend('agg')
+
+import  seaborn as sns
+# sns.set()
+
+from sklearn.datasets import make_blobs
+
+X, y = make_blobs(100, 2, centers=2, random_state=2, cluster_std=1.5)
+# ss=plt.scatter(X[:, 0], X[:, 1], c=y, s=50, cmap='RdBu')
+
+rng = np.random.RandomState(1)
+x = 10 * rng.rand(50)
+y = 2 * x - 5 + rng.randn(50)
+plt.scatter(x, y)
