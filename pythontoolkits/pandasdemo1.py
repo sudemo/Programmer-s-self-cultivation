@@ -30,7 +30,6 @@ data2['density']= data2['area']/data2['pop']
 
 
 import matplotlib.pyplot as plt
-plt.switch_backend('agg')
 
 import  seaborn as sns
 # sns.set()
@@ -42,5 +41,6 @@ X, y = make_blobs(100, 2, centers=2, random_state=2, cluster_std=1.5)
 
 rng = np.random.RandomState(1)
 x = 10 * rng.rand(50)
-y = 2 * x - 5 + rng.randn(50)
+y = 2 * x + rng.randn(50)
 plt.scatter(x, y)
+plt.show()
