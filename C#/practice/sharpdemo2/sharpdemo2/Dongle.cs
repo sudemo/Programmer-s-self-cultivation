@@ -52,7 +52,10 @@ namespace sharpdemo2
         {
             return true;
         }
-
+        public bool callDongleClose1()
+        {
+            return true;
+        }
 
         ///private
         ///
