@@ -19,26 +19,34 @@ import matplotlib.pyplot as plt
 # plt.imshow(gray, "gray")
 # img.show()
 
-path = "D:/pic/lena.jpg"
-image = cv2.imread(path)  # 小计
-print(image.size)
-# img = Image.open(path)
-cv2.imshow('origin',image)
-cv2.waitKey(0)
-# gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-# print(type(gray))
-# plt.imshow(gray)
+path = "D:/pic/2.jpg"
+image = cv2.imread(path)  # 小计 imread in bgr顺序，如果用plt.show显示，则会出现色差，变色
+print('长宽通道数', image.shape)   # (200, 200, 3)  长宽通道数，size 等于以上之积
+
+cv2.imshow('origin', image)
+# cv2.waitKey(0)
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+cv2.imshow('gray', gray)
+# cv2.waitKey(0)
 
 
 # plt.subplot(131), plt.imshow(image, "gray")
 # plt.title("source image"), plt.xticks([]), plt.yticks([])
 # plt.subplot(132), plt.hist(image.ravel(), 256)
 # plt.title("Histogram"), plt.xticks([]), plt.yticks([])
-ret1, th1 = cv2.threshold(image, 0, 255, cv2.THRESH_OTSU)  #方法选择为THRESH_OTSU
-# ret2, th2 = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
-print(ret1,th1)
-cv2.imshow('th2',th1)
+imgviewx = cv2.bilateralFilter(gray, 0, 50, 6)
+
+# ret1, th1 = cv2.threshold(gray, 0, 255, cv2.THRESH_OTSU)  #方法选择为THRESH_OTSU
+ret2, th2 = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+
+#显示文字
+# 参数：图像，文字内容， 坐标( x , y ) ，字体，大小，颜色( B , G ,R )，字体厚度
+font = cv2.FONT_HERSHEY_SCRIPT_SIMPLEX
+imgviewx = cv2.putText(imgviewx,"hello neo",(10, 50), font, 4, (0, 0, 23), 10)
+print(ret2,th2)
+cv2.imshow('th2',th2)
+cv2.imshow('1',imgviewx)
 cv2.waitKey(0)
 # plt.figure()
 # plt.subplot(133),
