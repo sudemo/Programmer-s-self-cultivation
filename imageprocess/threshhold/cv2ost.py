@@ -6,6 +6,7 @@ Created on: 2019/1/8 9:51
 Software: PyCharm Community Edition
 '''
 
+# import cv2
 import cv2
 import PIL
 from PIL import Image
@@ -18,24 +19,28 @@ import matplotlib.pyplot as plt
 # plt.imshow(gray, "gray")
 # img.show()
 
-path = "D:/pic/j2/19-00-21.bmp"
-# image = cv2.imread(path)
-img = Image.open(path)
-# plt.imshow(image)
+path = "D:/pic/lena.jpg"
+image = cv2.imread(path)  # 小计
+print(image.size)
+# img = Image.open(path)
+cv2.imshow('origin',image)
+cv2.waitKey(0)
 # gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 # print(type(gray))
-plt.imshow(img)
-plt.show()
+# plt.imshow(gray)
+
 
 # plt.subplot(131), plt.imshow(image, "gray")
 # plt.title("source image"), plt.xticks([]), plt.yticks([])
 # plt.subplot(132), plt.hist(image.ravel(), 256)
 # plt.title("Histogram"), plt.xticks([]), plt.yticks([])
-# ret1, th1 = cv2.threshold(img, 0, 255, cv2.THRESH_OTSU)  #方法选择为THRESH_OTSU
-ret2, th2 = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+ret1, th1 = cv2.threshold(image, 0, 255, cv2.THRESH_OTSU)  #方法选择为THRESH_OTSU
+# ret2, th2 = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
-# print(ret1,th1)
-plt.figure()
+print(ret1,th1)
+cv2.imshow('th2',th1)
+cv2.waitKey(0)
+# plt.figure()
 # plt.subplot(133),
 # plt.imshow(ret1, "gray")
 # plt.title("OTSU,threshold is " + str(ret1)), plt.xticks([]), plt.yticks([])
