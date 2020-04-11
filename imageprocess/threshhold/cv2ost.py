@@ -20,12 +20,12 @@ import  os
 # img.show()
 
 path = "D:/pic/lenna.jpg"
-if not os.path.exists(path) :
+if not os.path.exists(path):
     print('file not found')
 
 image = cv2.imread(path)  # 小计 imread in bgr顺序，如果用plt.show显示，则会出现色差，变色
 
-print('长宽通道数', image.shape)   # (200, 200, 3)  长宽通道数，size 等于以上之积
+# print('长宽通道数', image.shape)   # (200, 200, 3)  长宽通道数，size 等于以上之积
 
 # cv2.imshow('origin', image)
 # cv2.waitKey(0)
@@ -48,12 +48,12 @@ imgviewx = cv2.GaussianBlur(gray,(3,3),1)
 # 均值滤波 去随机噪声有很好的去燥效果
 # imgviewx = cv2.blur(gray,(5,5))
 cv2.imshow('filter',imgviewx)
-ret1, th1 = cv2.threshold(gray, 0, 255, cv2.THRESH_OTSU)  #方法选择为THRESH_OTSU
-ret2, th2 = cv2.threshold(imgviewx, 0, 255, cv2.THRESH_OTSU)
+# ret1, th1 = cv2.threshold(gray, 10, 200, cv2.THRESH_OTSU)  #方法选择为THRESH_OTSU
+# ret2, th2 = cv2.threshold(imgviewx, 150, 255, cv2.THRESH_OTSU)
 # ret2, th2 = cv2.threshold(imgviewx, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
-#自适应阈值 只返回分割后的图片 最后两个参数是领域大下 和 减去多少
-# th2 = cv2.adaptiveThreshold(gray,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,13,3)
+# 自适应阈值 只返回分割后的图片 最后两个参数是领域大下 和 减去多少
+th2 = cv2.adaptiveThreshold(imgviewx,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,231,1)
 # th3 = cv2.adaptiveThreshold(gray,255,cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY,11,2)
 
 
@@ -61,9 +61,9 @@ ret2, th2 = cv2.threshold(imgviewx, 0, 255, cv2.THRESH_OTSU)
 # 参数：图像，文字内容， 坐标( x , y ) ，字体，大小，颜色( B , G ,R )，字体厚度
 # font = cv2.FONT_HERSHEY_PLAIN
 # imgviewx = cv2.putText(imgviewx,"hello neo",(30, 100), font, 4, (112, 122, 123), 10)
-# print(ret2,th2)
+print(th2)
 cv2.imshow('th2',th2)
-cv2.imshow('th11',th1)
+# cv2.imshow('th11',th1)
 cv2.waitKey(0)
 # plt.figure()
 # plt.subplot(133),
