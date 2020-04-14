@@ -10,7 +10,7 @@ path = "D:/pic/2.jpg"
 # img = cv2.imread(path,0) # 直接转换为灰度图
 img = cv2.imread(path,0)
 print(img.shape)
-# img = cv2.medianBlur(img,5)
+img = cv2.medianBlur(img,5)
 # gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 # print(gray.shape)
 hret = cv2.calcHist([img], [0], None, [255], [0, 256]) # 直方图统计

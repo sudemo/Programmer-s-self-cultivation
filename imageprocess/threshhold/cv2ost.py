@@ -6,7 +6,7 @@ Created on: 2019/1/8 9:51
 Software: PyCharm Community Edition
 '''
 
-# import cv2
+
 import cv2
 import PIL
 from PIL import Image
