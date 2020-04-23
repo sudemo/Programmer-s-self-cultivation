@@ -24,19 +24,23 @@ edge = cv2.Canny(img, 50, 150)
 result = cut_img.copy()
 
 # rho参数表示参数极径 r 以像素值为单位的分辨率，这里一般使用 1 像素。
-# theta参数表示参数极角 \theta 以弧度为单位的分辨率，这里使用 1度。
+# theta参数表示参数极角 \theta 以弧度为单位的分辨率，这里使用 1度,0.001度。
 # threshold 表示示检测一条直线所需最少的曲线交点
 # 表示能组成一条直线的最少点的数量，点数量不足的直线将被抛弃
 minLineLength = 5  # height/32
 # 表示能被认为在一条直线上的亮点的最大距离
 maxLineGap = 20  # height/40
 
-lines = cv2.HoughLinesP(edge, 1, np.pi/2, 10,minLineLength, maxLineGap)
+lines = cv2.HoughLinesP(edge, 1, np.pi/1800, 20, minLineLength, maxLineGap)
 i = 0
+print(lines.size,lines.shape)
 for l in lines:
     for x1, y1, x2, y2 in lines[i]:
         cv2.line(result, (x1, y1), (x2, y2), (0, 1, 255), 1)   # 颜色空间顺序为 BGR
+        print(lines[i])
+
     i = i+1
+    print('长度：',i, np.sqrt((x2-x1)^2 +(y2-y1)^2))
 # 新建一个figure 对象
 # plt.figure()
 # plt.show()

@@ -26,7 +26,7 @@ plt.plot(x,y)
 #
 plt.subplot(233)
 plt.scatter(x,y)
-plt.title('散点')
+plt.title('scatter')
 
 plt.subplot(234)
 # plt.pie(y)
@@ -35,7 +35,7 @@ plt.pie(x)
 
 plt.subplot(235)
 plt.bar(x,y)
-plt.title('bar条形图')
+plt.title('bar')
 
 
 

@@ -6,7 +6,7 @@ Software: PyCharm Community Edition
 '''
 import PIL
 from PIL import Image
-import pysnooper
+# import pysnooper
 
 def sigma(im,i,debug = False):
     """
