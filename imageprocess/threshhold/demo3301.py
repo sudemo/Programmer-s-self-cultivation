@@ -43,5 +43,21 @@ def fun1(arg):
 
     return fun3()
 
+def  add_end(L=[]):
+    L.append('END') # 这里已经添加了一个END
+    print(L)
+    return L
+def  add_end2(L=[]):
+    if L is not None:
+        L = []
+    L.append('END') # 这里已经添加了一个END
+    # print(L)
+    # return L
+
 if __name__ == "__main__":
-    print(fun1("ad"))
+    # print(fun1("ad"))
+    # print( add_end())
+    # print(add_end())
+    print(add_end2())
+    add_end2()
+    # print(help(add_end().__doc__))

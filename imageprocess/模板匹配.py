@@ -19,6 +19,7 @@ w,h =temp.shape[::-1]
 
 res  = cv2.matchTemplate(src,temp,cv2.TM_CCOEFF)
 min_val ,max_val,min_loc,max_loc = cv2.minMaxLoc(res)
+print(help(cv2.matchTemplate.__doc__))
 plt.subplot(131)
 plt.plot(res)
 plt.subplot(132)
