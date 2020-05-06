@@ -463,3 +463,9 @@ compile_commands.json
 /C#/solution/sqltool/sqltool/CSqliteWrapper.cs
 /C#/solution/sqltool/sqltool/ATSLog.cs
 /C#/practice/camera/OpenCvSharp3-AnyCPU.4.0.0.20181129/.signature.p7s
+*.csv
+*.xlsx
+*.xls
+*.bmp
+*.jpg
+*.png
