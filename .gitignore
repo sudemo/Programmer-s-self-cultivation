@@ -469,3 +469,4 @@ compile_commands.json
 *.bmp
 *.jpg
 *.png
+*.stash
