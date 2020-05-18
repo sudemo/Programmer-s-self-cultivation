@@ -9,3 +9,7 @@ void slotdemo::slotfunc()
 {
    qDebug()<<"chufa"<<endl;
 }
+void slotdemo::slotfunc(QString ss)
+{
+   qDebug()<<"chufa"<<ss;
+}

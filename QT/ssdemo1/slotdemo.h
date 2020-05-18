@@ -10,6 +10,7 @@ public:
     slotdemo();
 public slots:
     void slotfunc();
+    void slotfunc(QString);
 };
 
 #endif // SLOTDEMO_H

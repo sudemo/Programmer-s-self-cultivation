@@ -12,7 +12,7 @@ public:
     void senddd();
 signals:
     void value_changed();
-
+    void value_changed(QString );
 };
 
 #endif // SIGNALDEMO_H
