@@ -6,6 +6,7 @@
 class signaldemo:public QObject
 {
     Q_OBJECT
+        
 public:
     signaldemo();
     void senddd();

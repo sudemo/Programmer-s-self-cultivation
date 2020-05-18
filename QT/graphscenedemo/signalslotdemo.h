@@ -10,9 +10,11 @@ public:
     Newspaper(const QString & name):m_name(name){}//初始化参数 name
 
     void send();
-
+    void send_plus();
 signals:
-    void newPaper(const QString &name );
+
+    void newpaper();
+    void newPaper_plus(const QString &name );
 private:
     QString m_name;
 
@@ -23,10 +25,10 @@ class myReader:public QObject
 {
     Q_OBJECT
 public:
-//    myReader(){}
-    void receiveNewspaper(const QString &name);
 
-    myReader *rd ;
+    void receiveNewspaperWithparam(const QString &name);
+    void receive_new_paper();
+
 
 };
 

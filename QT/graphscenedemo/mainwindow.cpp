@@ -20,10 +20,15 @@ button->setVisible(true);
 connect(QPushButton,SIGNAL(pressed()),this,SLOT(onAction()));*/
 
 //my signal slot
-Newspaper np ("daily news");
-
-QObject::connect(&np,&Newspaper::newPaper,myReader::rd，&myReader::receiveNewspaper());
-np.send();
+QString ss ="new paper";
+//Newspaper np (ss);
+auto *np =new Newspaper(ss);
+auto *mr = new myReader() ;
+//QObject::connect(np,&Newspaper::newPaper,mr，&myReader::receiveNewspaper);
+//connect(np,&Newspaper::newpaper,mr,&myReader::receive_new_paper);
+connect(np,&Newspaper::newPaper_plus,mr,&myReader::receiveNewspaperWithparam);
+//np->send();
+np->send_plus();
 }
 
 
