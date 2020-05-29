@@ -49,7 +49,7 @@ namespace testmethod
             //DatamatrixEncodingOptions opt = new DatamatrixEncodingOptions();
             DataMatrixReader dm = new DataMatrixReader();          
             byte[] bmap = Bitmap2Byte(img);
-            LuminanceSource source = new RGBLuminanceSource(bitmap, bmap.Length, bmap.Length);
+            LuminanceSource source = new RGBLuminanceSource(bmap, bmap.Length, bmap.Length);
             //LuminanceSource source = new RGBLuminanceSource(bmap, bmap.Length, bmap.Length);
             BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
             //Result result;
@@ -117,7 +117,7 @@ namespace testmethod
             //Console.WriteLine("hist");
             //using (new Window("histimg", img)) ;
             Cv2.ImShow("hs",img);
-           // Cv2.WaitKey();
+           Cv2.WaitKey();
             Rangef[] rangefs = new Rangef[]
                                      {
                                         new Rangef(0, 256),
@@ -137,14 +137,14 @@ namespace testmethod
                 //                                                           
                 //Cv2.Line(histimg, new Point(img.Width/256*(i-1), img.Height - Math.Round(img.At<float>(i - 1))), new Point(img.Width / 256 * (i - 1), img.Height - Math.Round(img.At<float>(i))), Scalar.Black, 2);//把线画出来
             }
-            Cv2.ImShow("hist", histimg);
-            Cv2.WaitKey();
+           // Cv2.ImShow("hist", histimg);
+            //Cv2.WaitKey();
         }
 
         static void Main(string[] args)
         {
             Program a = new Program();
-            // a.testhist();
+           a.testhist();
             //a.datamatrix();
             //a.qrcode();
         }

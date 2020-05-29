@@ -2,7 +2,7 @@
 
 signaldemo::signaldemo()
 {
-
+qDebug()<<'a';
 }
 
 void signaldemo::senddd()
@@ -10,3 +10,4 @@ void signaldemo::senddd()
     emit value_changed();
     
 }
+
