@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>ColibriCloudTest</title>
     {% if latest_question_list %}
     <ul>
-    {% for question in latest_question_list %}
+    <center>{% for question in latest_question_list %}
 <!--        投票链接，硬编码-->
 <!--        <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>-->
     <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
 
-        {% endfor %}
+        {% endfor %}</center>
     </ul>
 {% else %}
     <p>No polls are available.</p>
