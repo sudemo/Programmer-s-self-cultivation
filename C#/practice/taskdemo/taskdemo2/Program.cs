@@ -102,12 +102,31 @@ namespace taskdemo2
             Thread.Sleep(50);
             Task t1 = new Task(() =>
              {
-                 tm t = new tm();
-                 t.taskmethod();
+                 tm t11 = new tm();
+                 t11.taskmethod();
              }
             );
             t1.Start();
-            Console.WriteLine("main");
+
+            new Task(async () =>
+            {
+                Console.WriteLine("Task t start 2");
+                await Task.Delay(1000);
+                Console.WriteLine("Task t end");
+            }).Start();
+
+            //t.Start();
+
+            Task.Run( () =>
+            {
+                Console.WriteLine("Anonymous task start 3");
+                //await t;
+                Console.WriteLine("Anonymous task end");
+            });
+
+            Thread.Sleep(1200);
+
+            Console.WriteLine("end");
             Console.ReadKey();
         }
 
@@ -118,7 +137,7 @@ namespace taskdemo2
         public void taskmethod()
         {
             Thread.Sleep(1000);
-            Console.WriteLine("task called");
+            Console.WriteLine("task called 1");
             Console.ReadKey();
         }
     }
