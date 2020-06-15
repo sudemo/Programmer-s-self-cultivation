@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>ColibriCloudTest</title>
+<!--        <a href="polls:results.html">W3School</a>-->
+
     {% if latest_question_list %}
     <ul>
     <center>{% for question in latest_question_list %}
 <!--        投票链接，硬编码-->
 <!--        <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>-->
     <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-
         {% endfor %}</center>
     </ul>
 {% else %}
