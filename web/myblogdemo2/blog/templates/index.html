@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="UTF-8">
+    <title>blog</title>
+
+
+</head>
+
+<!---->
+<body>
+{% if blog_list %}
+    <ul>
+    <center>{% for value in blog_list %}
+<!--        投票链接，硬编码-->
+    <p> <li><a href="/blog/{{ value.id}}/">{{ value.title }}</a></li></p>
+<!---->
+
+<!--{{value}}-->
+<!--{{blog_list}}-->
+        {% endfor %}</center>
+    </ul>
+{% else %}
+    <p>No polls are available.内容是{{context}}</p>
+{% endif %}
+</body>
+<!---->
+</html>

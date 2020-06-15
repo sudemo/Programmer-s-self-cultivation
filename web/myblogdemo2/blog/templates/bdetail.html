@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    {% for articles in article %}-->
+<!--    <h2>{{ articles.title }}</h2>-->
+<!--    <p>{{ Blog.content }}</p>-->
+
+<!--{% endfor %}-->
+</head>
+<body>
+<!--{{string1}}-->
+<!--{{sss}}-->
+<h1>{{ question.question_text }}</h1>
+<ul>
+{% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }}</li>
+{% endfor %}
+</ul>
+
+</body>
+</html>
