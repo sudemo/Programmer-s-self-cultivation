@@ -20,10 +20,10 @@ from blog import views as mviews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('1/', mviews.index),
+    path('1/', mviews.detail),
     # path('', mviews.blog_index, name='blog_index'),
     # url(r'^blog/', include('blog.urls',namespace='blog')),
     # path(r'^active/(?P<active_id>[0-9]+)$',)
-    # path('12/', mviews.blog_index),
-    path('blog/', include('blog.urls')),
+    path('12/', mviews.book_name),
+    path('blog/', include('blog.urls', namespace='blog')),
 ]

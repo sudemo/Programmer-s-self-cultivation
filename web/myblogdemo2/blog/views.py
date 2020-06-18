@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.shortcuts import render,get_object_or_404
-from blog.models import Blog
+from blog.models import Blog,Book
 from django.http import HttpResponse, Http404
 from django.template import loader
 
@@ -26,19 +26,28 @@ def index(arg):
     # return HttpResponse('1')
 def blog_index(arg):
     article_name = get_object_or_404(Blog,id=1)
+
     sss = 'hello neo'
-    return  render(arg,"bdetail.html",{"string1":sss})
+    return render(arg,"bdetail.html",{"string1":sss})
     # return  render(arg, "bdetail.html", {"article": article_name})
 
 
 def detail(req,article_id):
-    # article = Blog.objects.get(id=article_id)
+    #
     try:
-        article =get_object_or_404(Blog, id=article_id)
+        article = Blog.objects.get(id=article_id)
+        # article =get_object_or_404(Blog, id=article_id)
+        print('ekere')
         print(article)
-    except Blog.DoesNotExist:
+    # except Blog.DoesNotExist:
+    except Exception as ex:
+        print(ex,'1')
         raise Http404("source does not exist")
-    print(type(article),article)
-    content = Blog
+    # content = Blog
     return render(req, "bdetail.html",{"article": article})
     # return HttpResponse('1212')
+
+
+def  book_name(req):
+    book = Book.objects.all()
+    return HttpResponse('1')

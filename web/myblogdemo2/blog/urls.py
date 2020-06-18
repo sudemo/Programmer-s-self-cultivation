@@ -11,12 +11,12 @@ from . import views
 app_name = 'blog'  # 命名空间，防止url重名
 
 urlpatterns = [
-    url('1/',views.index),
-    url('12/',views.blog_index),
+    url('',views.index),
+    # url('12/',views.blog_index),
     # url('', views.detail),
     # url(r'^addUser/',views.add_user),
     # url(r'^show_index/',views.user),
     # url(r'^user_page/(?P<ids>[0-9]+)$',views.active_page,name='user_page'),  #ids匹配函数的参数 这样保证每个url都是可匹配到的
-    path('<int:article_id>', views.detail, name='detail'),
+    path('<int:article_id>/', views.detail, name='detail'),
     # path('<int:pk>/', views.detail, name='details'),
 ]

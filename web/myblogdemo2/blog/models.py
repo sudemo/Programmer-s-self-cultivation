@@ -10,6 +10,13 @@ class Blog(models.Model):
     content = models.TextField()
     # substract = content[:20]
 
-    def __str__(self):
-        # return "标题：{} 字数： {}，时间：{}，概要： {} ; ".format(self.title,len(self.content),self.creat_date, self.content[:20])
-        return  self.title
+    # def __str__(self):
+    #     # return "标题：{} 字数： {}，时间：{}，概要： {} ; ".format(self.title,len(self.content),self.creat_date, self.content[:20])
+    #     return  self.title
+
+class Book(models.Model):
+    book_name = models.CharField(max_length=200)
+    author = models.CharField(max_length=200)
+    publish_date =models.DateTimeField()
+    bref_content = models.TextField()
+
