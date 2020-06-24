@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Diagnostics;
 using PLCCommunicationKit.SocketBaseKit;
 using PLCCommunicationKit.Siemens;
+using System.Net;
 
 namespace PLCCommunicationKit
 {
@@ -15,22 +16,23 @@ namespace PLCCommunicationKit
         static byte[] aaa = new byte[] { 0x01};
         static void Main(string[] args)
         {
-            byte[] readcmdexam = new byte[] { 0x03, 0x00, 0x00, 0x1f, 0x02, 0xf0, 0x80, 0x32, 0x10, 0x00, 0x00, 0x00, 0x1c, 0x00, 0x0e, 0x00 };
-            
-            SiemensS7Net s7 = new SiemensS7Net();
+            // byte[] readcmdexam = new byte[] { 0x03, 0x00, 0x00, 0x1f, 0x02, 0xf0, 0x80, 0x32, 0x10, 0x00, 0x00, 0x00, 0x1c, 0x00, 0x0e, 0x00 };
+            string ip = "192.168.0.10";
+            SiemensS7Net s7 = new SiemensS7Net(SiemensType.S1200,ip);
             bool ret;
-            Logger.Infor("enter plc init");
+           // Logger.Infor("enter plc init");
             ret = s7.init_plc_Connect();
-            Logger.Infor("init plc ok");
+            //Logger.Infor("init plc ok");
             //s7.writeByteData(aaa, 2, 29, 1, 4);
             //s7.writeByteData(readcmdexam);
-            SocketBase.SocketSend(readcmdexam);
+            //SocketBase.SocketSend(readcmdexam);
             /*SocketBase.initSocketBase();
             byte[] ss = new byte[] { 0x01};
             SocketBase.SocketSend(ss);
             byte[] aa = SocketBase.SocketRec();
-            
-            //Console.ReadKey();*/
+            */
+            Console.WriteLine(ret);
+            Console.ReadKey();
 
             
 
