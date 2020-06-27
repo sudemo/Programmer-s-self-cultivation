@@ -12,8 +12,8 @@ namespace ConsoleApplicataion1
     {
         static void Main(string[] args)
         {
-            Test1.DoClickAsync();
-            Console.WriteLine("不等待异步方法，直接执行");
+           // Test1.DoClickAsync();
+           // Console.WriteLine("不等待异步方法，直接执行");
             Console.ReadKey();
         }
         public class Test1
