@@ -32,5 +32,5 @@ urlpatterns = [
     path('myblog/', myblogviews.index),
     url(r'^', include(router.urls)), #匹配字符串开头
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),  # 匹配其结尾
-    re_path(r'.*',myblogviews.index ),
+    re_path(r'.*',myblogviews.index),
 ]
