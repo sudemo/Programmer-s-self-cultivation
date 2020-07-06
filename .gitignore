@@ -470,3 +470,5 @@ compile_commands.json
 *.jpg
 *.png
 *.stash
+*.sqlite3
+*.db

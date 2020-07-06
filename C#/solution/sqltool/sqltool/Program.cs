@@ -27,7 +27,7 @@ namespace sqltoolkit
             cmd.Connection = conn;
             conn.Open();
 
-            SQLiteHelper sh = new SQLiteHelper(cmd);
+           // SQLiteHelper sh = new SQLiteHelper(cmd);
 
             // do something...
 
