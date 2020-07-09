@@ -5,6 +5,7 @@
 '''
 import datetime
 import time
+import numpy as np
 LEN = 10000
 # bytearray[][]
 # arr = new
@@ -26,5 +27,6 @@ for i in range(1000):
 
 s2 = time.process_time_ns()-s1
 print(s2)
-
+s3= np.array(multilist)
+print(s3.shape)
 #  结果一致
