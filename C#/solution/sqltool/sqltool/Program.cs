@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using nsCommoner;
 using System.Data.SQLite;
+using nsCommoner;
+
+
 namespace sqltoolkit
 {
     
@@ -32,7 +35,10 @@ namespace sqltoolkit
             // do something...
 
             conn.Close();
+            CSqliteWrapper cq = new CSqliteWrapper();
+            
 
+            ATSLog.Log_Db("start");
 
         }
     }
