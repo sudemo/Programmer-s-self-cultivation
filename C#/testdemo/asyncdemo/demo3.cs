@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Task_Delay
 {
     class Program
-    {
+    {/*
         static async Task Main(string[] args)
         {
             Simple ds = new Simple();
@@ -33,6 +33,6 @@ namespace Task_Delay
             Console.WriteLine("  Before Delay: {0}", sw.ElapsedMilliseconds);
              await Task.Delay(5000);      //执行到await表达式时，立即返回到调用方法，等待5秒后执行后续部分
             Console.WriteLine(" After Delay : {0} ", sw.ElapsedMilliseconds);//后续部分
-        }
+        }*/
     }
 }
