@@ -77,6 +77,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="autoconfirm.cs" />
     <Compile Include="demo2.cs" />
     <Compile Include="demo3.cs" />
     <Compile Include="Form1.cs">

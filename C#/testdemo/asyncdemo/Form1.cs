@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -8,6 +9,9 @@ namespace asyncdemo
     public partial class Form1 : Form
     {
         int i;
+      
+         Form f2 = new Form();
+
         public Form1()
         {
             InitializeComponent();
@@ -19,6 +23,7 @@ namespace asyncdemo
             //pictureBox1.Show();
             pictureBox2.Hide();
 
+
         }
 
 
@@ -26,7 +31,7 @@ namespace asyncdemo
         {
             if (status)
             {
-               // button1.ForeColor = Color.Gray;
+                // button1.ForeColor = Color.Gray;
             }
         }
 
@@ -34,21 +39,21 @@ namespace asyncdemo
         //private void button1_Click(object sender, EventArgs e)
         //{
         //    state = !state;//这里先把它转为true实现功能。当再次按下button时候，转化一下状态，就停止啦~~~
-        //    if (state)
+        //    if (state)
         //    {
         //        i = 0;
         //        timer1.Enabled = true;//计时器开始启动
-        //        button1.Text = "暂停";
+        //        button1.Text = "暂停";
         //    }
         //    else
         //    {
         //        timer1.Enabled = false;//计时器关闭
-        //        button1.Text = "开启";
+        //        button1.Text = "开启";
         //    }
         //}
 
 
-      
+
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             pictureBox2.Location = pictureBox1.Location;
@@ -95,22 +100,39 @@ namespace asyncdemo
             t.Start();
 
             int ii = 0;
-            await Task.Delay(100); 
+            await Task.Delay(100);
             for (int i = 0; i < 300; i++)
             {
                 System.Threading.Thread.Sleep(40);
                 Console.WriteLine("异步工作内容,Writing from callCount loop: " + i);
             }
             //Console.WriteLine("just before await");
-            return  "123";
-           
+            return "123";
+
             //Console.WriteLine("异步 马上结束callCount completed");
-            
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("hello");
+            timer1.Enabled = true;
+
+            if (f2 == null)
+            { f2 = new Form(); }
+           // MessageBox.Show(f2,"hello");
+            if (MessageBox.Show(f2,"are u sure?","tishi", MessageBoxButtons.OKCancel) ==DialogResult.OK)
+            {
+                ShowDialog();
+              //  MessageBox.Show(f2,"j");
+            }
         }
+
+
+        private void timer1_Tick_1(object sender, EventArgs e)
+        {
+           // f2.Close();
+        }
+        
+
     }
 }
