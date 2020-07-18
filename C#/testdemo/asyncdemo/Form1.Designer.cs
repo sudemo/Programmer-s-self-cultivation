@@ -58,6 +58,10 @@
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(103, 178);
