@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "multiprocessdemo", "multiprocessdemo.csproj", "{00FB2E94-CAFE-4DEE-89CB-078CA521C51A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketProcess", "..\SocketProcess\SocketProcess.csproj", "{3FC588D0-1808-4073-804D-3AC577E58C27}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{00FB2E94-CAFE-4DEE-89CB-078CA521C51A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00FB2E94-CAFE-4DEE-89CB-078CA521C51A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00FB2E94-CAFE-4DEE-89CB-078CA521C51A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00FB2E94-CAFE-4DEE-89CB-078CA521C51A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FC588D0-1808-4073-804D-3AC577E58C27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FC588D0-1808-4073-804D-3AC577E58C27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FC588D0-1808-4073-804D-3AC577E58C27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FC588D0-1808-4073-804D-3AC577E58C27}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A972FD73-B926-4C30-A117-0540E2132E04}
+	EndGlobalSection
+EndGlobal
