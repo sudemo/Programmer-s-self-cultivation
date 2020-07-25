@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "multithread", "multithread.csproj", "{B16E9452-1C7D-4062-BF24-1B9EE1AFD022}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B16E9452-1C7D-4062-BF24-1B9EE1AFD022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B16E9452-1C7D-4062-BF24-1B9EE1AFD022}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B16E9452-1C7D-4062-BF24-1B9EE1AFD022}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B16E9452-1C7D-4062-BF24-1B9EE1AFD022}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CF1F0ACA-2114-4C1A-9743-91C63DA78A7C}
+	EndGlobalSection
+EndGlobal
