@@ -1,4 +1,5 @@
-﻿using System;
+﻿using logbaseQuene;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.IO.Pipes;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,8 +24,49 @@ namespace multiprocessdemo
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+            init();
         }
+
+        // 初始化管道和启动进程的参数
+        public void init()
+        {
+
+            process1.StartInfo.FileName = "SocketProcess.exe";
+            process1.StartInfo.Arguments = "hello";
+            process1.StartInfo.UseShellExecute = false;
+            process1.StartInfo.CreateNoWindow = true;
+            process1.StartInfo.RedirectStandardOutput = true;
+            //process1.StartInfo();
+            //ProcessStartInfo ps = new ProcessStartInfo();
+
+
+           
+
+
+            //try
+            //{
+            //    pipeServer.WaitForConnection();
+            //    string test;
+            //    sw.WriteLine("Waiting");
+            //    sw.Flush();
+            //    pipeServer.WaitForPipeDrain();
+            //    test = sr.ReadLine();
+            //    Console.WriteLine(test);
+            //}
+
+            //catch (Exception ex) { throw ex; }
+
+            //finally
+            //{
+            //    pipeServer.WaitForPipeDrain();
+            //    if (pipeServer.IsConnected) { pipeServer.Disconnect(); }
+            //}
+
+
+        }
+
+
+
         private void button1_Click(object sender, EventArgs e)
         {
             //启动一个新的socket进程
@@ -33,7 +76,7 @@ namespace multiprocessdemo
             startInfo.UseShellExecute = false;
             // Process.Start(startInfo);
 
-            startInfo.Arguments = "127.0.0.1";
+            //startInfo.Arguments = "127.0.0.1";
 
             Process.Start(startInfo);
         }
@@ -45,7 +88,7 @@ namespace multiprocessdemo
             Process piClient = new Process();
 
             piClient.StartInfo.FileName = "SocketProcess.exe";
-            piClient.StartInfo.Arguments = "2";
+
             using (AnonymousPipeServerStream pipeServer =
                 new AnonymousPipeServerStream(PipeDirection.Out,
                 HandleInheritability.Inheritable))
@@ -55,14 +98,68 @@ namespace multiprocessdemo
 
                 // Pass the client process a handle to the server.
                 piClient.StartInfo.Arguments =
-                    pipeServer.GetClientHandleAsString();
+                    pipeServer.GetClientHandleAsString() + "  ssss";
+                // 如果 UserName 属性不为 空引用（在 Visual Basic 中为 Nothing） 或不是一个空字符串，
+                // 则 UseShellExecute 必须为 false，否则调用Process.Start(ProcessStartInfo) 
+                // 方法时将引发 InvalidOperationException。
                 piClient.StartInfo.UseShellExecute = false;
+                piClient.StartInfo.CreateNoWindow = true;
+                //piClient.StartInfo.RedirectStandardInput = true;
+                //piClient.StartInfo.RedirectStandardOutput = true;
+
                 piClient.Start();
 
                 pipeServer.DisposeLocalCopyOfClientHandle();
-
+                try
+                {
+                    // Read user input and send that to the client process.
+                    using (StreamWriter sw = new StreamWriter(pipeServer))
+                    {
+                        sw.AutoFlush = true;
+                        // Send a 'sync message' and wait for client to receive it.
+                        sw.WriteLine("SYNC");
+                        pipeServer.WaitForPipeDrain();
+                        // Send the console input to the client process.
+                        Console.Write("[SERVER] Enter text: ");
+                        sw.WriteLine(Console.ReadLine());
+                    }
+                }
+                // Catch the IOException that is raised if the pipe is broken
+                // or disconnected.
+                catch (IOException ex)
+                {
+                    Console.WriteLine("[SERVER] Error: {0}", ex.Message);
+                }
             }
+
+            piClient.WaitForExit();
+
+            piClient.Close();
+            Console.WriteLine("[SERVER] Client quit. Server terminating.");
+
+        }
+
+        private void process1_Exited(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        { //不能多次点击
+            process1.Start();
+
+            var pipeServer = new NamedPipeServerStream("testpipe", PipeDirection.InOut, 4);
+
+            StreamReader sr = new StreamReader(pipeServer);
+            StreamWriter sw = new StreamWriter(pipeServer);
+            pipeServer.WaitForConnection();
+            //string t= sr.ReadLine();
+            bool res = pipeServer.IsConnected;
+            Logger2.Infor(res.ToString());
+            richTextBox1.Text = res.ToString();
+
 
         }
     }
 }
+
