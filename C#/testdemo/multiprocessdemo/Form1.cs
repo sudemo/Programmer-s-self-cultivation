@@ -25,6 +25,7 @@ namespace multiprocessdemo
         private void Form1_Load(object sender, EventArgs e)
         {
             init();
+
         }
 
         // 初始化管道和启动进程的参数
@@ -34,15 +35,10 @@ namespace multiprocessdemo
             process1.StartInfo.FileName = "SocketProcess.exe";
             process1.StartInfo.Arguments = "hello";
             process1.StartInfo.UseShellExecute = false;
-            process1.StartInfo.CreateNoWindow = true;
-            process1.StartInfo.RedirectStandardOutput = true;
+            process1.StartInfo.CreateNoWindow = false;
+            process1.StartInfo.RedirectStandardOutput = false;
             //process1.StartInfo();
             //ProcessStartInfo ps = new ProcessStartInfo();
-
-
-           
-
-
             //try
             //{
             //    pipeServer.WaitForConnection();
@@ -61,11 +57,37 @@ namespace multiprocessdemo
             //    pipeServer.WaitForPipeDrain();
             //    if (pipeServer.IsConnected) { pipeServer.Disconnect(); }
             //}
-
-
         }
 
+        public void　initPipe()
+        {
+            var pipeServer = new NamedPipeServerStream("testpipe", PipeDirection.InOut, 4);
 
+            StreamReader sr = new StreamReader(pipeServer);
+            StreamWriter sw = new StreamWriter(pipeServer);
+
+            Task taskPipe = Task.Run(() => pipeServer.WaitForConnection());
+            //Task taskPipe1 = new Task(() => pipeServer.WaitForConnection());   taskPipe1.Start();
+
+            //string t= sr.ReadLine();
+            bool res = pipeServer.IsConnected;
+            Logger2.Infor(res.ToString());
+            richTextBox1.Text = res.ToString();
+        }
+
+        public bool check_process_status()
+        {
+            Process[] plist = Process.GetProcessesByName("SocketProcess.exe");
+            if (plist.Length == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -146,19 +168,25 @@ namespace multiprocessdemo
 
         private void button3_Click(object sender, EventArgs e)
         { //不能多次点击
-            process1.Start();
+            if (!check_process_status())
+            {
+                process1.Start();
+            }
+        }
 
-            var pipeServer = new NamedPipeServerStream("testpipe", PipeDirection.InOut, 4);
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (check_process_status())
+            { process1.Kill(); }
+        }
 
-            StreamReader sr = new StreamReader(pipeServer);
-            StreamWriter sw = new StreamWriter(pipeServer);
-            pipeServer.WaitForConnection();
-            //string t= sr.ReadLine();
-            bool res = pipeServer.IsConnected;
-            Logger2.Infor(res.ToString());
-            richTextBox1.Text = res.ToString();
-
-
+        private void button5_Click(object sender, EventArgs e)
+        {
+            var s=Math.Round(53.3012619227981, 2);
+            
+            Random sss = new Random(Convert.ToInt32( DateTime.Today.Day));
+            
+            richTextBox1.Text = sss.NextDouble().ToString();
         }
     }
 }
