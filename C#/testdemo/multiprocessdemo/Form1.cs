@@ -183,10 +183,15 @@ namespace multiprocessdemo
         private void button5_Click(object sender, EventArgs e)
         {
             var s=Math.Round(53.3012619227981, 2);
-            
-            Random sss = new Random(Convert.ToInt32( DateTime.Today.Day));
-            
-            richTextBox1.Text = sss.NextDouble().ToString();
+
+            //Random sss = new Random(Convert.ToInt32( DateTime.Today.Day));
+
+            double punchingRadius = 51.9290909090909;
+            punchingRadius = Math.Round(punchingRadius,2);
+            var sss = Convert.ToDouble(punchingRadius.ToString().Split('.')[1])/200;
+
+
+            richTextBox1.Text = sss.ToString();
         }
     }
 }
