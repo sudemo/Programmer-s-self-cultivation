@@ -10,6 +10,7 @@ using System.IO.Pipes;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,6 +18,7 @@ namespace multiprocessdemo
 {
     public partial class Form1 : Form
     {
+        bool enable = true;
         public Form1()
         {
             InitializeComponent();
@@ -37,6 +39,7 @@ namespace multiprocessdemo
             process1.StartInfo.UseShellExecute = false;
             process1.StartInfo.CreateNoWindow = false;
             process1.StartInfo.RedirectStandardOutput = false;
+            #region MyRegion
             //process1.StartInfo();
             //ProcessStartInfo ps = new ProcessStartInfo();
             //try
@@ -56,7 +59,8 @@ namespace multiprocessdemo
             //{
             //    pipeServer.WaitForPipeDrain();
             //    if (pipeServer.IsConnected) { pipeServer.Disconnect(); }
-            //}
+            //} 
+            #endregion
         }
 
         public void　initPipe()
@@ -65,14 +69,31 @@ namespace multiprocessdemo
 
             StreamReader sr = new StreamReader(pipeServer);
             StreamWriter sw = new StreamWriter(pipeServer);
-
-            Task taskPipe = Task.Run(() => pipeServer.WaitForConnection());
+            pipeServer.WaitForConnection();
+            //Task taskPipe = Task.Run(() => pipeServer.WaitForConnection());
             //Task taskPipe1 = new Task(() => pipeServer.WaitForConnection());   taskPipe1.Start();
 
             //string t= sr.ReadLine();
             bool res = pipeServer.IsConnected;
             Logger2.Infor(res.ToString());
             richTextBox1.Text = res.ToString();
+            //Task taskPipe = Task.Run(() => pipeServer.WaitForConnection());
+            //Task taskPipe1 = new Task(() => pipeServer.WaitForConnection());
+            
+            while (true)
+            {
+                Thread.Sleep(100);
+                string t= sr.ReadLine();
+                
+                this.Invoke(new Action(() =>
+                {
+                    // richTextBox1.Text.Append<string>(string t.ToString());
+                    richTextBox1.AppendText(t);
+                }));
+
+            }
+            //Task<string> t1 = new Task(sr.ReadLine());
+
         }
 
         public bool check_process_status()
@@ -100,7 +121,7 @@ namespace multiprocessdemo
 
             //startInfo.Arguments = "127.0.0.1";
 
-            Process.Start(startInfo);
+            // Process.Start(startInfo);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -160,6 +181,7 @@ namespace multiprocessdemo
             Console.WriteLine("[SERVER] Client quit. Server terminating.");
 
         }
+        
 
         private void process1_Exited(object sender, EventArgs e)
         {
@@ -168,16 +190,42 @@ namespace multiprocessdemo
 
         private void button3_Click(object sender, EventArgs e)
         { //不能多次点击
-            if (!check_process_status())
+            //open pro
+            if (button3.Enabled && !check_process_status())
             {
                 process1.Start();
+                initPipe();
+                this.Invoke(new Action(() =>
+                {
+                    button3.Enabled = enable;
+                    pictureBox1.Visible = enable;
+                    pictureBox2.Visible = !enable;
+                }));
+            }
+            else
+            {
+                button3.Enabled = true;
             }
         }
 
         private void button4_Click(object sender, EventArgs e)
-        {
+        { //end process
+            button3.Enabled = true;
             if (check_process_status())
-            { process1.Kill(); }
+            { 
+                process1.Kill();
+                //process1.Close(); //只是用来清理托管资源，不负责退出程序
+            }
+            if (!check_process_status())
+            {
+
+                this.Invoke(new Action(() =>
+                {
+                    pictureBox1.Visible = enable;
+                    pictureBox2.Visible = !enable;
+                }));               
+            }
+
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -192,6 +240,11 @@ namespace multiprocessdemo
 
 
             richTextBox1.Text = sss.ToString();
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
