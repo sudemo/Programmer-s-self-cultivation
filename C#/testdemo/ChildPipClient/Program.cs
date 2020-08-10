@@ -6,12 +6,13 @@ using System.Threading;
 using System.Threading.Tasks;
 
 class PipeClient
+
 {
     public static NamedPipeClientStream pipeClient;
     static void Main(string[] args)
     {
 
-        PipeClient1.client();
+        PipeClient1.Client();
 
         // NewMethod();
         Thread pipeThread = new Thread(new ThreadStart(SendData));

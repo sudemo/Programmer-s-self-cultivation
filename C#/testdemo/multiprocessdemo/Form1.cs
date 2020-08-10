@@ -65,20 +65,15 @@ namespace multiprocessdemo
 
         public void　initPipe()
         {
-            var pipeServer = new NamedPipeServerStream("testpipe", PipeDirection.InOut, 4);
+            var pipeServer = new NamedPipeServerStream("testpipe", PipeDirection.InOut, 2);
 
             StreamReader sr = new StreamReader(pipeServer);
             StreamWriter sw = new StreamWriter(pipeServer);
             pipeServer.WaitForConnection();
-            //Task taskPipe = Task.Run(() => pipeServer.WaitForConnection());
-            //Task taskPipe1 = new Task(() => pipeServer.WaitForConnection());   taskPipe1.Start();
 
-            //string t= sr.ReadLine();
             bool res = pipeServer.IsConnected;
             Logger2.Infor(res.ToString());
-            richTextBox1.Text = res.ToString();
-            //Task taskPipe = Task.Run(() => pipeServer.WaitForConnection());
-            //Task taskPipe1 = new Task(() => pipeServer.WaitForConnection());
+            richTextBox1.AppendText(res.ToString()+DateTime.Now +"/n");
             
             while (true)
             {
@@ -87,12 +82,10 @@ namespace multiprocessdemo
                 
                 this.Invoke(new Action(() =>
                 {
-                    // richTextBox1.Text.Append<string>(string t.ToString());
-                    richTextBox1.AppendText(t);
+                    richTextBox1.AppendText(t + DateTime.Now + "/n");
                 }));
 
             }
-            //Task<string> t1 = new Task(sr.ReadLine());
 
         }
 

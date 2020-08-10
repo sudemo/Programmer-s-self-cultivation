@@ -15,7 +15,10 @@ namespace multithread
             Thread th = new Thread(outy);
             th.Name = "th tthread";
             th.Start();
-            
+            Thread th2 = new Thread(outz);
+            th2.Name = "th2 tthread";
+            th2.Start();
+
             Console.WriteLine(Thread.CurrentThread.Name);
             for (int i = 0; i < 1000; i++)
             {
@@ -31,6 +34,14 @@ namespace multithread
             for (int i = 0; i < 1000; i++)
             {
                 Console.Write("y"); 
+            }
+        }
+        static void outz()
+        {
+            Console.WriteLine(Thread.CurrentThread.Name);
+            for (int i = 0; i < 1000; i++)
+            {
+                Console.Write("z");
             }
         }
     }

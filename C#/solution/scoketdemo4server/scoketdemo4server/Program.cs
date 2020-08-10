@@ -29,14 +29,14 @@ namespace scoketdemo4server
 
                 Thread thread1 = new Thread(sendmsg);
                 thread1.IsBackground = true;
-                thread1.Start(server);
+                thread1.Start(server); //带一个对象参数
                 Console.WriteLine("start thread1 {0}", thread1.Name);
             }
             
         }
 
 
-        public static void recvmsg(object i)
+        public static void recvmsg(object i) 
         {
             var server = i as Socket;
             while (true)
@@ -100,7 +100,7 @@ namespace scoketdemo4server
             Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             //IPAddress ip = IPAddress.Any;
             IPAddress ip = IPAddress.Parse("127.0.0.1");
-            IPEndPoint port = new IPEndPoint(ip,102);
+            IPEndPoint port = new IPEndPoint(ip,10200);
             //bind
             server.Bind(port);
             Console.WriteLine("listen success");
