@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="demo1.cs" />
+    <Compile Include="namepipe.cs" />
     <Compile Include="parent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

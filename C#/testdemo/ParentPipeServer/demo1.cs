@@ -2,29 +2,32 @@
 using System.Dynamic;
 using System.IO;
 using System.IO.Pipes;
+using System.Text;
 using System.Threading;
 
 class PipeServer1
 {
 
-    public static readonly NamedPipeServerStream SpipeServer;
+    public static NamedPipeServerStream ParentPipeServer;
+    public static NamedPipeClientStream ParentPipeClient;
+
     public static StreamWriter sw;
     public static StreamReader sr;
-    
+
     static object locker = new object();
     public static NamedPipeServerStream getins()
     {
 
-        if (SpipeServer == null)
+        if (ParentPipeServer == null)
             lock (locker)
             {
-                if (SpipeServer == null)
-                { 
-                    return new NamedPipeServerStream("testpipe", PipeDirection.InOut,2);
+                if (ParentPipeServer == null)
+                {
+                    return new NamedPipeServerStream("pip1", PipeDirection.Out);
                 }
             }
 
-         return SpipeServer;
+        return ParentPipeServer;
 
     }
 
@@ -54,9 +57,9 @@ class PipeServer1
                 sw.AutoFlush = true;
                 Console.Write("Enter text: ");
                 sw.WriteLine(Console.ReadLine());
-                
-                
-                
+
+
+
                 string s = sr.ReadLine();
                 if (s != null)
                 {
@@ -75,43 +78,37 @@ class PipeServer1
     }
 
 
-    public static void SendTH()
+    public static void SendTH(object p)
     {
-        var pserv = getins();
-        Console.WriteLine("NamedPipeServerStream object created.");
-        // Wait for a client to connect
-        Console.Write("Waiting for client connection...");
-        pserv.WaitForConnection();
-        Console.WriteLine("Client connected.");
+        var pserv = p as NamedPipeServerStream;
+        Console.WriteLine("enter send thread");
+
         sw = new StreamWriter(pserv);
-        //sr = new StreamReader(pipeServer);
 
         while (true)
         {
-            Thread.Sleep(100);
+            Thread.Sleep(1000);
             try
             {
-                // Read user input and send that to the client process.
 
+                //Console.Write("Rec text: ");
+                //sw.WriteLine("hllllleo");
+                for (int i = 0; i < 20; i++)
 
-               // sw.AutoFlush = true;
-               // Console.Write("Enter text: ");
-                sw.WriteLine("hllllleo");
-                sw.Flush();
-                //string s = sr.ReadLine();
-                //if (s != null)
-                //{
-                //    Console.WriteLine("receive from client:" + s);
-                //}
-            
+                {
+                    sw.WriteLine(i);
+                    sw.Flush();
+                    pserv.WaitForPipeDrain();
+
+                }
+
             }
-            // Catch the IOException that is raised if the pipe is broken
-            // or disconnected.
+
             catch (IOException e)
             {
                 Console.WriteLine("ERROR: {0}", e.Message);
                 pserv.Close();
-                sw.Close();
+                //sw.Close();
                 pserv.Dispose();
                 break;
             }
@@ -119,42 +116,99 @@ class PipeServer1
 
     }
 
-    public static void RexTH()
+    public static void RexTH(object p)
     {
+        //var pserv = p as NamedPipeServerStream;
+        var pcl = p as NamedPipeClientStream;
+        Console.WriteLine("enter receive thread");
 
-        var pserv = getins();
 
-        Console.WriteLine("NamedPipeServerStream object created.");
-        // Wait for a client to connect
-        Console.Write("Waiting for client connection...");
-        pserv.WaitForConnection();
-        Console.WriteLine("Client connected.");
-       // sw = new StreamWriter(pipeServer);
-        sr = new StreamReader(pserv);
+        // sw = new StreamWriter(pipeServer);
+        sr = new StreamReader(pcl);
+
 
         while (true)
         {
             try
             {
-                // Read user input and send that to the client process.
 
-
-             //   sw.AutoFlush = true;
-             //   Console.Write("Enter text: ");
-             //   sw.WriteLine(Console.ReadLine());
+                //Thread.Sleep(1000);
                 string s = sr.ReadLine();
                 if (s != null)
                 {
-                    Console.WriteLine("receive from client:" + s);
+
+                    Console.WriteLine(" rec {0} ", s);
+
                 }
+
             }
+
             // Catch the IOException that is raised if the pipe is broken
             // or disconnected.
-            catch (IOException e)
+            //catch (IOException e)
+            //{
+            //    Console.WriteLine("ERROR: {0}", e.Message);
+            //    break;
+            //}
+            catch (Exception e1)
             {
-                Console.WriteLine("ERROR: {0}", e.Message);
+                Console.WriteLine(e1.Message);
                 break;
             }
         }
+        Console.Write("Press Enter to continue...");
+        Console.ReadLine();
     }
+
+}
+
+class DuplePipe
+{
+
+    public static NamedPipeServerStream nps;
+    public static NamedPipeClientStream npc;
+
+    public static StreamWriter nsw;
+    public static StreamReader nsr;
+    public static void dupledemo()
+    {
+         npc = new NamedPipeClientStream(".", "npc", PipeDirection.In);
+         nps = new NamedPipeServerStream("nps", PipeDirection.Out);
+         nsr = new StreamReader(npc);
+         nsw = new StreamWriter(nps);
+        npc.Connect();
+        nps.WaitForConnection();
+        Console.WriteLine(npc.IsConnected.ToString()+ nps.IsConnected.ToString());
+    }
+
+    public static void  ReadData()
+    {
+        //Console.WriteLine
+        while (true)
+        {
+            Thread.Sleep(100);
+            string ss = nsr.ReadLine();
+            if(ss!=null) { Console.WriteLine(ss);  }
+            Console.WriteLine("waiting..");
+            continue;
+        }
+    }
+    public static void SendData()
+    {
+        nsw.AutoFlush = true;
+        //Console.WriteLine
+        //while (true)
+        //{
+        //    Thread.Sleep(100);
+        //    string ss = nsr.ReadLine();
+        //    if (ss != null) { Console.WriteLine(ss); }
+        //}
+        for (int i = 0; i < 15; i++)  
+        {
+            nsw.WriteLine("hello"+i.ToString());
+            nps.WaitForPipeDrain();
+        }
+
+    }
+
 }
