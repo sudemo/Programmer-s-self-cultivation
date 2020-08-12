@@ -37,12 +37,12 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.GreypictureBox1 = new System.Windows.Forms.PictureBox();
+            this.GreenpictureBox2 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GreypictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GreenpictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // button2
@@ -119,28 +119,28 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // pictureBox1
+            // GreypictureBox1
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(746, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(42, 49);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 8;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.BindingContextChanged += new System.EventHandler(this.button1_Click);
+            this.GreypictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("GreypictureBox1.Image")));
+            this.GreypictureBox1.Location = new System.Drawing.Point(746, 12);
+            this.GreypictureBox1.Name = "GreypictureBox1";
+            this.GreypictureBox1.Size = new System.Drawing.Size(42, 49);
+            this.GreypictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.GreypictureBox1.TabIndex = 8;
+            this.GreypictureBox1.TabStop = false;
+            this.GreypictureBox1.BindingContextChanged += new System.EventHandler(this.button1_Click);
             // 
-            // pictureBox2
+            // GreenpictureBox2
             // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(657, 12);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(51, 49);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 9;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Visible = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            this.GreenpictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("GreenpictureBox2.Image")));
+            this.GreenpictureBox2.Location = new System.Drawing.Point(657, 12);
+            this.GreenpictureBox2.Name = "GreenpictureBox2";
+            this.GreenpictureBox2.Size = new System.Drawing.Size(51, 49);
+            this.GreenpictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.GreenpictureBox2.TabIndex = 9;
+            this.GreenpictureBox2.TabStop = false;
+            this.GreenpictureBox2.Visible = false;
+            this.GreenpictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // button1
             // 
@@ -158,8 +158,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.GreenpictureBox2);
+            this.Controls.Add(this.GreypictureBox1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -173,8 +173,8 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GreypictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GreenpictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -188,8 +188,8 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox GreypictureBox1;
+        private System.Windows.Forms.PictureBox GreenpictureBox2;
         private System.Windows.Forms.Button button1;
     }
 }

@@ -152,7 +152,7 @@ namespace logbaseQuene
                 string format = "yyyy-MM-dd'.log'";
                 _timeSign = new DateTime(now.Year, now.Month, now.Day);
                 _timeSign = _timeSign.AddDays(1);
-                format = "ParentTH" + format;   //修改日志名字
+                format = "父进程" + format;   //修改日志名字
                 return now.ToString(format);
             }
 

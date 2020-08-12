@@ -18,6 +18,9 @@ namespace multiprocessdemo
 {
     public partial class Form1 : Form
     {
+
+        private StreamReader sr;
+        private StreamWriter sw;
         bool enable = true;
         public Form1()
         {
@@ -44,11 +47,11 @@ namespace multiprocessdemo
             //ProcessStartInfo ps = new ProcessStartInfo();
             //try
             //{
-            //    pipeServer.WaitForConnection();
+            //    PipeServer.WaitForConnection();
             //    string test;
             //    sw.WriteLine("Waiting");
             //    sw.Flush();
-            //    pipeServer.WaitForPipeDrain();
+            //    PipeServer.WaitForPipeDrain();
             //    test = sr.ReadLine();
             //    Console.WriteLine(test);
             //}
@@ -57,41 +60,78 @@ namespace multiprocessdemo
 
             //finally
             //{
-            //    pipeServer.WaitForPipeDrain();
-            //    if (pipeServer.IsConnected) { pipeServer.Disconnect(); }
+            //    PipeServer.WaitForPipeDrain();
+            //    if (PipeServer.IsConnected) { PipeServer.Disconnect(); }
             //} 
             #endregion
         }
 
-        public void　initPipe()
+        public void initPipe()
         {
-            var pipeServer = new NamedPipeServerStream("testpipe", PipeDirection.InOut, 2);
+            try
 
-            StreamReader sr = new StreamReader(pipeServer);
-            StreamWriter sw = new StreamWriter(pipeServer);
-            pipeServer.WaitForConnection();
-
-            bool res = pipeServer.IsConnected;
-            Logger2.Infor(res.ToString());
-            richTextBox1.AppendText(res.ToString()+DateTime.Now +"/n");
-            
-            while (true)
             {
-                Thread.Sleep(100);
-                string t= sr.ReadLine();
-                
+
+
+                var PipeServer = new NamedPipeServerStream("np1", PipeDirection.Out);
+                var PipeChild = new NamedPipeClientStream(".", "np2", PipeDirection.In);
+                 sr = new StreamReader(PipeChild);
+                 sw = new StreamWriter(PipeServer);
+
+
+                PipeServer.WaitForConnection();
+                PipeChild.Connect();
+
+
+                bool res = PipeServer.IsConnected;
+                Logger2.Infor("pipe连接结果：" + res.ToString());
                 this.Invoke(new Action(() =>
                 {
-                    richTextBox1.AppendText(t + DateTime.Now + "/n");
+                    richTextBox1.AppendText(res.ToString() + DateTime.Now + "\n");
                 }));
+                string temp;
+                while ((temp = sr.ReadLine()) != null)
+                {
+                    // Thread.Sleep(100);
+                    //string t= ;
 
+                    this.Invoke(new Action(() =>
+                    {
+                        richTextBox1.AppendText(temp + DateTime.Now + "\n");
+                    }));
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
             }
 
         }
 
         public bool check_process_status()
         {
-            Process[] plist = Process.GetProcessesByName("SocketProcess.exe");
+            //为什么有时候带.exe有时候不带》》就是不带的
+
+            Process[] plist = Process.GetProcessesByName("SocketProcess");
+            if (plist.Length > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        /// <summary>
+        /// ProcessName = "1.exe"
+        /// </summary>
+        /// <param name="ProcessName"></param>
+        /// <returns></returns>
+        public bool check_process_status(string ProcessName)  //
+        {
+            Process[] plist = Process.GetProcessesByName(ProcessName);
             if (plist.Length == 1)
             {
                 return true;
@@ -100,7 +140,7 @@ namespace multiprocessdemo
             {
                 return false;
             }
-            
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -119,62 +159,74 @@ namespace multiprocessdemo
 
         private void button2_Click(object sender, EventArgs e)
         {
-
-
-            Process piClient = new Process();
-
-            piClient.StartInfo.FileName = "SocketProcess.exe";
-
-            using (AnonymousPipeServerStream pipeServer =
-                new AnonymousPipeServerStream(PipeDirection.Out,
-                HandleInheritability.Inheritable))
+            MessageBox.Show((check_process_status()).ToString());
+            Process[] plist = Process.GetProcessesByName("SocketProcess");
+            if (plist.Length == 1)
             {
-                Console.WriteLine("[SERVER] Current TransmissionMode: {0}.",
-                    pipeServer.TransmissionMode);
-
-                // Pass the client process a handle to the server.
-                piClient.StartInfo.Arguments =
-                    pipeServer.GetClientHandleAsString() + "  ssss";
-                // 如果 UserName 属性不为 空引用（在 Visual Basic 中为 Nothing） 或不是一个空字符串，
-                // 则 UseShellExecute 必须为 false，否则调用Process.Start(ProcessStartInfo) 
-                // 方法时将引发 InvalidOperationException。
-                piClient.StartInfo.UseShellExecute = false;
-                piClient.StartInfo.CreateNoWindow = true;
-                //piClient.StartInfo.RedirectStandardInput = true;
-                //piClient.StartInfo.RedirectStandardOutput = true;
-
-                piClient.Start();
-
-                pipeServer.DisposeLocalCopyOfClientHandle();
-                try
+                foreach (var p in plist)
                 {
-                    // Read user input and send that to the client process.
-                    using (StreamWriter sw = new StreamWriter(pipeServer))
-                    {
-                        sw.AutoFlush = true;
-                        // Send a 'sync message' and wait for client to receive it.
-                        sw.WriteLine("SYNC");
-                        pipeServer.WaitForPipeDrain();
-                        // Send the console input to the client process.
-                        Console.Write("[SERVER] Enter text: ");
-                        sw.WriteLine(Console.ReadLine());
-                    }
-                }
-                // Catch the IOException that is raised if the pipe is broken
-                // or disconnected.
-                catch (IOException ex)
-                {
-                    Console.WriteLine("[SERVER] Error: {0}", ex.Message);
+                    p.Kill();
+                    Console.WriteLine(p.HasExited);
                 }
             }
 
-            piClient.WaitForExit();
+            MessageBox.Show((check_process_status()).ToString());
+            #region MyRegion
+            //Process piClient = new Process();
 
-            piClient.Close();
-            Console.WriteLine("[SERVER] Client quit. Server terminating.");
+            //piClient.StartInfo.FileName = "SocketProcess.exe";
+
+            //using (AnonymousPipeServerStream pipeServer =
+            //    new AnonymousPipeServerStream(PipeDirection.Out,
+            //    HandleInheritability.Inheritable))
+            //{
+            //    Console.WriteLine("[SERVER] Current TransmissionMode: {0}.",
+            //        pipeServer.TransmissionMode);
+
+            //    // Pass the client process a handle to the server.
+            //    piClient.StartInfo.Arguments =
+            //        pipeServer.GetClientHandleAsString() + "  ssss";
+            //    // 如果 UserName 属性不为 空引用（在 Visual Basic 中为 Nothing） 或不是一个空字符串，
+            //    // 则 UseShellExecute 必须为 false，否则调用Process.Start(ProcessStartInfo) 
+            //    // 方法时将引发 InvalidOperationException。
+            //    piClient.StartInfo.UseShellExecute = false;
+            //    piClient.StartInfo.CreateNoWindow = true;
+            //    //piClient.StartInfo.RedirectStandardInput = true;
+            //    //piClient.StartInfo.RedirectStandardOutput = true;
+
+            //    piClient.Start();
+
+            //    pipeServer.DisposeLocalCopyOfClientHandle();
+            //    try
+            //    {
+            //        // Read user input and send that to the client process.
+            //        using (StreamWriter sw = new StreamWriter(pipeServer))
+            //        {
+            //            sw.AutoFlush = true;
+            //            // Send a 'sync message' and wait for client to receive it.
+            //            sw.WriteLine("SYNC");
+            //            pipeServer.WaitForPipeDrain();
+            //            // Send the console input to the client process.
+            //            Console.Write("[SERVER] Enter text: ");
+            //            sw.WriteLine(Console.ReadLine());
+            //        }
+            //    }
+            //    // Catch the IOException that is raised if the pipe is broken
+            //    // or disconnected.
+            //    catch (IOException ex)
+            //    {
+            //        Console.WriteLine("[SERVER] Error: {0}", ex.Message);
+            //    }
+            //}
+
+            //piClient.WaitForExit();
+
+            //piClient.Close();
+            //Console.WriteLine("[SERVER] Client quit. Server terminating."); 
+            #endregion
 
         }
-        
+
 
         private void process1_Exited(object sender, EventArgs e)
         {
@@ -187,13 +239,13 @@ namespace multiprocessdemo
             if (button3.Enabled && !check_process_status())
             {
                 process1.Start();
-                initPipe();
-                this.Invoke(new Action(() =>
-                {
-                    button3.Enabled = enable;
-                    pictureBox1.Visible = enable;
-                    pictureBox2.Visible = !enable;
-                }));
+                new Task(() =>
+                initPipe()).Start();
+
+                button3.Enabled = !enable;
+                GreypictureBox1.Hide();
+                GreenpictureBox2.Show();
+
             }
             else
             {
@@ -203,33 +255,40 @@ namespace multiprocessdemo
 
         private void button4_Click(object sender, EventArgs e)
         { //end process
-            button3.Enabled = true;
+            
+            //string ss = process1.ProcessName;
             if (check_process_status())
-            { 
-                process1.Kill();
-                //process1.Close(); //只是用来清理托管资源，不负责退出程序
-            }
-            if (!check_process_status())
-            {
 
-                this.Invoke(new Action(() =>
-                {
-                    pictureBox1.Visible = enable;
-                    pictureBox2.Visible = !enable;
-                }));               
+            {
+                //process1.Close(); //只是用来清理托管资源，不负责退出程序
+                process1.Kill();
+                process1.Close(); //只是用来清理托管资源，不负责退出程序
+                sw.Close();
+                sr.Close();
+                
             }
+            //if (!check_process_status())
+            //{
+            GreypictureBox1.Show();
+            GreenpictureBox2.Hide();
+            //Thread.Sleep(3000);
+            button3.Enabled = true;
+            //this.Update();
+            //this.Refresh();
+            //}
+            //Application.DoEvents();效率低，但是体验好，可以用异步代替更好
 
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            var s=Math.Round(53.3012619227981, 2);
+            var s = Math.Round(53.3012619227981, 2);
 
             //Random sss = new Random(Convert.ToInt32( DateTime.Today.Day));
 
             double punchingRadius = 51.9290909090909;
-            punchingRadius = Math.Round(punchingRadius,2);
-            var sss = Convert.ToDouble(punchingRadius.ToString().Split('.')[1])/200;
+            punchingRadius = Math.Round(punchingRadius, 2);
+            var sss = Convert.ToDouble(punchingRadius.ToString().Split('.')[1]) / 200;
 
 
             richTextBox1.Text = sss.ToString();
