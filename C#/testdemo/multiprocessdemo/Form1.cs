@@ -243,8 +243,9 @@ namespace multiprocessdemo
                 initPipe()).Start();
 
                 button3.Enabled = !enable;
-                GreypictureBox1.Hide();
-                GreenpictureBox2.Show();
+                GreypictureBox1.Image = Properties.Resources.green;
+                //GreypictureBox1.Hide();
+                //GreenpictureBox2.Show();
 
             }
             else
@@ -269,8 +270,9 @@ namespace multiprocessdemo
             }
             //if (!check_process_status())
             //{
-            GreypictureBox1.Show();
-            GreenpictureBox2.Hide();
+            GreypictureBox1.Image = Properties.Resources.red;
+            //GreypictureBox1.Show();
+            //GreenpictureBox2.Hide();
             //Thread.Sleep(3000);
             button3.Enabled = true;
             //this.Update();
