@@ -172,26 +172,31 @@ class DuplePipe
     public static StreamReader nsr;
     public static void dupledemo()
     {
-         npc = new NamedPipeClientStream(".", "npc", PipeDirection.In);
-         nps = new NamedPipeServerStream("nps", PipeDirection.Out);
+         npc = new NamedPipeClientStream(".", "np2", PipeDirection.In);
+         nps = new NamedPipeServerStream("np1", PipeDirection.Out);
          nsr = new StreamReader(npc);
          nsw = new StreamWriter(nps);
-        npc.Connect();
         nps.WaitForConnection();
+        npc.Connect();
+        
         Console.WriteLine(npc.IsConnected.ToString()+ nps.IsConnected.ToString());
     }
 
     public static void  ReadData()
     {
         //Console.WriteLine
-        while (true)
-        {
-            Thread.Sleep(100);
-            string ss = nsr.ReadLine();
-            if(ss!=null) { Console.WriteLine(ss);  }
-            Console.WriteLine("waiting..");
-            continue;
-        }
+        //while (true)
+        //{
+        //    Thread.Sleep(100);
+        //    string ss = nsr.ReadLine();
+        //    if(ss!=null) { Console.WriteLine(ss);  }
+        //    //Console.WriteLine("waiting..");
+        //    continue;
+        //}
+        string temp;
+        while ((temp = nsr.ReadLine()) != null)
+        { Console.WriteLine(temp); }
+
     }
     public static void SendData()
     {
@@ -203,9 +208,10 @@ class DuplePipe
         //    string ss = nsr.ReadLine();
         //    if (ss != null) { Console.WriteLine(ss); }
         //}
-        for (int i = 0; i < 15; i++)  
+        for (int i = 0; i < 10; i++)  
         {
-            nsw.WriteLine("hello"+i.ToString());
+            string tr = "hello" + i.ToString();
+            nsw.WriteLine(tr);
             nps.WaitForPipeDrain();
         }
 

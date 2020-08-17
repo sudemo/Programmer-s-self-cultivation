@@ -38,7 +38,7 @@ namespace multiprocessdemo
         {
 
             process1.StartInfo.FileName = "SocketProcess.exe";
-            process1.StartInfo.Arguments = "hello";
+            process1.StartInfo.Arguments = "40 127.0.0.1 10 3 1";
             process1.StartInfo.UseShellExecute = false;
             process1.StartInfo.CreateNoWindow = false;
             process1.StartInfo.RedirectStandardOutput = false;
@@ -87,7 +87,7 @@ namespace multiprocessdemo
                 Logger2.Infor("pipe连接结果：" + res.ToString());
                 this.Invoke(new Action(() =>
                 {
-                    richTextBox1.AppendText(res.ToString() + DateTime.Now + "\n");
+                    richTextBox1.AppendText(res.ToString() +" "+ DateTime.Now + "\n");
                 }));
                 string temp;
                 while ((temp = sr.ReadLine()) != null)
@@ -97,7 +97,7 @@ namespace multiprocessdemo
 
                     this.Invoke(new Action(() =>
                     {
-                        richTextBox1.AppendText(temp + DateTime.Now + "\n");
+                        richTextBox1.AppendText(temp + " " + DateTime.Now + "\n");
                     }));
                 }
             }
@@ -150,11 +150,7 @@ namespace multiprocessdemo
             // startInfo.WindowStyle = ProcessWindowStyle.Minimized;
             startInfo.CreateNoWindow = true;
             startInfo.UseShellExecute = false;
-            // Process.Start(startInfo);
-
-            //startInfo.Arguments = "127.0.0.1";
-
-            // Process.Start(startInfo);
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -235,22 +231,20 @@ namespace multiprocessdemo
 
         private void button3_Click(object sender, EventArgs e)
         { //不能多次点击
-            //open pro
-            if (button3.Enabled && !check_process_status())
+            //open pro 如果允许点击且进程不存在
+            if (button3_open_socketprocess.Enabled && !check_process_status())
             {
                 process1.Start();
                 new Task(() =>
                 initPipe()).Start();
 
-                button3.Enabled = !enable;
+                button3_open_socketprocess.Enabled = !enable;
                 GreypictureBox1.Image = Properties.Resources.green;
-                //GreypictureBox1.Hide();
-                //GreenpictureBox2.Show();
-
+                //button4_open_socketprocess.Enabled = true;
             }
             else
             {
-                button3.Enabled = true;
+                button3_open_socketprocess.Enabled = true;
             }
         }
 
@@ -265,41 +259,42 @@ namespace multiprocessdemo
                 process1.Kill();
                 process1.Close(); //只是用来清理托管资源，不负责退出程序
                 sw.Close();
-                sr.Close();
-                
+                sr.Close();     //清理管道资源，可以重复开启而不报错           
             }
-            //if (!check_process_status())
-            //{
+            
             GreypictureBox1.Image = Properties.Resources.red;
-            //GreypictureBox1.Show();
-            //GreenpictureBox2.Hide();
-            //Thread.Sleep(3000);
-            button3.Enabled = true;
-            //this.Update();
-            //this.Refresh();
-            //}
+            
+            button3_open_socketprocess.Enabled = true;
+            
             //Application.DoEvents();效率低，但是体验好，可以用异步代替更好
 
         }
-
         private void button5_Click(object sender, EventArgs e)
         {
-            var s = Math.Round(53.3012619227981, 2);
+            #region test
+            //var s = Math.Round(53.3012619227981, 2);
 
-            //Random sss = new Random(Convert.ToInt32( DateTime.Today.Day));
+            ////Random sss = new Random(Convert.ToInt32( DateTime.Today.Day));
 
-            double punchingRadius = 51.9290909090909;
-            punchingRadius = Math.Round(punchingRadius, 2);
-            var sss = Convert.ToDouble(punchingRadius.ToString().Split('.')[1]) / 200;
+            //double punchingRadius = 51.9290909090909;
+            //punchingRadius = Math.Round(punchingRadius, 2);
+            //var sss = Convert.ToDouble(punchingRadius.ToString().Split('.')[1]) / 200;
 
 
-            richTextBox1.Text = sss.ToString();
+            //richTextBox1.Text = sss.ToString(); 
+            #endregion
+
+            string temp = richTextBox2.Text;
+            sw.WriteLine(temp);
+            richTextBox2.Clear();
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
 
         }
+
+       
     }
 }
 

@@ -10,8 +10,8 @@ namespace plcdemo
     class PlcHelper 
     {
         private static CpuType c = CpuType.S71500;
-        //public static string ip = "127.0.0.1";
-        public static string ip = "192.168.0.11";
+        public static string ip = "127.0.0.1";
+        //public static string ip = "192.168.0.11";
         private Plc plc_instance = new Plc(c, ip, 0, 1);
         
         public  static PlcHelper plcHelper_ins = new PlcHelper();
@@ -65,7 +65,10 @@ namespace plcdemo
         {
             return plc_instance.Read(DataType.DataBlock, db, startaddr, VarType.Int, count);
         }
-
+        public object ReadDB_Word(int db, int startaddr, int count)
+        {
+            return plc_instance.Read(DataType.DataBlock, db, startaddr, VarType.Word, count);
+        }
 
         //异步读
         public Task<object> ReadDB_Async(int db, int startaddr, int count)

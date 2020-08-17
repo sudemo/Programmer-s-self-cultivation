@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.ML;
 
 namespace plcdemo
 {
@@ -31,10 +32,19 @@ namespace plcdemo
                 max = m;
             }
             var s = ll.Max();
-           // Console.WriteLine(max);
-            var ss = Read_DB1101();
-            //byte[] a = (byte[])ss;
+            // Console.WriteLine(max);
 
+
+            int a = 32768;
+            short b = (short)a;
+            Console.WriteLine(b);
+
+            var ss = Read_DB1101();
+            var s2 = Read_DIntDB10();
+            var s3 = (Int16)PlcHelper.plcHelper_ins.GetInstance().ReadDB_int(10,0,1);
+            var s4 = PlcHelper.plcHelper_ins.GetInstance().ReadDB_Word(10,0,2);
+            //byte[] a = (byte[])ss;
+            Console.WriteLine(ss);
             //Task<object> t1 = new Task<object>(() => Read_DB10());
             //Task<object> t2 = new Task<object>(()=> Read_DB1101());
             //Task t1 = new Task(() => Read_async_DB10());
@@ -99,7 +109,7 @@ namespace plcdemo
 
             PlcHelper.plcHelper_ins.GetInstance();
             PlcHelper.plcHelper_ins.Open();
-            return PlcHelper.plcHelper_ins.ReadDB(100, 0, 1);
+            return PlcHelper.plcHelper_ins.ReadDB(10, 0, 1);
             //PlcHelper.GetInstance();
             //var res = PlcHelper.  (DataType.DataBlock, 1011, 70, 2);
 
@@ -127,6 +137,8 @@ namespace plcdemo
             //var res = PlcHelper.  (DataType.DataBlock, 1011, 70, 2);
 
         }
+
+
         static Task <Byte[]> Read_async_DB10()
         {
 
@@ -150,6 +162,13 @@ namespace plcdemo
 
         }
 
+        static object Read_DIntDB10()
+        {
+
+            PlcHelper.plcHelper_ins.GetInstance();
+            PlcHelper.plcHelper_ins.Open();
+            return PlcHelper.plcHelper_ins.ReadDB_dint(10, 0, 1);
+        }
 
 
         #region 序列化
