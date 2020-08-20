@@ -40,8 +40,9 @@ namespace multiprocessdemo
             process1.StartInfo.FileName = "SocketProcess.exe";
             process1.StartInfo.Arguments = "40 127.0.0.1 10 3 1";
             process1.StartInfo.UseShellExecute = false;
-            process1.StartInfo.CreateNoWindow = false;
-            process1.StartInfo.RedirectStandardOutput = false;
+            process1.StartInfo.CreateNoWindow = true;
+            process1.StartInfo.RedirectStandardOutput = true;
+            process1.EnableRaisingEvents = true;
             #region MyRegion
             //process1.StartInfo();
             //ProcessStartInfo ps = new ProcessStartInfo();
@@ -69,44 +70,46 @@ namespace multiprocessdemo
         public void initPipe()
         {
             try
-
             {
-
-
                 var PipeServer = new NamedPipeServerStream("np1", PipeDirection.Out);
                 var PipeChild = new NamedPipeClientStream(".", "np2", PipeDirection.In);
-                 sr = new StreamReader(PipeChild);
-                 sw = new StreamWriter(PipeServer);
-
+                sr = new StreamReader(PipeChild);
+                sw = new StreamWriter(PipeServer);
+               
 
                 PipeServer.WaitForConnection();
                 PipeChild.Connect();
 
-
+                sw.AutoFlush = true;
                 bool res = PipeServer.IsConnected;
                 Logger2.Infor("pipe连接结果：" + res.ToString());
                 this.Invoke(new Action(() =>
                 {
-                    richTextBox1.AppendText(res.ToString() +" "+ DateTime.Now + "\n");
+                    richTextBox1.AppendText(res.ToString() + " " + DateTime.Now + "\n");
                 }));
-                string temp;
-                while ((temp = sr.ReadLine()) != null)
-                {
-                    // Thread.Sleep(100);
-                    //string t= ;
-
-                    this.Invoke(new Action(() =>
-                    {
-                        richTextBox1.AppendText(temp + " " + DateTime.Now + "\n");
-                    }));
-                }
+                ReciveDataAnalyze();
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "主进程");
             }
 
+        }
+
+        public void ReciveDataAnalyze()
+        {
+            string temp;
+            while ((temp = sr.ReadLine()) != null)
+            {
+                // Thread.Sleep(100);
+                //string t= ;
+
+                this.Invoke(new Action(() =>
+                {
+                    richTextBox1.AppendText(temp + " " + DateTime.Now + "\n");
+                }));
+            }
         }
 
         public bool check_process_status()
@@ -129,6 +132,29 @@ namespace multiprocessdemo
         /// </summary>
         /// <param name="ProcessName"></param>
         /// <returns></returns>
+        public void KillProcess(string name)
+        {
+            Process[] plist = Process.GetProcessesByName(name);
+            if (plist.Length == 1)
+            {
+                foreach (var p in plist)
+                {
+                    p.Kill();
+                    //Console.WriteLine(p.HasExited);
+                }
+            }
+            #region MyRegion
+            //if (check_process_status(name))
+            //{
+
+            //process1.Close(); //只是用来清理托管资源，不负责退出程序
+            //process1.Kill();
+            //process1.Close(); //只是用来清理托管资源，不负责退出程序
+            //sw.Close();
+            //sr.Close();     //清理管道资源，可以重复开启而不报错   
+            // } 
+            #endregion
+        }
         public bool check_process_status(string ProcessName)  //
         {
             Process[] plist = Process.GetProcessesByName(ProcessName);
@@ -145,12 +171,57 @@ namespace multiprocessdemo
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //启动一个新的socket进程
-            ProcessStartInfo startInfo = new ProcessStartInfo("notepad.exe");
-            // startInfo.WindowStyle = ProcessWindowStyle.Minimized;
-            startInfo.CreateNoWindow = true;
-            startInfo.UseShellExecute = false;
-            
+            ////启动一个新的socket进程
+            //ProcessStartInfo startInfo = new ProcessStartInfo("notepad.exe");
+            //// startInfo.WindowStyle = ProcessWindowStyle.Minimized;
+            //startInfo.CreateNoWindow = true;
+            //startInfo.UseShellExecute = false;
+            string temp = "hello";
+
+            string mode = temp.Split(' ')[0];
+            string str_cmd = temp.Substring(2);
+            //string[] sArray = temp.Split(' ');
+            //string mode = sArray[0];
+            //List<string> cmd = sArray.ToList();
+            //cmd.RemoveAt(0);
+            //string str_cmd= string.Join(" ", cmd);
+            //string str_cmd = cmd.ToArray().ToString();
+
+            switch (mode)
+            {
+                case "R": //reading from plc
+                    {
+
+                        Console.WriteLine("r");
+                    }
+                    break;
+                case "W": //writing to plc
+                    {
+                        Console.WriteLine("w");
+                    }
+                    break;
+                case "N": // normal,not about plc
+                    {
+                        if (str_cmd == "exit")
+                        {
+                            Console.WriteLine("exiting");
+                            //exit();
+                        }
+                        else if (str_cmd == "hello")
+                        {
+                            Console.WriteLine("Hi");
+                        }
+                        //子进程 读取来自服务器的命令，
+                        Console.WriteLine(temp);
+                    }
+                    break;
+                default:
+                   MessageBox.Show("error cmd", "程解析");
+                    break;
+            }
+
+
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -223,15 +294,27 @@ namespace multiprocessdemo
 
         }
 
-
         private void process1_Exited(object sender, EventArgs e)
         {
+            try
+            {
+                GreypictureBox1.Image = Properties.Resources.red;
+                this.button4_stop_socketprocess.Enabled = false;
+                button3_open_socketprocess.Enabled = true;
+                sw.Close();
+                sr.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "主进程");
+            }
+
 
         }
 
         private void button3_Click(object sender, EventArgs e)
-        { //不能多次点击
-            //open pro 如果允许点击且进程不存在
+        {
+            //open pro 如果 允许点击且进程不存在 就开启进程
             if (button3_open_socketprocess.Enabled && !check_process_status())
             {
                 process1.Start();
@@ -240,7 +323,8 @@ namespace multiprocessdemo
 
                 button3_open_socketprocess.Enabled = !enable;
                 GreypictureBox1.Image = Properties.Resources.green;
-                //button4_open_socketprocess.Enabled = true;
+                button4_stop_socketprocess.Enabled = true;
+
             }
             else
             {
@@ -250,22 +334,32 @@ namespace multiprocessdemo
 
         private void button4_Click(object sender, EventArgs e)
         { //end process
-            
+
             //string ss = process1.ProcessName;
             if (check_process_status())
 
             {
-                //process1.Close(); //只是用来清理托管资源，不负责退出程序
-                process1.Kill();
-                process1.Close(); //只是用来清理托管资源，不负责退出程序
-                sw.Close();
-                sr.Close();     //清理管道资源，可以重复开启而不报错           
+                try
+                {
+
+                    //process1.Close(); //只是用来清理托管资源，不负责退出程序
+                    process1.Kill();
+                    process1.Close(); //只是用来清理托管资源，不负责退出程序
+                    sw.Close();
+                    sr.Close();     //清理管道资源，可以重复开启而不报错   
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message, "主进程");
+                }
+
             }
-            
+
             GreypictureBox1.Image = Properties.Resources.red;
-            
+            button4_stop_socketprocess.Enabled = false;
             button3_open_socketprocess.Enabled = true;
-            
+
             //Application.DoEvents();效率低，但是体验好，可以用异步代替更好
 
         }
@@ -283,18 +377,40 @@ namespace multiprocessdemo
 
             //richTextBox1.Text = sss.ToString(); 
             #endregion
+            if (check_process_status())
+            {
+                try
+                {
+                    string temp;
+                    if ((temp = richTextBox2.Text)!="")
+                    {
+                        sw.WriteLine(temp);
+                        richTextBox2.Clear();
+                    }
+                    else
+                    {
+                        MessageBox.Show("请先输入");
+                    }
+                    
+                }
+                catch (Exception ex)
+                {
+                    Logger2.Infor(ex.Message);
+                    MessageBox.Show(ex.Message);
+                }
 
-            string temp = richTextBox2.Text;
-            sw.WriteLine(temp);
-            richTextBox2.Clear();
+            }
+            else
+            {
+                MessageBox.Show("请先开启子进程", "主线程提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            KillProcess("SocketProcess");
         }
-
-       
     }
 }
-
+///解决直接关软件，导致子进程不退出的问题

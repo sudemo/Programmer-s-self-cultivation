@@ -19,7 +19,7 @@ class PipeServer
         th.Name = "read";
         th2.Name = "send";
         th.Start();
-        //th2.Start();
+        th2.Start();
        // DuplePipe.SendData();
         Console.ReadKey();
     }

@@ -35,7 +35,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.GreypictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button4_open_socketprocess = new System.Windows.Forms.Button();
+            this.button4_stop_socketprocess = new System.Windows.Forms.Button();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -74,10 +74,13 @@
             // 
             // button3_open_socketprocess
             // 
-            this.button3_open_socketprocess.BackColor = System.Drawing.Color.LimeGreen;
+            this.button3_open_socketprocess.BackColor = System.Drawing.Color.Transparent;
+            this.button3_open_socketprocess.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button3_open_socketprocess.ForeColor = System.Drawing.Color.Black;
+            this.button3_open_socketprocess.Image = global::multiprocessdemo.Properties.Resources.green;
             this.button3_open_socketprocess.Location = new System.Drawing.Point(3, 12);
             this.button3_open_socketprocess.Name = "button3_open_socketprocess";
-            this.button3_open_socketprocess.Size = new System.Drawing.Size(104, 73);
+            this.button3_open_socketprocess.Size = new System.Drawing.Size(117, 73);
             this.button3_open_socketprocess.TabIndex = 5;
             this.button3_open_socketprocess.Text = "开启数据进程";
             this.button3_open_socketprocess.UseVisualStyleBackColor = false;
@@ -85,11 +88,11 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(630, 415);
+            this.button5.Location = new System.Drawing.Point(670, 406);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.Size = new System.Drawing.Size(105, 37);
             this.button5.TabIndex = 7;
-            this.button5.Text = "button5";
+            this.button5.Text = "发送";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -112,18 +115,19 @@
             this.GreypictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.GreypictureBox1.TabIndex = 8;
             this.GreypictureBox1.TabStop = false;
-            this.GreypictureBox1.BindingContextChanged += new System.EventHandler(this.button1_Click);
             // 
-            // button4_open_socketprocess
+            // button4_stop_socketprocess
             // 
-            this.button4_open_socketprocess.BackColor = System.Drawing.Color.Red;
-            this.button4_open_socketprocess.Location = new System.Drawing.Point(113, 14);
-            this.button4_open_socketprocess.Name = "button4_open_socketprocess";
-            this.button4_open_socketprocess.Size = new System.Drawing.Size(104, 68);
-            this.button4_open_socketprocess.TabIndex = 6;
-            this.button4_open_socketprocess.Text = "关闭数据进程";
-            this.button4_open_socketprocess.UseVisualStyleBackColor = false;
-            this.button4_open_socketprocess.Click += new System.EventHandler(this.button4_Click);
+            this.button4_stop_socketprocess.BackColor = System.Drawing.Color.White;
+            this.button4_stop_socketprocess.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button4_stop_socketprocess.Image = global::multiprocessdemo.Properties.Resources.red;
+            this.button4_stop_socketprocess.Location = new System.Drawing.Point(126, 14);
+            this.button4_stop_socketprocess.Name = "button4_stop_socketprocess";
+            this.button4_stop_socketprocess.Size = new System.Drawing.Size(118, 68);
+            this.button4_stop_socketprocess.TabIndex = 6;
+            this.button4_stop_socketprocess.Text = "关闭数据进程";
+            this.button4_stop_socketprocess.UseVisualStyleBackColor = false;
+            this.button4_stop_socketprocess.Click += new System.EventHandler(this.button4_Click);
             // 
             // richTextBox2
             // 
@@ -154,6 +158,7 @@
             // 
             // Form1
             // 
+            this.AcceptButton = this.button5;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
@@ -163,7 +168,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.GreypictureBox1);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4_open_socketprocess);
+            this.Controls.Add(this.button4_stop_socketprocess);
             this.Controls.Add(this.button3_open_socketprocess);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button2);
@@ -171,6 +176,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GreypictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -185,7 +191,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.PictureBox GreypictureBox1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button4_open_socketprocess;
+        private System.Windows.Forms.Button button4_stop_socketprocess;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox richTextBox2;

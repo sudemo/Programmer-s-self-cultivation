@@ -184,15 +184,7 @@ class DuplePipe
 
     public static void  ReadData()
     {
-        //Console.WriteLine
-        //while (true)
-        //{
-        //    Thread.Sleep(100);
-        //    string ss = nsr.ReadLine();
-        //    if(ss!=null) { Console.WriteLine(ss);  }
-        //    //Console.WriteLine("waiting..");
-        //    continue;
-        //}
+        
         string temp;
         while ((temp = nsr.ReadLine()) != null)
         { Console.WriteLine(temp); }
@@ -201,19 +193,22 @@ class DuplePipe
     public static void SendData()
     {
         nsw.AutoFlush = true;
-        //Console.WriteLine
-        //while (true)
-        //{
-        //    Thread.Sleep(100);
-        //    string ss = nsr.ReadLine();
-        //    if (ss != null) { Console.WriteLine(ss); }
-        //}
-        for (int i = 0; i < 10; i++)  
+        while (true)
         {
-            string tr = "hello" + i.ToString();
-            nsw.WriteLine(tr);
-            nps.WaitForPipeDrain();
+            Console.WriteLine("please input:");
+            string ss = Console.ReadLine();
+            if(ss!=null)
+            {
+                nsw.WriteLine(ss);
+                Console.WriteLine("已发送"+ss);
+            }
         }
+        //for (int i = 0; i < 5; i++)  
+        //{
+        //    string tr = "hello" + i.ToString();
+        //    nsw.WriteLine(tr);
+        //    nps.WaitForPipeDrain();
+        //}
 
     }
 
