@@ -1,11 +1,12 @@
 ﻿using logbaseQuene;
 using S7.Net;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Pipes;
+using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
-
+using System.Windows.Forms;
 namespace SocketProcess
 {
     class Childprogram
@@ -20,59 +21,75 @@ namespace SocketProcess
         }
 
         /// <summary>
-        /// args 的内容为： cpu ip db st count eg,"40 ip 23 0 1"
+        /// args 的内容为： cpu ip db startaddr readingcount eg,"40 ip 23 0 1" 40 127.0.0.1 10 0 1
         /// </summary>
         /// <param name="args"></param>
+        public static Plc MyProxy;
         static void Main(string[] args)
         {
-            Logger2.Infor("inside sub process");
-            if (args.Length > 0)
+            try
             {
-                /*CpuType cpu = (CpuType)Convert.ToInt32(args[0]);
-                string ip = args[1];
-                CreateSocketProcess cs = new CreateSocketProcess(cpu, ip);
-                Plc MyProxy = cs.MyPlcInstance;
-                MyProxy.Open();
-
-                cs.DB = Convert.ToInt32(args[2]);
-                cs.StartAddr = Convert.ToInt32(args[3]);
-                cs.ReadCount = Convert.ToInt32(args[4]);*/
-
-                //pip communicate
-                foreach (string s in args)
+                Logger2.Infor("inside sub process 01");
+                if (args.Length > 0)
                 {
-                    Logger2.Infor("args is :" + s);
+                    CpuType cpu = (CpuType)Convert.ToInt32(args[0]);
+                    string ip = args[1];
+                    CreateSocketProcess cs = new CreateSocketProcess(cpu, ip);
+                    MyProxy = cs.MyPlcInstance;
+                    MyProxy.Open();
+
+                    //cs.DB = Convert.ToInt32(args[2]);
+                    //cs.StartAddr = Convert.ToInt32(args[3]);
+                    //cs.ReadCount = Convert.ToInt32(args[4]);
+
+                    #region MyRegion
+                    //pip communicate
+                    //foreach (string s in args)
+                    //{
+                    //    Logger2.Infor("args is :" + s);
+                    //}
+                    // Console.WriteLine(args[0]);
+                    //sw.WriteLine("client recieved :"+temp); 
+                    #endregion
+                    PipeHelper ph = new PipeHelper();
+                    ph.InitPipe();
+                    //ReadPlcAndWritePipe(cs, MyProxy);
+                    Console.ReadKey();
                 }
-                // Console.WriteLine(args[0]);
-                //sw.WriteLine("client recieved :"+temp);
-                PipeHelper ph = new PipeHelper();
-                ph.InitPipe();
-                /*while (true)
+                else
                 {
-                    Thread.Sleep(1000);
-                    byte[] res = MyProxy.ReadBytes(DataType.DataBlock, cs.DB, cs.StartAddr, cs.ReadCount);
-
-                    foreach (var b in res)
-                    {
-                        Console.Write(b);
-                    }
-                    break;
-                }*/
-                Console.ReadKey();
+                    Console.WriteLine("wrong input para number,please check");
+                    Console.ReadKey();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Console.WriteLine("wrong input para number,please check");
-                Console.ReadKey();
+                Logger2.Error(ex.Message);
+                MessageBox.Show(ex.Message, "子进程提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 
 
         }
-        public static void exit()
+
+        private static void ReadPlcAndWritePipe(CreateSocketProcess cs, Plc MyProxy)
         {
-            Environment.Exit(0);
+            while (true)
+            {
+                Thread.Sleep(1000);
+                //byte[] res = MyProxy.ReadBytes(DataType.DataBlock, cs.DB, cs.StartAddr, cs.ReadCount);
+                //object res1 = MyProxy.Read(DataType.DataBlock, cs.DB, cs.StartAddr, VarType.Int, cs.ReadCount);
+                //List<Int16> res1 = (List<Int16>)MyProxy.Read(DataType.DataBlock, cs.DB, cs.StartAddr, VarType.Int, cs.ReadCount);
+                //Int16 res1 = (Int16)MyProxy.Read(DataType.DataBlock, cs.DB, cs.StartAddr, VarType.Int, cs.ReadCount);
+
+                Int32 res3 = (Int32)MyProxy.Read(DataType.DataBlock, cs.DB, cs.StartAddr, VarType.DInt, cs.ReadCount);
+
+                PipeHelper.sw_2.WriteLine(res3);
+
+            }
         }
+
+
 
 
     }
@@ -84,6 +101,11 @@ namespace SocketProcess
         public static StreamReader sr_1;
         public static StreamWriter sw_2;
 
+        public static void exit()
+        {
+            Logger2.Infor("exited");
+            Environment.Exit(0);
+        }
         public void InitPipe()
         {
             try
@@ -95,16 +117,22 @@ namespace SocketProcess
 
                 ChildPipeClient_1.Connect(); //此处的顺序很重要，必须与服务器向匹配，否则会一直阻塞
                 ChildPipeServer_2.WaitForConnection();
+                sw_2.AutoFlush = true;
                 //reconnecting  只有客户端
                 //ReConnect();
-                Logger2.Infor("connected");
+                Logger2.Infor("pipe connected 02");
                 StartPipeThread();
 
             }
             catch (Exception ex)
             {
                 Logger2.Error(ex.Message);
-                throw;
+                ChildPipeClient_1.Close();
+                ChildPipeServer_2.Close();
+                sr_1.Close();
+                sw_2.Close();
+                MessageBox.Show(ex.Message, "子进程");
+                // throw;
             }
         }
 
@@ -121,19 +149,77 @@ namespace SocketProcess
         }
 
         /// <summary>
-        /// 子进程 读取来自服务器
+        /// 子进程 读取管道中服务器的命令
         /// </summary>
         public void Pipe4Reading()
         {
-            string temp1;
-            while ((temp1 = sr_1.ReadLine()) != null)
-            // while ((temp = sr_1.ReadLine()) != null)
-
+            try
             {
-                //子进程 读取来自服务器的命令，
-                Console.WriteLine(temp1);
-               // Logger2.Infor("recing   " + temp1);
+                string temp;
+                while ((temp = sr_1.ReadLine()) != null)
+                {
+                    try
+                    {
+
+
+                        Logger2.Infor(temp + " 03");
+                        //string temp = "N hello";
+                        string mode = temp.Split(' ')[0];
+                        //string mode = temp.Substring(0, 1);
+                        string str_cmd = temp.Substring(2);
+
+                        sw_2.WriteLine(mode);
+                        sw_2.WriteLine(str_cmd);
+
+                        switch (mode)
+                        {
+                            case "R": //reading from plc
+                                {
+                                    object s = Childprogram.MyProxy.Read(str_cmd);
+                                    sw_2.WriteLine(s);
+                                }
+                                break;
+                            case "W": //writing to plc
+                                {
+                                    sw_2.WriteLine("w");
+                                }
+                                break;
+                            case "exit": // normal,not about plc
+                                {
+
+                                    sw_2.WriteLine("exiting");
+                                    exit();
+
+                                }
+                                break;
+                            case "hello":
+                                {
+
+                                    sw_2.WriteLine("Hi");
+                                }
+                                break;
+                            default:
+                                MessageBox.Show("error cmd", "子进程解析");
+                                break;
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show(ex.Message, "子进程");
+                    }
+                    // Logger2.Infor("recing   " + temp);
+                }
+
+
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "子进程");
+                // throw;
+            }
+
         }
 
         /// <summary>
@@ -162,11 +248,9 @@ namespace SocketProcess
             }
 
         }
-
-
         public void Pipe4Sending()
         {
-            sw_2.AutoFlush = true;
+            //sw_2.AutoFlush = true;
             //向服务器发送从plc读取的数据，注意数据格式
             try
             {
@@ -174,7 +258,7 @@ namespace SocketProcess
                 {
                     sw_2.WriteLine($"hello{i.ToString()}");
                 }
-               
+
 
             }
             catch (Exception)
@@ -210,22 +294,20 @@ namespace SocketProcess
             Thread th = new Thread(Pipe4Reading);
             Thread th2 = new Thread(new ParameterizedThreadStart(Pipe4Sending));
             th.IsBackground = true;
-            th2.IsBackground = true;
+            //th2.IsBackground = true;
             th.Name = "p4r";
-            th.Start();
-            th2.Name = "p4w";
-            
-            th2.Start("ssss");
-            Console.WriteLine("start rec send thread {0} {1}",th.IsAlive,th2.IsAlive);
+            th.Start();//接收线程
+            //th2.Name = "p4w";
+            sw_2.AutoFlush = true;
+            sw_2.WriteLine("from sub process: sub thread status {0},{1}", th.IsAlive, th2.IsAlive);
+            Logger2.Infor($"from sub process: sub thread status {th.IsAlive},{th2.IsAlive}");
+            //th2.Start("ssss");
+            //Console.WriteLine("start rec send thread {0} {1}",th.IsAlive,th2.IsAlive);
             //Pipe4Sending("ssss");
-            Pipe4Sending();
+            //Pipe4Sending();
         }
 
     }
-
-
-
-
 
 
     public class CreateSocketProcess
