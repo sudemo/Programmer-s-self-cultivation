@@ -30,7 +30,7 @@ if mclient.get_connected():
         rr = mclient.db_read(dbnum, start, amount)  #16进制 字节
         print(rr,[x for x in rr])
         # print(rr.hex())
-        r10= int(rr.hex(),16) # 转换为10进制
+        r10= int(rr.hex(), 16)  # 转换为10进制
         print(r10)
         mclient.disconnect()
     except Exception as e:
