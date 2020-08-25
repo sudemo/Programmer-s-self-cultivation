@@ -38,7 +38,7 @@ namespace multiprocessdemo
         {
 
             process1.StartInfo.FileName = "SocketProcess.exe";
-            process1.StartInfo.Arguments = "40 127.0.0.1 10 3 1";
+            process1.StartInfo.Arguments = "40 127.0.0.1 10 3 1"; //可以设置为，从配置及textbox获取
             process1.StartInfo.UseShellExecute = false;
             process1.StartInfo.CreateNoWindow = true;
             process1.StartInfo.RedirectStandardOutput = true;
