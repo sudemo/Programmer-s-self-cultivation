@@ -46,6 +46,7 @@ namespace Callpythondemo2
                     // 为异步获取订阅事件
                     pt.OutputDataReceived += new DataReceivedEventHandler(OnDataReceived);
                     pt.ErrorDataReceived += new DataReceivedEventHandler(OnDataReceived);
+                   
                     // 异步获取命令行内容
                     pt.BeginOutputReadLine();
                     //Thread.Sleep(2000);
