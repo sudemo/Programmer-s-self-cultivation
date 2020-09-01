@@ -8,8 +8,8 @@ from snap7.util import *
 
 mclient = snap7.client.Client()
 try:
-    # mclient.connect('127.0.0.1',0,0)
-    mclient.connect('192.168.0.10',0,0)
+    mclient.connect('127.0.0.1',0,0)
+    # mclient.connect('192.168.0.10',0,0)
 
 except Exception as e:
     print(e)
