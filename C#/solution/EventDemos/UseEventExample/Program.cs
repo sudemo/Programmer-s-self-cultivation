@@ -67,8 +67,12 @@ namespace UseEventExample
 
             //只能通过Publisher类的公有方法间接地触发事件
             Console.WriteLine("\n通过Publisher对象的公有方法触发事件\n");
-            //p.FireEvent(new Random().Next(1, 100));
-            p.FireEvent(12);
+            for (int i = 0; i < 10; i++)
+            {
+                p.FireEvent(new Random().Next(1, 100));
+            }
+           
+            //p.FireEvent(12);
             Console.ReadKey();
 
         }
