@@ -4,13 +4,14 @@
 # @File    : S7demo1.py
 '''
 import json
-
+# from datetime import time
+import time
 import snap7
 from cmd import Cmd
 import sys
 
-ip = "127.0.0.1"
-# ip = "192.168.0.10"
+# ip = "127.0.0.1"
+ip = "192.168.0.10"
 area = "0x84"
 dbnum = 10
 startaddr = 0
@@ -18,9 +19,9 @@ count = 1
 
 jsoncmd='''
 [
-    {"name":"f1","doc":"fun1 is for 1","DB_Number":10,"Start_address":"0","p_count":"1"},
-    {"name":"f2","doc":"fun2 is for 1","DB_Number":101,"Start_address":"0","p_count":"1"},
-    {"name":"f3","doc":"fun3 is for 1","DB_Number":1012,"Start_address":"0","p_count":"1"}
+    {"name":"f1","doc":"fun1 is for 1","DB_Number":1011,"Start_address":"0","p_count":"2"},  
+    {"name":"f2","doc":"fun2 is for 1","DB_Number":1011,"Start_address":"2","p_count":"2"},
+    {"name":"f3","doc":"fun3 is for 1","DB_Number":1011,"Start_address":"4","p_count":"2"}
    
 ]
     '''
@@ -84,6 +85,18 @@ class UnivsersalPLC(Cmd):
     def default(self, line):
         print("unknow command", line)
 
+    def do_script(self,args):
+        """Run script file. Argument should be filename"""
+        try:
+            with open(sys.path[0] + '/' + args) as f:
+                for line in f:
+                    self.onecmd(line)
+            return True
+        except IOError:
+            print("Script file not found!\n%s")
+            sys.stdout.flush()
+            return False
+
 '''
     def preloop(self):
         """命令line解析之前被调用该方法"""
@@ -116,10 +129,12 @@ def make_fun_attr(name, doc, p_db_number, p_start_address, p_count):  # 定义�
                 print('write  plc mode,please input param')
                 p_count_array = bytearray(p_count, 'utf-8')
                 self.client.db_write(p_db_number, start_address, p_count_array) # 在此模式下 p_count即为data in byte array
+
                 return
             else:
                 res = self.client.db_read(start_address, db_Number, count)
-                print(res)
+                print("read res :",res.hex(),(int(res.hex(), 16)))
+
         except Exception as e:
             print(e)
 
@@ -133,19 +148,24 @@ def main():
     ins = UnivsersalPLC()  # 创建instance
     res = ins.init_connect()
     if res:
-        res1 = ins.read_byte_data()
-        print("test reading",res1)
-        print(ins.analyze_data(res1))
-
+        # res1 = ins.read_byte_data()
+        # print("test reading",res1)
+        # print(ins.analyze_data(res1))
+        print("connected")
     j = json.loads(jsoncmd)
 
     for item in j:
         # 字符串比较，控制输出格式，将输入的字符串doc赋值给fname
         new_func_name = "do_%s" % item["name"]
         setattr(UnivsersalPLC, new_func_name, make_fun_attr(new_func_name, item["doc"], item["Start_address"], item["DB_Number"], item["p_count"]))
-
+    # while 1:
+    #     ins.do_script(str(1))
+        # print('1')
+        # time.sleep(1)
     ins.cmdloop()
 
 
 if __name__=='__main__':
+    # ins = UnivsersalPLC()  # 创建instance
     main()
+
