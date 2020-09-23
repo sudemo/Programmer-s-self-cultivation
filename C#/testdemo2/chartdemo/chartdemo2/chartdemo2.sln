@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30330.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "chartdemo2", "chartdemo2.csproj", "{28BC3DFB-C8C7-4C95-8383-30ECF9AE9EBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventDemo2", "..\EventDemo2\EventDemo2.csproj", "{FE9FB002-E441-4384-BD93-B20890291739}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventDemo1", "..\EventDemo1\EventDemo1.csproj", "{9601A40F-642A-4468-A547-9F401D503413}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28BC3DFB-C8C7-4C95-8383-30ECF9AE9EBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28BC3DFB-C8C7-4C95-8383-30ECF9AE9EBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28BC3DFB-C8C7-4C95-8383-30ECF9AE9EBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28BC3DFB-C8C7-4C95-8383-30ECF9AE9EBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE9FB002-E441-4384-BD93-B20890291739}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE9FB002-E441-4384-BD93-B20890291739}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE9FB002-E441-4384-BD93-B20890291739}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE9FB002-E441-4384-BD93-B20890291739}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9601A40F-642A-4468-A547-9F401D503413}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9601A40F-642A-4468-A547-9F401D503413}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9601A40F-642A-4468-A547-9F401D503413}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9601A40F-642A-4468-A547-9F401D503413}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9AEA4303-FECB-423B-A72B-61CA677E0803}
+	EndGlobalSection
+EndGlobal
