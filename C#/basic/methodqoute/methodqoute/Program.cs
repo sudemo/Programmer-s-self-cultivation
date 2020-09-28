@@ -24,7 +24,7 @@ namespace methodqoute
         static void Main(string[] args)
         {
            // string ab = Console.ReadLine();
-            Console.WriteLine("plz input");
+            Console.WriteLine("plz input two int numbers");
             int b = Convert.ToInt32(Console.ReadLine());
             int  a = Convert.ToInt32(Console.ReadLine());
             //int a = string ab
@@ -34,6 +34,14 @@ namespace methodqoute
             //调用
             ret = aa.findmax(a, b);
             Console.Write("max: {0}",ret);
+
+
+            var members = typeof(object).GetMembers(System.Reflection.BindingFlags.Public|System.Reflection.BindingFlags.Static);
+            foreach (var item in members)
+
+            {
+                Console.WriteLine($"{item.Name} is a {item.MemberType}");
+            }    
             Console.ReadLine();
             
         }
