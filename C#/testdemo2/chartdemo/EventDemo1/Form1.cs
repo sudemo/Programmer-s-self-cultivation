@@ -17,7 +17,8 @@ namespace EventDemo1
     {
 
         //public string DisplayString 
-        public string DisplayString { get; set; }
+        public string DisplayString { get
+                ; set; }
         public Form1()
         {
          //   Control.CheckForIllegalCrossThreadCalls = false;
@@ -38,9 +39,11 @@ namespace EventDemo1
 
         public void OnChanged(object source, FileSystemEventArgs e)
         {
+            
             Console.WriteLine("changed " + e.ToString() + source.ToString());
-            Program.MainForm.DisplayString = "changed";
-            Program.MainForm.richTextBox1.AppendText("changed");
+            this.richTextBox1.AppendText(DisplayString);
+            //Program.MainForm.DisplayString = "changed";
+            //Program.MainForm.richTextBox1.AppendText("changed");//onchanged 不在form中的时候的用法，会跨线程
             //Program.MainForm.Refresh();
             //文件改變後的代碼
         }
