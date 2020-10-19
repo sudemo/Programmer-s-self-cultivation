@@ -27,6 +27,9 @@ namespace UCS
             MessageBox.Show("Test");
         }
 
-       
+        private void ucSwitch4_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
