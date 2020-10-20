@@ -15,7 +15,8 @@ namespace Callpythondemo2
         {
             ProcessStartInfo ps = new ProcessStartInfo();
             ps.FileName = "C:/Users/Neo/.conda/envs/exceldemo/python.exe";
-            ps.Arguments =  "d:/S7demo1.py -u";
+            //ps.Arguments =  "d:/S7demo1.py -u";
+            ps.Arguments = "d:/demo2.py -u";
             //ps.Arguments = "D:/Gitrepository/github/Programmer self-cultivation/pythontoolkits/UniversalS7";
             ps.UseShellExecute = false;
             ps.RedirectStandardOutput = true;
