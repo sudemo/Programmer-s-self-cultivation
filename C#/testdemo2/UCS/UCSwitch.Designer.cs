@@ -35,7 +35,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "UCSwitch";
-            this.Size = new System.Drawing.Size(92, 29);
+            this.Size = new System.Drawing.Size(155, 63);
             this.ResumeLayout(false);
 
         }

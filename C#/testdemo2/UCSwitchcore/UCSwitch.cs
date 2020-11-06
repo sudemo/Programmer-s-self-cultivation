@@ -354,31 +354,49 @@ namespace UCS
                         break;
                     }
                 #region line abort
-                //case SwitchType.Line:
-                //    {
-                //        var fillColor = m_checked ? m_trueColor : m_falseColor;
-                //        int intLineHeight = (Height - 2 - 4) / 2;
+                case SwitchType.Line1:
+                    {
+                        var fillColor = m_checked ? m_trueColor : m_falseColor;
+                        //Point point1 = new Point(50, 20);
+                        //Point point2 = new Point(75, 50);
+                        //Point point3 = new Point(100, 20);
+                        //Point point1 = new Point(10, 10);
+                        //Point point2 = new Point(10, 70);
+                        //Point point3 = new Point(50, 40);
+                        //等腰三角形 左下 上，右中三点
+                        Point point1 = new Point(((Width-Height)/4)+4, 4); 
+                        Point point2 = new Point(((Width-Height)/4)+4, Height-4);
+                        //Point point3 = new Point(Height-2, Height/2);
+                        Point point3 = new Point(Width-4, Height/2);
+                        Point[] pntArr = { point1, point2, point3 };
+                        byte[] bytes = { (byte)PathPointType.Line, (byte)PathPointType.Line, (byte)PathPointType.Line };
+                        GraphicsPath path = new GraphicsPath(pntArr, bytes);
+                        g.FillPath(new SolidBrush(fillColor), path);
+                        #region MyRegion line
+                        //        var fillColor = m_checked ? m_trueColor : m_falseColor;
+                        //        int intLineHeight = (Height - 2 - 4) / 2;
 
-                //        GraphicsPath path = new GraphicsPath();
-                //        path.AddLine(new Point(Height / 2, (Height - intLineHeight) / 2), new Point(Width - Height / 2, (Height - intLineHeight) / 2));
-                //        path.AddArc(new Rectangle(Width - Height / 2 - intLineHeight - 1, (Height - intLineHeight) / 2, intLineHeight, intLineHeight), -90, 180);
-                //        path.AddLine(new Point(Width - Height / 2, (Height - intLineHeight) / 2 + intLineHeight), new Point(Width - Height / 2, (Height - intLineHeight) / 2 + intLineHeight));
-                //        path.AddArc(new Rectangle(Height / 2, (Height - intLineHeight) / 2, intLineHeight, intLineHeight), 90, 180);
-                //        g.FillPath(new SolidBrush(fillColor), path);
+                        //        GraphicsPath path = new GraphicsPath();
+                        //        path.AddLine(new Point(Height / 2, (Height - intLineHeight) / 2), new Point(Width - Height / 2, (Height - intLineHeight) / 2));
+                        //        path.AddArc(new Rectangle(Width - Height / 2 - intLineHeight - 1, (Height - intLineHeight) / 2, intLineHeight, intLineHeight), -90, 180);
+                        //        path.AddLine(new Point(Width - Height / 2, (Height - intLineHeight) / 2 + intLineHeight), new Point(Width - Height / 2, (Height - intLineHeight) / 2 + intLineHeight));
+                        //        path.AddArc(new Rectangle(Height / 2, (Height - intLineHeight) / 2, intLineHeight, intLineHeight), 90, 180);
+                        //        g.FillPath(new SolidBrush(fillColor), path);
 
-                //        if (m_checked)
-                //        {
-                //            g.FillEllipse(new SolidBrush(fillColor), new Rectangle(Width - Height - 1 + 2, 1 + 2, Height - 2 - 4, Height - 2 - 4));
-                //            g.FillEllipse(Brushes.White, new Rectangle(Width - 2 - (Height - 2 - 4) / 2 - (Height - 2 - 4) / 2 / 2 - 4, (Height - 2 - (Height - 2 - 4) / 2) / 2 + 1, (Height - 2 - 4) / 2, (Height - 2 - 4) / 2));
-                //        }
-                //        else
-                //        {
-                //            g.FillEllipse(new SolidBrush(fillColor), new Rectangle(1 + 2, 1 + 2, Height - 2 - 4, Height - 2 - 4));
-                //            g.FillEllipse(Brushes.White, new Rectangle((Height - 2 - 4) / 2 - (Height - 2 - 4) / 2 / 2 + 4, (Height - 2 - (Height - 2 - 4) / 2) / 2 + 1, (Height - 2 - 4) / 2, (Height - 2 - 4) / 2));
-                //        }
+                        //        if (m_checked)
+                        //        {
+                        //            g.FillEllipse(new SolidBrush(fillColor), new Rectangle(Width - Height - 1 + 2, 1 + 2, Height - 2 - 4, Height - 2 - 4));
+                        //            g.FillEllipse(Brushes.White, new Rectangle(Width - 2 - (Height - 2 - 4) / 2 - (Height - 2 - 4) / 2 / 2 - 4, (Height - 2 - (Height - 2 - 4) / 2) / 2 + 1, (Height - 2 - 4) / 2, (Height - 2 - 4) / 2));
+                        //        }
+                        //        else
+                        //        {
+                        //            g.FillEllipse(new SolidBrush(fillColor), new Rectangle(1 + 2, 1 + 2, Height - 2 - 4, Height - 2 - 4));
+                        //            g.FillEllipse(Brushes.White, new Rectangle((Height - 2 - 4) / 2 - (Height - 2 - 4) / 2 / 2 + 4, (Height - 2 - (Height - 2 - 4) / 2) / 2 + 1, (Height - 2 - 4) / 2, (Height - 2 - 4) / 2));
+                        //        }
 
-                //        break;
-                //    } 
+                        #endregion
+                        break;
+                    }
                 #endregion
 
 
@@ -393,6 +411,8 @@ namespace UCS
                         path.AddLine(new Point(Width - Height / 2, Height - 1), new Point(Height / 2, Height - 1));
                         path.AddArc(new Rectangle(1, 1, Height - 2, Height - 2), 90, 180);
                         g.FillPath(new SolidBrush(fillColor), path);
+
+
 
                         string strText = string.Empty;
                         //if (m_texts != null && m_texts.Length == 2)
@@ -444,6 +464,7 @@ namespace UCS
             }
         }
 
+      
     }
 
     /// <summary>
@@ -462,7 +483,7 @@ namespace UCS
         /// <summary>
         /// 横线
         /// </summary>
-        Line
+        Line1
         
     }
 }

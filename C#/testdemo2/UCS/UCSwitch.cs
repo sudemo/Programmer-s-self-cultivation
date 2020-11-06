@@ -354,31 +354,41 @@ namespace UCS
                         break;
                     }
                 #region line abort
-                //case SwitchType.Line:
-                //    {
-                //        var fillColor = m_checked ? m_trueColor : m_falseColor;
-                //        int intLineHeight = (Height - 2 - 4) / 2;
+                case SwitchType.Line:
+                    {
+                        #region MyRegion
+                        //        var fillColor = m_checked ? m_trueColor : m_falseColor;
+                        //        int intLineHeight = (Height - 2 - 4) / 2;
 
-                //        GraphicsPath path = new GraphicsPath();
-                //        path.AddLine(new Point(Height / 2, (Height - intLineHeight) / 2), new Point(Width - Height / 2, (Height - intLineHeight) / 2));
-                //        path.AddArc(new Rectangle(Width - Height / 2 - intLineHeight - 1, (Height - intLineHeight) / 2, intLineHeight, intLineHeight), -90, 180);
-                //        path.AddLine(new Point(Width - Height / 2, (Height - intLineHeight) / 2 + intLineHeight), new Point(Width - Height / 2, (Height - intLineHeight) / 2 + intLineHeight));
-                //        path.AddArc(new Rectangle(Height / 2, (Height - intLineHeight) / 2, intLineHeight, intLineHeight), 90, 180);
-                //        g.FillPath(new SolidBrush(fillColor), path);
+                        //        GraphicsPath path = new GraphicsPath();
+                        //        path.AddLine(new Point(Height / 2, (Height - intLineHeight) / 2), new Point(Width - Height / 2, (Height - intLineHeight) / 2));
+                        //        path.AddArc(new Rectangle(Width - Height / 2 - intLineHeight - 1, (Height - intLineHeight) / 2, intLineHeight, intLineHeight), -90, 180);
+                        //        path.AddLine(new Point(Width - Height / 2, (Height - intLineHeight) / 2 + intLineHeight), new Point(Width - Height / 2, (Height - intLineHeight) / 2 + intLineHeight));
+                        //        path.AddArc(new Rectangle(Height / 2, (Height - intLineHeight) / 2, intLineHeight, intLineHeight), 90, 180);
+                        //        g.FillPath(new SolidBrush(fillColor), path);
 
-                //        if (m_checked)
-                //        {
-                //            g.FillEllipse(new SolidBrush(fillColor), new Rectangle(Width - Height - 1 + 2, 1 + 2, Height - 2 - 4, Height - 2 - 4));
-                //            g.FillEllipse(Brushes.White, new Rectangle(Width - 2 - (Height - 2 - 4) / 2 - (Height - 2 - 4) / 2 / 2 - 4, (Height - 2 - (Height - 2 - 4) / 2) / 2 + 1, (Height - 2 - 4) / 2, (Height - 2 - 4) / 2));
-                //        }
-                //        else
-                //        {
-                //            g.FillEllipse(new SolidBrush(fillColor), new Rectangle(1 + 2, 1 + 2, Height - 2 - 4, Height - 2 - 4));
-                //            g.FillEllipse(Brushes.White, new Rectangle((Height - 2 - 4) / 2 - (Height - 2 - 4) / 2 / 2 + 4, (Height - 2 - (Height - 2 - 4) / 2) / 2 + 1, (Height - 2 - 4) / 2, (Height - 2 - 4) / 2));
-                //        }
+                        //        if (m_checked)
+                        //        {
+                        //            g.FillEllipse(new SolidBrush(fillColor), new Rectangle(Width - Height - 1 + 2, 1 + 2, Height - 2 - 4, Height - 2 - 4));
+                        //            g.FillEllipse(Brushes.White, new Rectangle(Width - 2 - (Height - 2 - 4) / 2 - (Height - 2 - 4) / 2 / 2 - 4, (Height - 2 - (Height - 2 - 4) / 2) / 2 + 1, (Height - 2 - 4) / 2, (Height - 2 - 4) / 2));
+                        //        }
+                        //        else
+                        //        {
+                        //            g.FillEllipse(new SolidBrush(fillColor), new Rectangle(1 + 2, 1 + 2, Height - 2 - 4, Height - 2 - 4));
+                        //            g.FillEllipse(Brushes.White, new Rectangle((Height - 2 - 4) / 2 - (Height - 2 - 4) / 2 / 2 + 4, (Height - 2 - (Height - 2 - 4) / 2) / 2 + 1, (Height - 2 - 4) / 2, (Height - 2 - 4) / 2));
+                        //        } 
+                        #endregion
 
-                //        break;
-                //    } 
+
+                        Point point1 = new Point(50, 20);
+                        Point point2 = new Point(75, 50);
+                        Point point3 = new Point(100, 20);
+                        Point[] pntArr = { point1, point2, point3 };
+                        byte[] bytes = { (byte)PathPointType.Line, (byte)PathPointType.Line, (byte)PathPointType.Line };
+                        GraphicsPath path = new GraphicsPath(pntArr, bytes);
+                        g.FillPath(Brushes.Red, path);
+                        break;
+                    }
                 #endregion
 
 
@@ -386,59 +396,67 @@ namespace UCS
                 default:
                     {
                         #region default ellipse
-                        var fillColor = m_checked ? m_trueColor : m_falseColor;
-                        GraphicsPath path = new GraphicsPath();
-                        path.AddLine(new Point(Height / 2, 1), new Point(Width - Height / 2, 1));
-                        path.AddArc(new Rectangle(Width - Height - 1, 1, Height - 2, Height - 2), -90, 180);
-                        path.AddLine(new Point(Width - Height / 2, Height - 1), new Point(Height / 2, Height - 1));
-                        path.AddArc(new Rectangle(1, 1, Height - 2, Height - 2), 90, 180);
-                        g.FillPath(new SolidBrush(fillColor), path);
+                        //var fillColor = m_checked ? m_trueColor : m_falseColor;
+                        //GraphicsPath path = new GraphicsPath();
+                        //path.AddLine(new Point(Height / 2, 1), new Point(Width - Height / 2, 1));
+                        //path.AddArc(new Rectangle(Width - Height - 1, 1, Height - 2, Height - 2), -90, 180);
+                        //path.AddLine(new Point(Width - Height / 2, Height - 1), new Point(Height / 2, Height - 1));
+                        //path.AddArc(new Rectangle(1, 1, Height - 2, Height - 2), 90, 180);
+                        //g.FillPath(new SolidBrush(fillColor), path);
 
-                        string strText = string.Empty;
-                        //if (m_texts != null && m_texts.Length == 2)
-                        if (m_texts != null&&m_texts.Length==2)
-                        {
-                            if (m_checked)
-                            {
-                                strText = m_texts[0];//已打开
-                            }
-                            else
-                            {
-                                strText = m_texts[1]; //已关闭
-                            }
-                        }
+                        //string strText = string.Empty;
+                        ////if (m_texts != null && m_texts.Length == 2)
+                        //if (m_texts != null&&m_texts.Length==2)
+                        //{
+                        //    if (m_checked)
+                        //    {
+                        //        strText = m_texts[0];//已打开
+                        //    }
+                        //    else
+                        //    {
+                        //        strText = m_texts[1]; //已关闭
+                        //    }
+                        //}
 
-                        if (m_checked)
-                        {
-                            g.FillEllipse(Brushes.White, new Rectangle(Width - Height - 1 + 2, 1 + 2, Height - 2 - 4, Height - 2 - 4));
-                            if (string.IsNullOrEmpty(strText))
-                            {
-                                //没字 空白
-                                g.DrawEllipse(new Pen(Color.White, 2), new Rectangle((Height - 2 - 4) / 2 - (Height - 2 - 4) / 2 / 2, (Height - 2 - (Height - 2 - 4) / 2) / 2 + 1, (Height - 2 - 4) / 2, (Height - 2 - 4) / 2));
-                            }
-                            else
-                            {   //已打开 显示位置。x,y
-                                SizeF sizeF = g.MeasureString(strText.Replace(" ", "A"), Font);
-                                int intTextY = (Height - (int)sizeF.Height) / 2 + 2;//
-                                g.DrawString(strText, Font, new SolidBrush(m_trueTextColr), new Point((Height - 2 - 4 - 10) / 2, intTextY));
-                            }
-                        }
-                        else
-                        {
-                            g.FillEllipse(Brushes.White, new Rectangle(1 + 2, 1 + 2, Height - 2 - 4, Height - 2 - 4));
-                            if (string.IsNullOrEmpty(strText))
-                            {
-                                g.DrawEllipse(new Pen(Color.White, 2), new Rectangle(Width - 2 - (Height - 2 - 4) / 2 - (Height - 2 - 4) / 2 / 2, (Height - 2 - (Height - 2 - 4) / 2) / 2 + 1, (Height - 2 - 4) / 2, (Height - 2 - 4) / 2));
-                            }
-                            else
-                            {    //已关闭 显示位置。x,y
-                                SizeF sizeF = g.MeasureString(strText.Replace(" ", "A"), Font);
-                                int intTextY = (Height - (int)sizeF.Height) / 2 + 2;
-                                g.DrawString(strText, Font, new SolidBrush(m_falseTextColr), new Point(Width - 20 - (Height - 2 - 4) / 2 - (Height - 2 - 4) / 2 / 2 - (int)sizeF.Width / 2, intTextY));
-                            }
-                        } 
+                        //if (m_checked)
+                        //{
+                        //    g.FillEllipse(Brushes.White, new Rectangle(Width - Height - 1 + 2, 1 + 2, Height - 2 - 4, Height - 2 - 4));
+                        //    if (string.IsNullOrEmpty(strText))
+                        //    {
+                        //        //没字 空白
+                        //        g.DrawEllipse(new Pen(Color.White, 2), new Rectangle((Height - 2 - 4) / 2 - (Height - 2 - 4) / 2 / 2, (Height - 2 - (Height - 2 - 4) / 2) / 2 + 1, (Height - 2 - 4) / 2, (Height - 2 - 4) / 2));
+                        //    }
+                        //    else
+                        //    {   //已打开 显示位置。x,y
+                        //        SizeF sizeF = g.MeasureString(strText.Replace(" ", "A"), Font);
+                        //        int intTextY = (Height - (int)sizeF.Height) / 2 + 2;//
+                        //        g.DrawString(strText, Font, new SolidBrush(m_trueTextColr), new Point((Height - 2 - 4 - 10) / 2, intTextY));
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    g.FillEllipse(Brushes.White, new Rectangle(1 + 2, 1 + 2, Height - 2 - 4, Height - 2 - 4));
+                        //    if (string.IsNullOrEmpty(strText))
+                        //    {
+                        //        g.DrawEllipse(new Pen(Color.White, 2), new Rectangle(Width - 2 - (Height - 2 - 4) / 2 - (Height - 2 - 4) / 2 / 2, (Height - 2 - (Height - 2 - 4) / 2) / 2 + 1, (Height - 2 - 4) / 2, (Height - 2 - 4) / 2));
+                        //    }
+                        //    else
+                        //    {    //已关闭 显示位置。x,y
+                        //        SizeF sizeF = g.MeasureString(strText.Replace(" ", "A"), Font);
+                        //        int intTextY = (Height - (int)sizeF.Height) / 2 + 2;
+                        //        g.DrawString(strText, Font, new SolidBrush(m_falseTextColr), new Point(Width - 20 - (Height - 2 - 4) / 2 - (Height - 2 - 4) / 2 / 2 - (int)sizeF.Width / 2, intTextY));
+                        //    }
+                        //} 
                         #endregion
 
+
+                        Point point1 = new Point(50, 20);
+                        Point point2 = new Point(75, 50);
+                        Point point3 = new Point(100, 20);
+                        Point[] pntArr = { point1, point2, point3 };
+                        byte[] bytes = { (byte)PathPointType.Line, (byte)PathPointType.Line, (byte)PathPointType.Line };
+                        GraphicsPath path = new GraphicsPath(pntArr, bytes);
+                        g.FillPath(Brushes.Red, path);
                         break;
                     }
             }

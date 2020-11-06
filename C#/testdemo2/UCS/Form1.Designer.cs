@@ -39,6 +39,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.ucSwitch2 = new UCS.UCSwitch();
+            this.ucSwitch5 = new UCS.UCSwitch();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -182,15 +183,33 @@
             this.ucSwitch2.TrueTextColr = System.Drawing.Color.White;
             this.ucSwitch2.CheckedChanged += new System.EventHandler(this.ucSwitch2_CheckedChanged);
             // 
+            // ucSwitch5
+            // 
+            this.ucSwitch5.Checked = false;
+            this.ucSwitch5.FalseColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(189)))), ((int)(((byte)(189)))));
+            this.ucSwitch5.FalseTextColr = System.Drawing.Color.White;
+            this.ucSwitch5.Location = new System.Drawing.Point(499, 346);
+            this.ucSwitch5.Name = "ucSwitch5";
+            this.ucSwitch5.Size = new System.Drawing.Size(92, 29);
+            this.ucSwitch5.SwitchType = UCS.SwitchType.Ellipse;
+            this.ucSwitch5.TabIndex = 5;
+            this.ucSwitch5.Texts = new string[] {
+        "已开启",
+        "已关闭"};
+            this.ucSwitch5.TrueColor = System.Drawing.Color.Green;
+            this.ucSwitch5.TrueTextColr = System.Drawing.Color.White;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ucSwitch5);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -209,5 +228,6 @@
         private UCSwitch ucSwitch3;
         private UCSwitch ucSwitch1;
         private System.Windows.Forms.Label label4;
+        private UCSwitch ucSwitch5;
     }
 }

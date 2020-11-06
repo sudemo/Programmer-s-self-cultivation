@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace TestUCS
 {
     public partial class Form1 : Form
@@ -27,6 +28,11 @@ namespace TestUCS
             Graphics graphics = this.CreateGraphics();
             graphics.DrawString("hello", Font, new SolidBrush(Color.Green), new Point(20,5), stringFormat);
             //g.DrawString("hello", Font, new SolidBrush(m_trueTextColr), new Point((Height - 2 - 4 - 10) / 2, intTextY));
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

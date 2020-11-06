@@ -19,8 +19,13 @@ namespace UCSwitchcore
 
         private void ucSwitch1_CheckedChanged(object sender, EventArgs e)
         {
-            var s = 0.1 + 0.2;
-            MessageBox.Show(s.ToString());
+            //var s = 0.1 + 0.2;
+            //MessageBox.Show(s.ToString());
+        }
+
+        private void ucSwitch2_CheckedChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show("Test");
         }
     }
 }
