@@ -1,13 +1,13 @@
-﻿namespace UCS
+﻿namespace UCSwitchFramework
 {
-    partial class UCSwitch
+    partial class UCSwitchFramewk
     {
-        /// <summary>
+        /// <summary> 
         /// 必需的设计器变量。
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
+        /// <summary> 
         /// 清理所有正在使用的资源。
         /// </summary>
         /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
@@ -22,7 +22,7 @@
 
         #region 组件设计器生成的代码
 
-        /// <summary>
+        /// <summary> 
         /// 设计器支持所需的方法 - 不要修改
         /// 使用代码编辑器修改此方法的内容。
         /// </summary>
@@ -30,13 +30,12 @@
         {
             this.SuspendLayout();
             // 
-            // UCSwitch
+            // UCSwitchFramewk
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "UCSwitch";
-            this.Size = new System.Drawing.Size(107, 41);
+            this.Name = "UCSwitchFramewk";
+            this.Size = new System.Drawing.Size(107, 42);
             this.ResumeLayout(false);
 
         }
