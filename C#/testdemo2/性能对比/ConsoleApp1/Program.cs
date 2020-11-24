@@ -10,14 +10,19 @@ namespace ConsoleApp1
         {
             //Stopwatch st = new Stopwatch();
             //st.Start();
-            //Console.WriteLine("Hello World!");
+            Stopwatch st = Stopwatch.StartNew();
+            //Console.WriteLine("Hello World!"); //20 ticks 48- 27.34
             //GenerateFibonacci(1000);
             //st.Stop();
             //TimeSpan ts = st.Elapsed;
 
-            //Console.WriteLine($"core运行时间：{ts.TotalMilliseconds}");
+
             maopao();
-            Console.ReadLine();
+            //st.Stop();
+            //TimeSpan ts = st.Elapsed;
+            Console.WriteLine(st.Elapsed.TotalMilliseconds);
+            //Console.WriteLine($"core运行时间：{ts.TotalMilliseconds} {ts.Ticks}");
+            //Console.ReadLine();
         }
 
         static IEnumerable<int> GenerateFibonacci(int n)
@@ -53,9 +58,11 @@ namespace ConsoleApp1
                     }
                 }
             }
-            string d2 = (DateTime.Now - d1).ToString();
-            Console.Write(d2);
-            Console.ReadLine();
+            //var re = DateTime.Now.Ticks - d1.Ticks;
+            //Console.WriteLine($"{DateTime.Now.Ticks} 运行  {d1.Ticks} {re}" );
+            //string d2 = (DateTime.Now - d1).ToString();
+            //Console.WriteLine(d2);
+            //Console.ReadLine();
         }
     }
 

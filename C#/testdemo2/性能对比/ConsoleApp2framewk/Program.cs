@@ -10,13 +10,16 @@ namespace ConsoleApp1
         {
             //Stopwatch st = new Stopwatch();
             //st.Start();
+            var st = Stopwatch.StartNew();
             //Console.WriteLine("Hello World!");
             //GenerateFibonacci(1000);
+
+            maopao();
             //st.Stop();
             //TimeSpan ts = st.Elapsed;
 
-            //Console.WriteLine($"fk运行时间：{ts.TotalMilliseconds}");
-            maopao();
+            //Console.WriteLine($"fk运行时间 ms：{ts.Ticks} {ts.TotalMilliseconds}");
+           Console.WriteLine(st.Elapsed.TotalMilliseconds);
             Console.ReadKey();
         }
 
@@ -53,8 +56,8 @@ namespace ConsoleApp1
                     }
                 }
             }
-            string d2 = (DateTime.Now - d1).ToString();
-            Console.Write(d2);
+            //string d2 = (DateTime.Now - d1).ToString();
+            //Console.Write(d2);
             //Console.ReadLine();
         }
 
