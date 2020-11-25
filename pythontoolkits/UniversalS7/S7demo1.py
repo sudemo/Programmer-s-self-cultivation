@@ -10,13 +10,14 @@ import snap7
 from cmd import Cmd
 import sys
 
-# ip = "127.0.0.1"
-ip = "192.168.0.10"
+ip = "127.0.0.1"
+# ip = "192.168.0.10"
 area = "0x84"
 dbnum = 10
 startaddr = 0
 count = 1
 
+# 函数名字， 功能介绍，DB编号，起始位置，读取数目
 jsoncmd='''
 [
     {"name":"f1","doc":"fun1 is for 1","DB_Number":1011,"Start_address":"0","p_count":"2"},  
